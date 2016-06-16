@@ -3,6 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/jquery-ui.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="js/jquery-1.9.1.js"></script>
@@ -29,8 +30,8 @@
   </div>
 
   <div class="navbar-collapse collapse menu pension-header-menu">
-    <form name="login" class="navbar-form navbar login-form" role="form" action="login.php" method="POST">
-      <img src="img/name.jpg">
+    <form name="login" class="navbar-form navbar login-form" action="login.php" method="POST">
+      <img src="img/name.jpg" alt="name image">
         <div class="form-group">
           <input placeholder="Anmeldename" name="login" class="form-control" type="text">
         </div>
@@ -47,7 +48,7 @@
   </div>
 
   <div class="img-container">
-    <img src="img/logo_desktop.jpg" class="img-logo" />
+    <img src="img/logo_desktop.jpg" class="img-logo" alt="Image Logo"/>
 
     <div class="pension-container text-logo-container">
 
@@ -73,7 +74,7 @@
 
   </div>
 
-    <div class="pension-container">
+    <div id="App" class="pension-container">
 
       <div class="bread-crumbs">
         Breadcrumb > Breadcrumb 1 > Breadcrumb 2
@@ -101,7 +102,7 @@
           <div class="cbox">
             <table class="user-age-table">
               <tr>
-                <td class="user-age-lable-cell"><label for="">Mein aktuelles Alter:</label></td>
+                <td class="user-age-lable-cell"><label for="UserAge">Mein aktuelles Alter:</label></td>
                 <td class="user-age-slider-cell"><div id="UserAge" class="user-age-slider pension-result-slider"></div></td>
               </tr>
             </table>
@@ -132,18 +133,18 @@
               <h2>Alltägliches</h2>
         
               <div class="answer-images">
-                <img id="Img_1_1" class="pension-image" src='img/q/q_1_1.jpg' />
-                <img id="Img_1_2" class="pension-image" src='img/q/q_1_2.jpg' />
-                <img id="Img_1_3" class="pension-image" src='img/q/q_1_3.jpg' />
-                <img id="Img_1_4" class="pension-image" src='img/q/q_1_4.jpg' />
-                <img id="Img_1_5" class="pension-image" src='img/q/q_1_5.jpg' />
+                <img id="Img_1_1" class="pension-image" src='img/q/q_1_1.jpg' alt="Image 1 for question 1" />
+                <img id="Img_1_2" class="pension-image" src='img/q/q_1_2.jpg' alt="Image 2 for question 1" />
+                <img id="Img_1_3" class="pension-image" src='img/q/q_1_3.jpg' alt="Image 3 for question 1" />
+                <img id="Img_1_4" class="pension-image" src='img/q/q_1_4.jpg' alt="Image 4 for question 1" />
+                <img id="Img_1_5" class="pension-image" src='img/q/q_1_5.jpg' alt="Image 5 for question 1" />
               </div>
 
               <table class="pension-controlls">
                 <tr>
-                  <td class="side-controll-column"><span id="QuestionMinus" class="question-button" onclick="(app.minusClickListener.bind(app))()">-</span></td>
+                  <td class="side-controll-column"><span class="question-button" onclick="(app.minusClickListener.bind(app))()">-</span></td>
                   <td class="slider-controll-column"><div id="PensionSlider1" class="pension-slider slider-icon-leben"></div></td>
-                  <td class="side-controll-column"><span id="QuestionPlus" class="question-button" onclick="(app.plusClickListener.bind(app))()">+</span></td>
+                  <td class="side-controll-column"><span class="question-button" onclick="(app.plusClickListener.bind(app))()">+</span></td>
                 </tr>
               </table>
             </div>
@@ -164,19 +165,19 @@
               <h2>Reisen</h2>
         
               <div class="answer-images">
-                <img id="Img_2_1" class="pension-image" src="img/q/q_2_1.jpg" />
-                <img id="Img_2_2" class="pension-image" src="img/q/q_2_2.jpg" />
-                <img id="Img_2_3" class="pension-image" src="img/q/q_2_3.jpg" />
-                <img id="Img_2_4" class="pension-image" src="img/q/q_2_4.jpg" />
-                <img id="Img_2_5" class="pension-image" src="img/q/q_2_5.jpg" />
+                <img id="Img_2_1" class="pension-image" src="img/q/q_2_1.jpg" alt="Image 1 for question 2"  />
+                <img id="Img_2_2" class="pension-image" src="img/q/q_2_2.jpg" alt="Image 2 for question 2"  />
+                <img id="Img_2_3" class="pension-image" src="img/q/q_2_3.jpg" alt="Image 3 for question 2"  />
+                <img id="Img_2_4" class="pension-image" src="img/q/q_2_4.jpg" alt="Image 4 for question 2"  />
+                <img id="Img_2_5" class="pension-image" src="img/q/q_2_5.jpg" alt="Image 5 for question 2"  />
               </div>
       
         
               <table class="pension-controlls">
                 <tr>
-                  <td class="side-controll-column"><span id="QuestionMinus" class="question-button" onclick="(app.minusClickListener.bind(app))()">-</span></td>
+                  <td class="side-controll-column"><span class="question-button" onclick="(app.minusClickListener.bind(app))()">-</span></td>
                   <td class="slider-controll-column"><div id="PensionSlider2" class="pension-slider slider-icon-reisen"></div></td>
-                  <td class="side-controll-column"><span id="QuestionPlus" class="question-button" onclick="(app.plusClickListener.bind(app))()">+</span></td>
+                  <td class="side-controll-column"><span class="question-button" onclick="(app.plusClickListener.bind(app))()">+</span></td>
                 </tr>
               </table>
             </div>
@@ -196,18 +197,18 @@
               <h2>Freizeit</h2>
 
               <div class="answer-images">
-                <img id="Img_3_1" class="pension-image" src="img/q/q_3_1.jpg" />
-                <img id="Img_3_2" class="pension-image" src="img/q/q_3_2.jpg" />
-                <img id="Img_3_3" class="pension-image" src="img/q/q_3_3.jpg" />
-                <img id="Img_3_4" class="pension-image" src="img/q/q_3_4.jpg" />
-                <img id="Img_3_5" class="pension-image" src="img/q/q_3_5.jpg" />
+                <img id="Img_3_1" class="pension-image" src="img/q/q_3_1.jpg" alt="Image 1 for question 1" />
+                <img id="Img_3_2" class="pension-image" src="img/q/q_3_2.jpg" alt="Image 2 for question 1" />
+                <img id="Img_3_3" class="pension-image" src="img/q/q_3_3.jpg" alt="Image 3 for question 1" />
+                <img id="Img_3_4" class="pension-image" src="img/q/q_3_4.jpg" alt="Image 4 for question 1" />
+                <img id="Img_3_5" class="pension-image" src="img/q/q_3_5.jpg" alt="Image 5 for question 1" />
               </div>
 
               <table class="pension-controlls">
                 <tr>
-                  <td class="side-controll-column"><span id="QuestionMinus" class="question-button" onclick="(app.minusClickListener.bind(app))()">-</span></td>
+                  <td class="side-controll-column"><span class="question-button" onclick="(app.minusClickListener.bind(app))()">-</span></td>
                   <td class="slider-controll-column"><div id="PensionSlider3" class="pension-slider slider-icon-wohnen"></div></td>
-                  <td class="side-controll-column"><span id="QuestionPlus" class="question-button" onclick="(app.plusClickListener.bind(app))()">+</span></td>
+                  <td class="side-controll-column"><span class="question-button" onclick="(app.plusClickListener.bind(app))()">+</span></td>
                 </tr>
               </table>
             </div>
@@ -241,7 +242,7 @@
               </td>
               <td class="category-image">
                 <div id="FinalSliderImages1">
-                  <img src="img/q/q_1_1.jpg" alt=""><img src="img/q/q_1_2.jpg" alt=""><img src="img/q/q_1_3.jpg" alt=""><img src="img/q/q_1_4.jpg" alt=""><img src="img/q/q_1_5.jpg" alt="">
+                  <img src="img/q/q_1_1.jpg" alt="Image 1 for question 1"><img src="img/q/q_1_2.jpg" alt="Image 2 for question 1"><img src="img/q/q_1_3.jpg" alt="Image 3 for question 1"><img src="img/q/q_1_4.jpg" alt="Image 4 for question 1"><img src="img/q/q_1_5.jpg" alt="Image 5 for question 1">
                 </div>
               </td>
               <td>
@@ -256,7 +257,7 @@
 
               <td class="category-image">
                 <div id="FinalSliderImages2">
-                  <img src="img/q/q_2_1.jpg" alt=""><img src="img/q/q_2_2.jpg" alt=""><img src="img/q/q_2_3.jpg" alt=""><img src="img/q/q_2_4.jpg" alt=""><img src="img/q/q_2_5.jpg" alt="">
+                  <img src="img/q/q_2_1.jpg" alt="Image 1 for question 2"><img src="img/q/q_2_2.jpg" alt="Image 2 for question 2"><img src="img/q/q_2_3.jpg" alt="Image 3 for question 2"><img src="img/q/q_2_4.jpg" alt="Image 4 for question 2"><img src="img/q/q_2_5.jpg" alt="Image 5 for question 2">
                 </div>
               </td>
 
@@ -272,7 +273,7 @@
               
               <td class="category-image">
                 <div id="FinalSliderImages3">
-                  <img src="img/q/q_3_1.jpg" alt=""><img src="img/q/q_3_2.jpg" alt=""><img src="img/q/q_3_3.jpg" alt=""><img src="img/q/q_3_4.jpg" alt=""><img src="img/q/q_3_5.jpg" alt="">
+                  <img src="img/q/q_3_1.jpg" alt="Image 1 for question 3"><img src="img/q/q_3_2.jpg" alt="Image 2 for question 3"><img src="img/q/q_3_3.jpg" alt="Image 3 for question 3"><img src="img/q/q_3_4.jpg" alt="Image 4 for question 3"><img src="img/q/q_3_5.jpg" alt="Image 5 for question 3">
                 </div>
               </td>
 
@@ -281,7 +282,6 @@
                 <p>Rinotera allundum est erando entalia bueno kanitustra enorum klibum espana</p>
               </td> 
             </tr>
-            <tr>
           </table>
 
           <div class="pension-price-row clearfix cbox">
@@ -302,8 +302,8 @@
           <div class="pension-calculator">
 
             <h1 id="PensionGoalDescription">
-            Jeder Beitrag zählt: Auch kleine Schritte führen zum Rentenziel.
-          </h1>
+              Jeder Beitrag zählt: Auch kleine Schritte führen zum Rentenziel.
+            </h1>
 
             <div class="clearfix cbox" style="margin-top: 1em">
               <div class="col-md-4">
@@ -319,7 +319,7 @@
 
               <div class="col-md-8">
                 <div class="pension-row">
-                  <label for="">Mein Alter:</label>
+                  <label for="ResultWorkYears">Mein Alter:</label>
                   <div id="ResultWorkYears" class="pension-result-slider">
                     <span class="min">18</span>
                     <span class="max">55</span>
@@ -328,7 +328,7 @@
                 </div>
 
                 <div class="pension-row">
-                  <label for="">Mein monatlicher Beitrag:</label>
+                  <label for="ResultPayment">Mein monatlicher Beitrag:</label>
                   <div id="ResultPayment" class="pension-result-slider">
                     <span class="min">20</span>
                     <span class="max">500</span>
@@ -342,17 +342,15 @@
               Wer will schon auf etwas verzichten? Heute nicht und später erst recht nicht! Sorgen Sie dafür, dass Sie ein Leben lang Ihre Wünsche und Ziele ausleben können – Ihr Sparkassen-Berater hilft dabei!
             </div>
 
-              <div class="clearfix" style="margin-top: 1em">
+            <div class="clearfix" style="margin-top: 1em">
 
-                <span class="pull-right weiter-btn">
-                  Termin vereinbaren
-                </span>
+              <span class="pull-right weiter-btn">
+                Termin vereinbaren
+              </span>
 
-                <span class="pull-right weiter-btn" style="background-color: gray; margin-right: 1em;">
-                  Angebot berechnen
-                </span>
-              </div>
-
+              <span class="pull-right weiter-btn" style="background-color: gray; margin-right: 1em;">
+                Angebot berechnen
+              </span>
             </div>
 
           </div>

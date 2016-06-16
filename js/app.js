@@ -59,7 +59,7 @@ Application.prototype.init = function() {
   this.question_age_card = new QuestionAgeCard(this);
 
   this.onResizeListener();
-  $(window).on("resize", this.onResizeListener);
+  $(window).on("resize", this.onResizeListener.bind(this));
 
   $(".pension-questions").hide();
 
@@ -351,6 +351,7 @@ QuestionCard.prototype.getHeight = function() {
 
 QuestionCard.prototype.show = function() {
   this.$this.show();
+  this.resizeImage();
 };
 
 QuestionCard.prototype.hide = function() {

@@ -303,6 +303,8 @@ padding: 2em; */
 
 .final-table h3 {
     color: red;
+    margin: 0;
+    margin-bottom: 14px;
 }
 
 td.final-slider {

@@ -5,7 +5,7 @@ html, body {
 
 .cbox {
   background-color: white;
-  padding: 15px;
+  padding: 26px 20px;
 }
 
 .pension-questions {
@@ -15,10 +15,21 @@ html, body {
 .weiter-btn {
   background-color: red;
   color: white;
-  padding: 10px 5px 10px 30px;
+  padding: 10px 50px 10px 30px;
   cursor: pointer;
   font-size: 18pt;
   font-family: SparkasseMedium;
+  position: relative;
+}
+
+.weiter-btn:after {
+  content: "";
+  background-image: url(../img/icons/ico-next.png);
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  right: 10px;
+  top: 12px;
 }
 
 .easy-hidden,
@@ -86,23 +97,27 @@ div.easy-hidden {
   position: absolute;
 	font-size: 3em;
 	background-color: red;
-	padding: 20px 10px 10px 10px;
+	padding: 20px 20px 20px 20px;
 	color: white;
   width: 360px;
-  bottom: 1em;
+  bottom: 61px;
 }
 
 .text-logo h1 {
   font-family: SparkasseHead;
-  font-weight: bold;
+  font-size: 55px;
+  line-height: 66px;
 }
 
 .text-logo h3 {
-  font-size: 16pt;
+  font-size: 16px;
+  line-height: 19px;
+  margin: 0 0 14px 0;
 }
 
 #TitleStartButton {
-  font-size: 24pt;
+  font-size: 24px;
+  line-height: 28px;
   float: right;
 }
 

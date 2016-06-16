@@ -322,7 +322,7 @@ td.final-slider {
 
 .category-image div {
     height: 100%;
-    font-size: 0;
+    font-size: 0 !important;
 }
 
 .category-image img {

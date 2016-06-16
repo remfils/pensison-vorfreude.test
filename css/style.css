@@ -13,7 +13,7 @@ html, body {
 }
 
 .weiter-btn {
-  background-color: #ED252B;
+  background-color: red;
   color: white;
   padding: 10px 50px 10px 15px;
   cursor: pointer;
@@ -38,7 +38,7 @@ div.easy-hidden {
 }
 
 .menu {
-	background-color: #ED252B;
+	background-color: red;
 }
 
 .btn-login,
@@ -96,7 +96,7 @@ div.easy-hidden {
 .text-logo {
   position: absolute;
 	font-size: 3em;
-	background-color: #ED252B;
+	background-color: red;
 	padding: 20px 20px 20px 20px;
 	color: white;
   width: 360px;
@@ -122,7 +122,7 @@ div.easy-hidden {
 }
 
 .navbar-default .navbar-nav > li > a {
-	color: #ED252B;
+	color: red;
 }
 
 .bread-crumbs {
@@ -192,7 +192,7 @@ div.easy-hidden {
 
 #QuestionNumbers .red,
 #QuestionNumbers .red:after {
-    background-color: #ED252B !important;
+    background-color: red !important;
 }
 
 .questions {
@@ -231,7 +231,7 @@ div.easy-hidden {
 }
 
 .btn-start-test {
-  background-color: #ED252B;
+  background-color: red;
   cursor: pointer;
   color: white;
   font-size: 2em;
@@ -294,7 +294,7 @@ div.easy-hidden {
 
 .field-user-email {
   padding: 10px;
-  background-color: #ED252B;
+  background-color: red;
   display: block;
 }
 
@@ -403,7 +403,7 @@ div.easy-hidden {
 }
 
 .category-row > div > header {
-  color: #ED252B;
+  color: red;
   font-weight: bold;
 }
 
@@ -413,25 +413,25 @@ div.easy-hidden {
 
 .slider-icon-leben .ui-slider-handle,
 #Category1 {
-    background-color: #ED252B !important;
+    background-color: red !important;
     background-image: url("../img/icons/icon-leben.png") !important;
 }
 
 .slider-icon-reisen .ui-slider-handle,
 #Category2 {
-    background-color: #ED252B !important;
+    background-color: red !important;
     background-image: url("../img/icons/icon-reisen.png") !important;
 }
 
 .slider-icon-wohnen .ui-slider-handle,
 #Category3 {
-    background-color: #ED252B !important;
+    background-color: red !important;
     background-image: url("../img/icons/icon-wohnen.png") !important;
 }
 
 .slider-icon-herzen .ui-slider-handle,
 #Category4 {
-    background-color: #ED252B !important;
+    background-color: red !important;
     background-image: url("../img/icons/icon-herzen.png") !important;
 }
 
@@ -512,7 +512,14 @@ div.easy-hidden {
   /* width: 80px;
   height: 80px;
   border-radius: 40px;
-  background-color: #ED252B;
+  background-color: red;
   margin-right: 300px;
   position: relative; */
+}
+
+
+
+.btn-danger {
+  background-color: red;
+  border: 0;
 }

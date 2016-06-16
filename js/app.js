@@ -237,7 +237,7 @@ Application.prototype.displayPensionCalculator = function() {
 };
 
 Application.prototype.showGameOverScreen = function() {
-  //$("#GameOverScreen").dialog("open");
+  $("#GameOverScreen").dialog("open");
 };
 
 

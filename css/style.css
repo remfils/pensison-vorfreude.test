@@ -13,9 +13,9 @@ html, body {
 }
 
 .weiter-btn {
-  background-color: red;
+  background-color: #ED252B;
   color: white;
-  padding: 10px 50px 10px 30px;
+  padding: 10px 50px 10px 15px;
   cursor: pointer;
   font-size: 18pt;
   font-family: SparkasseMedium;
@@ -38,7 +38,7 @@ div.easy-hidden {
 }
 
 .menu {
-	background-color: red;
+	background-color: #ED252B;
 }
 
 .btn-login,
@@ -96,7 +96,7 @@ div.easy-hidden {
 .text-logo {
   position: absolute;
 	font-size: 3em;
-	background-color: red;
+	background-color: #ED252B;
 	padding: 20px 20px 20px 20px;
 	color: white;
   width: 360px;
@@ -122,7 +122,7 @@ div.easy-hidden {
 }
 
 .navbar-default .navbar-nav > li > a {
-	color: red;
+	color: #ED252B;
 }
 
 .bread-crumbs {
@@ -135,8 +135,9 @@ div.easy-hidden {
 /* QUESTIONS */
 
 #QuestionNumbers {
-    display: flex;
+    /* display: flex; */
     justify-content: center;
+    text-align: center;
     /* margin-bottom: 20px; */
 }
 
@@ -144,7 +145,7 @@ div.easy-hidden {
   background-color: gray;
   border-radius: 50%;
   color: white;
-  display: block;
+  display: inline-block;
   font-size: 18px;
   line-height: 36px;
   width: 36px;
@@ -153,22 +154,45 @@ div.easy-hidden {
   position: relative;
   margin-right: 40px;
   padding: auto 0;
+  -webkit-transition: all 0.4s;
+       -moz-transition: all 0.4s;
+        -ms-transition: all 0.4s;
+         -o-transition: all 0.4s;
+            transition: all 0.4s;
 }
 
 #QuestionNumbers span:not(:last-child):after {
     content: "";
     display: block;
-    width: 42px;
+    width: 50px;
     height: 3px;
     background-color: gray;
     position: absolute;
     left: 35px;
     top: 18px;
+    
+    -webkit-transition: all 0.4s;
+       -moz-transition: all 0.4s;
+        -ms-transition: all 0.4s;
+         -o-transition: all 0.4s;
+            transition: all 0.4s;
+}
+
+#QuestionNumbers .current-question {
+  width: 46px;
+  height: 46px;
+  line-height: 46px;
+  /* top: -5px; */
+}
+
+#QuestionNumbers .current-question:after {
+  left: 45px !important;
+  top: 23px !important;
 }
 
 #QuestionNumbers .red,
 #QuestionNumbers .red:after {
-    background-color: red !important;
+    background-color: #ED252B !important;
 }
 
 .questions {
@@ -207,7 +231,7 @@ div.easy-hidden {
 }
 
 .btn-start-test {
-  background-color: red;
+  background-color: #ED252B;
   cursor: pointer;
   color: white;
   font-size: 2em;
@@ -270,7 +294,7 @@ div.easy-hidden {
 
 .field-user-email {
   padding: 10px;
-  background-color: red;
+  background-color: #ED252B;
   display: block;
 }
 
@@ -379,7 +403,7 @@ div.easy-hidden {
 }
 
 .category-row > div > header {
-  color: red;
+  color: #ED252B;
   font-weight: bold;
 }
 
@@ -389,25 +413,25 @@ div.easy-hidden {
 
 .slider-icon-leben .ui-slider-handle,
 #Category1 {
-    background-color: red !important;
+    background-color: #ED252B !important;
     background-image: url("../img/icons/icon-leben.png") !important;
 }
 
 .slider-icon-reisen .ui-slider-handle,
 #Category2 {
-    background-color: red !important;
+    background-color: #ED252B !important;
     background-image: url("../img/icons/icon-reisen.png") !important;
 }
 
 .slider-icon-wohnen .ui-slider-handle,
 #Category3 {
-    background-color: red !important;
+    background-color: #ED252B !important;
     background-image: url("../img/icons/icon-wohnen.png") !important;
 }
 
 .slider-icon-herzen .ui-slider-handle,
 #Category4 {
-    background-color: red !important;
+    background-color: #ED252B !important;
     background-image: url("../img/icons/icon-herzen.png") !important;
 }
 
@@ -465,6 +489,7 @@ div.easy-hidden {
   padding: 1em;
   border-collapse:separate;
   border: 1em solid #F1F1F1;
+  font-size: 20px;
 }
 
 .final-table tr:first-child th {
@@ -487,7 +512,7 @@ div.easy-hidden {
   /* width: 80px;
   height: 80px;
   border-radius: 40px;
-  background-color: red;
+  background-color: #ED252B;
   margin-right: 300px;
   position: relative; */
 }

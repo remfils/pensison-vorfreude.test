@@ -71,7 +71,7 @@ Application.prototype.init = function() {
     autoOpen: false,
     modal: true,
     width: 440,
-    height: 266,
+    height: 255,
     create: function (event, ui) {
         $('.ui-dialog-titlebar').css({'background':'none','border':'none'});
         $("#dialog-model").css({ 'padding': '0' });
@@ -101,6 +101,7 @@ Application.prototype.titleStartClickListener = function (e) {
 }
 
 Application.prototype.startButtonListener = function (e) {
+  $("html, body").animate({ scrollTop: $('#QuestionTitle').offset().top }, 1000);
   this.startTest();
 }
 
@@ -125,6 +126,7 @@ Application.prototype.minusClickListener = function (e) {
 Application.prototype.nextQuestion = function(e) {
   if ( this.current_question_id >= this.questions.length - 1  ) {
     this.finishTest();
+    $("html, body").animate({ scrollTop: $('#QuestionTitle').offset().top }, 1000);
     return;
   }
 
@@ -136,8 +138,10 @@ Application.prototype.nextQuestion = function(e) {
   var question_id = this.current_question_id;
 
   $("#QuestionNumbers span").each(function(i, item) {
+    $(item).removeClass("current-question");
     if ( i == question_id ) {
       $(item).addClass("red");
+      $(item).addClass("current-question");
     }
   });
 
@@ -156,8 +160,6 @@ Application.prototype.changeTitle = function(title) {
 
 Application.prototype.swapTwoCards = function(a, b, callback) {
   TweenLite.to( this.$app, 1, {height: b.outerHeight(true)} );
-
-  $("html, body").animate({ scrollTop: $('#QuestionTitle').offset().top }, 1000);
 
   TweenLite.to(a, 1, {opacity: 0, onComplete: function(){
     a.hide();
@@ -235,7 +237,7 @@ Application.prototype.displayPensionCalculator = function() {
 };
 
 Application.prototype.showGameOverScreen = function() {
-  $("#GameOverScreen").dialog("open");
+  //$("#GameOverScreen").dialog("open");
 };
 
 
@@ -385,7 +387,8 @@ QuestionCard.prototype.showImage = function(image_number, callback) {
 };
 
 QuestionCard.prototype.resizeImage = function() {
-  this.$(".answer-images").height(window.innerHeight - this.question_height_minus_image_height);
+  var image_height = this.$("#Img_"+ this.num + "_1").width() * 533 / 800;
+  this.$(".answer-images").height(image_height);
 };
 
 QuestionCard.prototype.plusClickListener = function() {
@@ -451,7 +454,9 @@ ResultCard.prototype.createSliders = function() {
 
             self.app.calculateImaginaryPension();
 
-            TweenLite.to( $("#FinalSliderImages" + i), 1, {x: -279.91 * (ui.value - 1)});
+            var $this = $("#FinalSliderImages" + i);
+
+            TweenLite.to( $this, 1, {x: -1 * $this.width() * (ui.value - 1)});
           }
         })
       );
@@ -466,6 +471,8 @@ ResultCard.prototype.init = function() {
   this.sliders.map(function(item, index) {
     item.slider("value", self.app.answers[index]);
   });
+
+  // $("td.category-image").width($("#FinalSliderImages1").height() / 533 * 800);
 };
 
 ResultCard.prototype.initCalulator = function() {
@@ -488,7 +495,7 @@ ResultCard.prototype.initCalulator = function() {
       self.updateCalculatorResult();
     },
     stop: function() {
-      $("#GameOverScreen").dialog("open");
+      self.app.showGameOverScreen();
 
       var app = self.app;
       if ( app.real_pension < app.imag_pension ) {

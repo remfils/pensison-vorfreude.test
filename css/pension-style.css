@@ -69,7 +69,9 @@ body {
 }
 
 .pagination-centered {
+    padding-top: 30px;
     padding-bottom: 0;
+    margin-top: 10px;
 }
 
 .pension-questions {
@@ -92,7 +94,7 @@ padding: 2em; */
 
 .pension-image {
     width: 100%;
-    height: 100%;
+    height: auto;
     background-size: auto 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -106,17 +108,19 @@ padding: 2em; */
 .side-controll-column {
     width: 10%;
     text-align: center;
+    vertical-align: middle;
+    padding-top: 12px;
 }
 
 .slider-controll-column {
     width: 80%;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .question-button {
     color: red;
-    font-size: 3em;
+    font-size: 76pt;
     cursor: pointer;
 }
 
@@ -128,12 +132,17 @@ padding: 2em; */
 
 .answer-images img {
     width: 100%;
+    padding: 0 5%;
 }
 
 .answer-images img:not(:first-child) {
     top: 0;
     left: 0;
     position: absolute;
+}
+
+.weiter-block {
+    margin-top: 14px
 }
 
 /* QUESTION AGE */
@@ -178,6 +187,8 @@ padding: 2em; */
 
 .user-age-lable-cell label {
     font-weight: normal;
+    font-size: 18pt;
+    color: #777777;
 }
 
 /* SCROLLBAR */
@@ -213,12 +224,12 @@ padding: 2em; */
 
 .pension-slider .ui-slider-handle {
     background: red;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     border: none;
-    margin-left: -30px;
-    margin-top: -30px;
+    margin-left: -40px;
+    margin-top: -40px;
     top: 0;
     left: 0;
     -webkit-transition: all 1s;
@@ -239,12 +250,21 @@ padding: 2em; */
 }
 
 .question-description {
-    margin-top: 1em;
-    height: 10%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    /* height: 10%; */
 }
 
 
 /* RESULT CARD */
+
+.result-first-message {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 21px;
+    margin-bottom: 14px;
+    margin-top: 20px;
+}
 
 .pension-price-row {
     color: red;
@@ -252,12 +272,13 @@ padding: 2em; */
 }
 
 .pension-price-row h2 {
-    font-size: 26px;
+    font-size: 26pt;
 }
 
 .pension-price-row h1 {
     font-size: 40pt;
     margin-bottom: 0;
+    font-weight: bold;
 }
 
 #PensionGoalDescription {
@@ -272,6 +293,14 @@ padding: 2em; */
     left: 80px;
 }
 
+.final-table {
+    height: 100%;
+}
+
+.final-table tr {
+    height: 100%;
+}
+
 .final-table h3 {
     color: red;
 }
@@ -279,12 +308,14 @@ padding: 2em; */
 td.final-slider {
     padding: 0 50px;
     min-width: 400px;
+    width: 50%;
 }
 
 .category-image {
     height: 200px;
     padding: 0 !important;
     max-width: 280px;
+    width: 25%;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -295,8 +326,8 @@ td.final-slider {
 }
 
 .category-image img {
-    height: 100%;
-    width: auto;
+    height: auto;
+    width: 100%;
 }
 
 .pension-calculator {
@@ -311,8 +342,9 @@ td.final-slider {
 .pension-calculator label {
     color: #666666;
     display: block;
-    font-size: 14px;
+    font-size: 14pt;
     font-weight: normal;
+    margin-bottom: 14px;
 }
 
 .pension-calculator input[type=text] {
@@ -342,6 +374,8 @@ td.final-slider {
 .pension-calculator h2 {
     margin-top: 3em;
     font-size: 18pt;
+    padding-right: 30px;
+    margin-top: 60px;
 }
 
 .pension-result-slider {
@@ -376,7 +410,7 @@ td.final-slider {
 
 .pension-result-slider .min,
 .pension-result-slider .max {
-    font-size: 14px;
+    font-size: 14pt;
     color: #666666;
     position: absolute;
     top: 20px;
@@ -388,7 +422,7 @@ td.final-slider {
 
 .pension-result-slider .value {
     color: red;
-    font-size: 15px;
+    font-size: 17pt;
     position: absolute;
     right: 0;
     top: -50px;
@@ -407,12 +441,11 @@ td.final-slider {
 }
 
 .small-message-box {
-    font-size: 18px;
-    margin-bottom: 14px;
+    font-size: 18pt;
 }
 
 #GameOverScreen {
-    padding: 0 30px 30px 30px;
+    padding: 0 30px 5px 30px;
 }
 
 #GameOverScreen h1 {
@@ -423,4 +456,14 @@ td.final-slider {
 
 #GameOverScreen p {
     margin-bottom: 20px;
+}
+
+.ui-dialog {
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    0px 0px 8px 0px rgba(50, 50, 50, 0.75);
+    box-shadow:         0px 0px 8px 0px rgba(50, 50, 50, 0.75);
+}
+
+.ui-widget-overlay {
+    background: black;
 }

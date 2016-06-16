@@ -22,7 +22,7 @@
 
   <div id="GameOverScreen">
     <h1>Hinweis:</h1>
-    <p>Vorfreude und Rentenziel stimmen nicht mehr überein. Bitte passen Sie Ihre Wünsche oder den monatlichen Beitrag an.</p>
+    <p><b>Vorfreude und Rentenziel stimmen nicht mehr überein.</b> Bitte passen Sie Ihre Wünsche oder den monatlichen Beitrag an.</p>
     <div class="clearfix">
       <span onclick="window.location.reload()" class="weiter-btn pull-right">Alles klar</span>
     </div>
@@ -117,7 +117,7 @@
         
           <div class="cbox pagination-centered">
             <div id="QuestionNumbers">
-              <span class="red">1</span>
+              <span class="red current-question">1</span>
               <span>2</span>
               <span>3</span>
               <span>✓</span>
@@ -132,11 +132,11 @@
               <h2>Alltägliches</h2>
         
               <div class="answer-images">
-                <div id="Img_1_1" class="pension-image" style="background-image: url('img/q/q_1_1.jpg');"></div>
-                <div id="Img_1_2" class="pension-image" style="background-image: url('img/q/q_1_2.jpg');"></div>
-                <div id="Img_1_3" class="pension-image" style="background-image: url('img/q/q_1_3.jpg');"></div>
-                <div id="Img_1_4" class="pension-image" style="background-image: url('img/q/q_1_4.jpg');"></div>
-                <div id="Img_1_5" class="pension-image" style="background-image: url('img/q/q_1_5.jpg');"></div>
+                <img id="Img_1_1" class="pension-image" src='img/q/q_1_1.jpg' />
+                <img id="Img_1_2" class="pension-image" src='img/q/q_1_2.jpg' />
+                <img id="Img_1_3" class="pension-image" src='img/q/q_1_3.jpg' />
+                <img id="Img_1_4" class="pension-image" src='img/q/q_1_4.jpg' />
+                <img id="Img_1_5" class="pension-image" src='img/q/q_1_5.jpg' />
               </div>
 
               <table class="pension-controlls">
@@ -149,7 +149,8 @@
             </div>
         
             <div class="cbox question-description">
-              Auch im Alter wollen Sie einen gewissen Lebensstandard im Alltag und beim Wohnen erhalten. Darf’s noch etwas mehr sein?
+              Auch im Alter wollen Sie einen gewissen Lebensstandard im Alltag und beim Wohnen erhalten.
+              <br/> Darf’s noch etwas mehr sein?
             </div>
           </div>
 
@@ -163,11 +164,11 @@
               <h2>Reisen</h2>
         
               <div class="answer-images">
-                <div id="Img_2_1" class="pension-image" style="background-image: url('img/q/q_2_1.jpg');"></div>
-                <div id="Img_2_2" class="pension-image" style="background-image: url('img/q/q_2_2.jpg');"></div>
-                <div id="Img_2_3" class="pension-image" style="background-image: url('img/q/q_2_3.jpg');"></div>
-                <div id="Img_2_4" class="pension-image" style="background-image: url('img/q/q_2_4.jpg');"></div>
-                <div id="Img_2_5" class="pension-image" style="background-image: url('img/q/q_2_5.jpg');"></div>
+                <img id="Img_2_1" class="pension-image" src="img/q/q_2_1.jpg" />
+                <img id="Img_2_2" class="pension-image" src="img/q/q_2_2.jpg" />
+                <img id="Img_2_3" class="pension-image" src="img/q/q_2_3.jpg" />
+                <img id="Img_2_4" class="pension-image" src="img/q/q_2_4.jpg" />
+                <img id="Img_2_5" class="pension-image" src="img/q/q_2_5.jpg" />
               </div>
       
         
@@ -195,11 +196,11 @@
               <h2>Freizeit</h2>
 
               <div class="answer-images">
-                <div id="Img_3_1" class="pension-image" style="background-image: url('img/q/q_3_1.jpg');"></div>
-                <div id="Img_3_2" class="pension-image" style="background-image: url('img/q/q_3_2.jpg');"></div>
-                <div id="Img_3_3" class="pension-image" style="background-image: url('img/q/q_3_3.jpg');"></div>
-                <div id="Img_3_4" class="pension-image" style="background-image: url('img/q/q_3_4.jpg');"></div>
-                <div id="Img_3_5" class="pension-image" style="background-image: url('img/q/q_3_5.jpg');"></div>
+                <img id="Img_3_1" class="pension-image" src="img/q/q_3_1.jpg" />
+                <img id="Img_3_2" class="pension-image" src="img/q/q_3_2.jpg" />
+                <img id="Img_3_3" class="pension-image" src="img/q/q_3_3.jpg" />
+                <img id="Img_3_4" class="pension-image" src="img/q/q_3_4.jpg" />
+                <img id="Img_3_5" class="pension-image" src="img/q/q_3_5.jpg" />
               </div>
 
               <table class="pension-controlls">
@@ -218,19 +219,19 @@
 
           <!-- QUESTION END -->
         
-          <div class="weiter-block">
+          <div class="weiter-block clear-fix">
             <span class="pull-right weiter-btn" onclick="(app.nextQuestion.bind(app))()">Weiter</span>
           </div>
         </div>
 
         <div id="Result" style="display: none;">
-          <h2>
+          <h2 class="result-first-message">
             Was immer Sie vorhaben: Sorgen Sie dafür, dass die Vorfreude bleibt. Mit dem neue leben aktivplan verwandeln
-            Sie Vorsorge in Vorfreude – je eher desto günstiger!
+            <br>Sie Vorsorge in Vorfreude – je eher desto günstiger!
           </h2>
 
           <div class="small-message-box cbox">
-            So viel Vorfreude wünschen Sie sich fürs Alter. Schauen Sie sich an, wie viel Rente Sie brauchen, damit Ihre Vorstellungen wahr werden – und wie viel Vorsorge dafür nötig ist!
+            So viel Vorfreude wünschen Sie sich fürs Alter. Schauen Sie sich an, wie viel Rente Sie brauchen, damit Ihre Vorstellungen wahr&nbsp;werden&nbsp;–&nbsp;und&nbsp;wie viel Vorsorge dafür nötig ist!
           </div>
 
           <table class="final-table">
@@ -296,10 +297,10 @@
           </table>
 
           <div class="pension-price-row clearfix cbox">
-            <div class="col-md-6">
+            <div class="col-md-8">
               <h2>Eine lebenslange monatliche Rente in dieser Höhe kann Ihre Vorfreude steigern:</h2>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <h1 id="PensionPrice" class="pull-right"></h1>
             </div>
           </div>

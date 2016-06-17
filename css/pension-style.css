@@ -62,7 +62,7 @@ body {
 .pension-container {
     margin-right: auto;
     margin-left: auto;
-    width: 980px;
+    width: 960px;
     position: relative;
 }
 
@@ -326,6 +326,7 @@ padding: 2em; */
 
 .final-table {
     height: 100%;
+    table-layout: fixed
 }
 
 .final-table tr {
@@ -356,6 +357,8 @@ td.final-slider {
 .category-image div {
     height: 100%;
     font-size: 0 !important;
+    object-fit: contain;
+    /* overflow: hidden; */
 }
 
 .category-image img {

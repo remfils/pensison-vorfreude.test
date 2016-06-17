@@ -36,7 +36,7 @@
         <tr>
           <td style="text-align: left">
             <form name="login" class="navbar-form navbar login-form" action="login.php" method="POST">
-              <img src="img/name.jpg" alt="name image">
+              <img src="img/name.png" alt="name image" style="width: 99px; margin-right: 50px;">
                 <div class="form-group">
                   <input placeholder="Anmeldename" name="login" class="form-control" type="text">
                 </div>
@@ -58,7 +58,19 @@
   </div>
 
   <div class="img-container">
-    <img src="img/logo_desktop.jpg" class="img-logo" alt="Image Logo"/>
+    <div style="background-image: url('img/logo_desktop.jpg'); height: 100vh; -webkit-background-size: cover;
+    background-size: cover;" class="img-logo"></div>
+    <!-- <img src="img/logo_desktop.jpg" class="img-logo" alt="Image Logo"/> -->
+
+    <script>
+      $(".img-logo").height($(window).height() - 96);
+    </script>
+
+    <!--[if Safari]>
+      <script>
+        $(".final-table tr").css("height", "194px");
+      </script>
+    <![endif]-->
 
     <div class="pension-container text-logo-container">
 
@@ -360,7 +372,7 @@
                 Termin vereinbaren
               </span>
 
-              <span class="pull-right weiter-btn" style="background-color: gray; margin-right: 1em;">
+              <span class="pull-right angebot-btn" style="background-color: #E3E3E3; color: #777777; margin-right: 1em;">
                 Angebot berechnen
               </span>
             </div>

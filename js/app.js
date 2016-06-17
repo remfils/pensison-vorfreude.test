@@ -225,6 +225,8 @@ Application.prototype.finishTest = function() {
   this.swapTwoCards($(".pension-questions"), this.result_card.$this, function() {
     self.calculateImaginaryPension();
 
+    self.result_card.setFields();
+
     TweenLite.set($("#PensionPrice"), {"opacity": 0});
 
     $("#PensionPrice").text( Math.round(self.imaginary_pension / 10 ) * 10 + " Euro*");
@@ -388,7 +390,8 @@ QuestionCard.prototype.showImage = function(image_number, callback) {
 };
 
 QuestionCard.prototype.resizeImage = function() {
-  var image_height = this.$("#Img_"+ this.num + "_1").width() * 533 / 800;
+  // var image_height = this.$("#Img_"+ this.num + "_1").width() * 533 / 800;
+  var image_height = 552.27;
   this.$(".answer-images").height(image_height);
 };
 
@@ -469,14 +472,24 @@ ResultCard.prototype.init = function() {
 
   this.initCalulator();
 
+  $("td.category-image").height(39);
+
+  // $("td.category-image").height($("#FinalSliderImages1").width() * 533 / 800);
+
+  var h = $("#FinalSliderImages1").width() * 533 / 800;
+
+  //$("td.category-image").height(h);
+
+  /*$(".category-image img").height(h);*/
+  /*$("td.category-image").width( 196 / 533 * 800);
+
+  console.log("ResultCard.prototype.init:", $("#FinalSliderImages1").height());*/
+};
+
+ResultCard.prototype.setFields = function() {
   this.sliders.map(function(item, index) {
     item.slider("value", self.app.answers[index]);
   });
-
-  $("td.category-image").height($("#FinalSliderImages1").width() * 533 / 800);
-  // $("td.category-image").width( 194 / 533 * 800);
-
-  console.log("ResultCard.prototype.init:", $("#FinalSliderImages1").height());
 };
 
 ResultCard.prototype.initCalulator = function() {

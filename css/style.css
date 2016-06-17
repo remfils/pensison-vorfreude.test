@@ -32,6 +32,14 @@ html, body {
   top: 12px;
 }
 
+.angebot-btn {
+  padding: 10px 15px 10px 15px;
+  cursor: pointer;
+  font-size: 18pt;
+  font-family: SparkasseMedium;
+  position: relative;
+}
+
 .easy-hidden,
 div.easy-hidden {
   display: none;
@@ -99,7 +107,7 @@ div.easy-hidden {
 	background-color: red;
 	padding: 20px 20px 20px 20px;
 	color: white;
-  width: 360px;
+  width: 362px;
   bottom: 61px;
 }
 
@@ -119,6 +127,10 @@ div.easy-hidden {
   font-size: 24px;
   line-height: 28px;
   float: right;
+}
+
+.pension-header-menu {
+  padding: 15px 0px !important;
 }
 
 .navbar-default .navbar-nav > li > a {

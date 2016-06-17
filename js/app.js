@@ -220,14 +220,14 @@ Application.prototype.finishTest = function() {
 
   this.changeTitle(this.result_card.title);
 
+  self.result_card.init();
+
   this.swapTwoCards($(".pension-questions"), this.result_card.$this, function() {
     self.calculateImaginaryPension();
 
     TweenLite.set($("#PensionPrice"), {"opacity": 0});
 
-    self.result_card.init();
-
-    $("#PensionPrice").text( Math.round(self.imaginary_pension * 100 ) / 100 + " Euro*");
+    $("#PensionPrice").text( Math.round(self.imaginary_pension / 10 ) * 10 + " Euro*");
     TweenLite.to($("#PensionPrice"), 0.3, {"opacity": 1});
   });
 };
@@ -448,7 +448,7 @@ ResultCard.prototype.createSliders = function() {
             self.app.answers[index] = ui.value;
 
             TweenLite.to($("#PensionPrice"), 0.4, {"opacity": 0, onComplete: function() {
-              $("#PensionPrice").text( Math.round(self.app.imaginary_pension * 100 ) / 100 + " Euro*");
+              $("#PensionPrice").text( Math.round(self.app.imaginary_pension / 10 ) * 10 + " Euro*");
 
               TweenLite.to($("#PensionPrice"), 0.4, {"opacity": 1});
             }});
@@ -473,7 +473,10 @@ ResultCard.prototype.init = function() {
     item.slider("value", self.app.answers[index]);
   });
 
-  // $("td.category-image").width($("#FinalSliderImages1").height() / 533 * 800);
+  $("td.category-image").height($("#FinalSliderImages1").width() * 533 / 800);
+  // $("td.category-image").width( 194 / 533 * 800);
+
+  console.log("ResultCard.prototype.init:", $("#FinalSliderImages1").height());
 };
 
 ResultCard.prototype.initCalulator = function() {
@@ -487,7 +490,7 @@ ResultCard.prototype.initCalulator = function() {
   this.payment_slider = $("#ResultPayment").slider({
     min: 20,
     max: 500,
-    step: 0.01,
+    step: 1,
     animate: true,
     range: "min",
     value: savings,
@@ -539,7 +542,7 @@ ResultCard.prototype.displayPensionCalculator = function() {
 
   var p = this.app.imaginary_pension;
 
-  var savings = this.app.calculateSavings();
+  var savings = Math.round(this.app.calculateSavings());
 
   var p_a = Application.PENSION_DATA_ARRAY[this.app.user_age];
 
@@ -555,7 +558,7 @@ ResultCard.prototype.displayPensionCalculator = function() {
   this.payment_slider.slider("option", "max", max);
 
   this.payment_slider.slider("value", savings);
-  $("#ResultPayment .value").text( Math.round(savings * 100) / 100);
+  $("#ResultPayment .value").text( savings);
 
   var height = 0;
   $calc.children().each(function(i, item) {

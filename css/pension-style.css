@@ -62,8 +62,8 @@ body {
 .pension-container {
     margin-right: auto;
     margin-left: auto;
-    padding-left: 15%;
-    padding-right: 15%;
+    width: 980px;
+    position: relative;
 }
 
 .pension-title-logo {
@@ -76,7 +76,7 @@ body {
 
 #QuestionTitle {
     color: red;
-    font-size: 39pt;
+    font-size: 39px;
     margin-bottom: 20pt;
     font-family: SparkasseLt;
 }
@@ -90,7 +90,7 @@ body {
 .pension-questions {
   /* position: absolute; */
   top: 0;
-  font-size: 18pt;
+  font-size: 18px;
 }
 
 .pagination-centered {
@@ -174,9 +174,11 @@ padding: 2em; */
 
 #UserAge:before,
 #UserAge:after {
+    font: 14pt;
     position: absolute;
-    top: 15px;
+    top: 23px;
     color: #666666;
+    font-size: 14pt;
 }
 
 #UserAge:before {
@@ -212,7 +214,7 @@ padding: 2em; */
 
 .user-age-lable-cell label {
     font-weight: normal;
-    font-size: 18pt;
+    font-size: 18px;
     color: #777777;
 }
 
@@ -222,9 +224,10 @@ padding: 2em; */
     position: absolute;
     width: 100%;
     text-align: center;
-    top: -30px;
+    top: -35px;
     color: red;
-    white-space: nowrap ;
+    white-space: nowrap;
+    font-size: 14pt;
 }
 
 .pension-slider.ui-widget-content {
@@ -277,16 +280,15 @@ padding: 2em; */
 .question-description {
     padding-top: 30px;
     padding-bottom: 30px;
-    /* height: 10%; */
 }
 
 
 /* RESULT CARD */
 
 .result-first-message {
-    font-size: 18pt;
+    font-size: 18px;
     font-weight: bold;
-    line-height: 20pt;
+    line-height: 20px;
     margin-bottom: 14px;
     margin-top: 20px;
 }
@@ -297,17 +299,19 @@ padding: 2em; */
 }
 
 .pension-price-row h2 {
-    font-size: 26pt;
+    font-size: 26px;
+    margin: 0px;
 }
 
 .pension-price-row h1 {
-    font-size: 40pt;
+    font-size: 40px;
     margin-bottom: 0;
     font-weight: bold;
+    margin: 0;
 }
 
 #PensionGoalDescription {
-    font-size: 18pt;
+    font-size: 18px;
     font-weight: bold;
     margin-top: 35px;
 }
@@ -336,14 +340,14 @@ padding: 2em; */
 
 td.final-slider {
     padding: 0 50px;
-    min-width: 400px;
+    /* min-width: 400px; */
     width: 50%;
 }
 
 .category-image {
     height: 200px;
     padding: 0 !important;
-    max-width: 280px;
+    /* max-width: 280px; */
     width: 25%;
     white-space: nowrap;
     overflow: hidden;
@@ -371,7 +375,7 @@ td.final-slider {
 .pension-calculator label {
     color: #666666;
     display: block;
-    font-size: 14pt;
+    font-size: 14px;
     font-weight: normal;
     margin-bottom: 14px;
 }
@@ -402,7 +406,7 @@ td.final-slider {
 
 .pension-calculator h2 {
     margin-top: 3em;
-    font-size: 18pt;
+    font-size: 18px;
     padding-right: 30px;
     margin-top: 60px;
 }
@@ -470,7 +474,7 @@ td.final-slider {
 }
 
 .small-message-box {
-    font-size: 18pt;
+    font-size: 18px;
 }
 
 #GameOverScreen {

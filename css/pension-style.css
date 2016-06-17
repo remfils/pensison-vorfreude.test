@@ -1,21 +1,46 @@
 @font-face {
     font-family: Sparkasse;
-    src: url(../fonts/Sparkasse_Rg.ttf);
+    src: url(../fonts/sparkasse_professionel/Sparkasse_Rg.ttf);
+}
+
+@font-face {
+    font-family: Sparkasse;
+    src: url(../fonts/sparkasse_professionel/Sparkasse_Bd.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Sparkasse;
+    src: url(../fonts/sparkasse_professionel/Sparkasse_It.ttf);
+    font-style: italic;
+}
+
+@font-face {
+    font-family: Sparkasse;
+    src: url(../fonts/sparkasse_professionel/Sparkasse_BdIt.ttf);
+    font-style: italic;
+    font-weight: bold;
 }
 
 @font-face {
     font-family: SparkasseHead;
-    src: url(../fonts/SparkasseHead_Rg.ttf);
+    src: url(../fonts/sparkasse_professionel/SparkasseHead_Rg.ttf);
 }
 
 @font-face {
     font-family: SparkasseMedium;
-    src: url(../fonts/Sparkasse_Md.ttf);
+    src: url(../fonts/sparkasse_professionel/Sparkasse_Md.ttf);
 }
 
 @font-face {
     font-family: SparkasseLt;
-    src: url(../fonts/Sparkasse_Lt.ttf);
+    src: url(../fonts/sparkasse_professionel/Sparkasse_Lt.ttf);
+}
+
+@font-face {
+    font-family: SparkasseLt;
+    src: url(../fonts/sparkasse_professionel/Sparkasse_LtIt.ttf);
+    font-style: italic;
 }
 
 body {
@@ -259,9 +284,9 @@ padding: 2em; */
 /* RESULT CARD */
 
 .result-first-message {
-    font-size: 18px;
+    font-size: 18pt;
     font-weight: bold;
-    line-height: 21px;
+    line-height: 20pt;
     margin-bottom: 14px;
     margin-top: 20px;
 }
@@ -283,6 +308,8 @@ padding: 2em; */
 
 #PensionGoalDescription {
     font-size: 18pt;
+    font-weight: bold;
+    margin-top: 35px;
 }
 
 .category-bar {

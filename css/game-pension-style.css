@@ -1,0 +1,159 @@
+.question-cards-section {
+  position: relative;
+}
+
+.question-card-section {
+  /* margin-top: 20px; */
+  /* margin-right: 0 !important; */
+  /* position: absolute; */
+  top: 0;
+}
+
+
+
+/* SLIDERS */
+
+.ui-handle-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: -35px;
+    color: red;
+    white-space: nowrap;
+    font-size: 14pt;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+    border-radius: 0;
+}
+
+/* pension-result-slider -> pension-simple-slider */
+
+.pension-simple-slider {
+    margin: 2em 0;
+}
+
+.pension-simple-slider .ui-slider-handle {
+    width: 30px;
+    height: 30px;
+    top: -11px;
+    border-radius: 15px;
+    background: white;
+}
+
+.pension-simple-slider .ui-slider-handle:focus,
+.pension-slider .ui-slider-handle:focus {
+    outline: none;
+    cursor: default;
+}
+
+.pension-simple-slider.ui-widget-content {
+    border: none;
+    background: #F0F0F0;
+}
+
+.pension-simple-slider.ui-slider-horizontal {
+    height: 0.6em;
+}
+
+.pension-simple-slider .ui-slider-range-min {
+    background: red;
+}
+
+.pension-simple-slider .min,
+.pension-simple-slider .max {
+    font-size: 14pt;
+    color: #666666;
+    position: absolute;
+    top: 20px;
+}
+
+.pension-simple-slider .max {
+    right: 0;
+}
+
+.pension-simple-slider .value {
+    color: red;
+    font-size: 17pt;
+    position: absolute;
+    right: 0;
+    top: -50px;
+}
+
+/* pension-slider->pension-question-slider */
+
+.pension-question-slider.ui-widget-content {
+    background: white;
+    outline: none;
+    border: none;
+    top: 7px;
+    background-color: red;
+}
+
+.pension-question-slider.ui-slider-horizontal {
+    height: 12px;
+}
+
+.pension-question-slider .ui-widget-header {
+    background: red;
+}
+
+.pension-question-slider .ui-slider-handle {
+    background: red;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: none;
+    margin-left: -40px;
+    margin-top: -40px;
+    top: 0;
+    left: 0;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -ms-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+    cursor: pointer;
+}
+
+/* USER AGE CARD */
+
+#QuestionAge {
+  clear: both;
+}
+
+#QuestionAge th {
+  white-space: nowrap;
+  color: #777777;
+}
+
+#QuestionAge td {
+  width: 100%;
+}
+
+#SliderUserAge {
+  position: relative;
+}
+
+#SliderUserAge:before,
+#SliderUserAge:after {
+    font: 14pt;
+    position: absolute;
+    top: 23px;
+    color: #666666;
+    font-size: 14pt;
+}
+
+#SliderUserAge:before {
+    content: "18 Jahre";
+    left: 0;
+}
+
+#SliderUserAge:after {
+    content: "67 Jahre";
+    right: 0;
+}
+
+#SliderUserAge .ui-handle-text {
+    left: -16px;
+}

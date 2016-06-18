@@ -273,3 +273,147 @@
     font-size: 76pt;
     cursor: pointer;
 }
+
+
+/* RESULT CARD */
+
+.result-first-message {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 20px;
+    margin-bottom: 14px;
+    margin-top: 20px;
+}
+
+.pension-price-row {
+    color: red;
+    margin-bottom: 14px;
+}
+
+.pension-price-row h2 {
+    font-size: 26px;
+    margin: 0px;
+}
+
+.pension-price-row h1 {
+    font-size: 40px;
+    margin-bottom: 0;
+    font-weight: bold;
+    margin: 0;
+}
+
+#PensionGoalDescription {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 35px;
+}
+
+.category-bar {
+    background-color: red;
+    height: 10px;
+    position: absolute;
+    top: 35px;
+    left: 80px;
+}
+
+.final-table {
+    height: 100%;
+    table-layout: fixed
+}
+
+.final-table tr {
+    height: 100%;
+}
+
+.final-table h3 {
+    color: red;
+    margin: 0;
+    margin-bottom: 14px;
+}
+
+td.final-slider {
+    padding: 0 50px;
+    /* min-width: 400px; */
+    width: 50%;
+}
+
+.category-image {
+    height: 200px;
+    padding: 0 !important;
+    /* max-width: 280px; */
+    width: 25%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.category-image div {
+    height: 100%;
+    font-size: 0 !important;
+    object-fit: contain;
+    /* overflow: hidden; */
+}
+
+.category-image img {
+    height: auto;
+    width: 100%;
+}
+
+.pension-calculator {
+    height: 0;
+    overflow: hidden;
+}
+
+.pension-row {
+    margin-bottom: 60px;
+}
+
+.pension-calculator label {
+    color: #666666;
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 14px;
+}
+
+.pension-calculator input[type=text] {
+    border: 2px solid #777777;
+    -webkit-border-radius: 5px;
+            border-radius: 5px;
+    color: red;
+    padding: 5px;
+    font-size: 17px;
+}
+
+.helper-button {
+    border: 1px solid #777777;
+    -webkit-border-radius: 50%;
+            border-radius: 50%;
+    color: #777777;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 10pt;
+    line-height: 20px;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    text-align: center;
+}
+
+.pension-calculator h2 {
+    margin-top: 3em;
+    font-size: 18px;
+    padding-right: 30px;
+    margin-top: 60px;
+}
+
+#ResultWorkYears .min:after,
+#ResultWorkYears .max:after,
+#ResultWorkYears .value:after {
+    content: " Jahre";
+}
+
+#ResultPayment .min:after,
+#ResultPayment .max:after,
+#ResultPayment .value:after {
+    content: " Euro";
+}

@@ -157,3 +157,119 @@
 #SliderUserAge .ui-handle-text {
     left: -16px;
 }
+
+/* QUESTION CARD */
+
+#QuestionNumbers {
+    justify-content: center;
+    text-align: center;
+}
+
+#QuestionNumbers span {
+  background-color: gray;
+  border-radius: 50%;
+  color: white;
+  display: inline-block;
+  font-size: 18px;
+  line-height: 36px;
+  width: 36px;
+  height: 36px;
+  text-align: center;
+  position: relative;
+  margin-right: 40px;
+  padding: auto 0;
+  -webkit-transition: all 0.4s;
+       -moz-transition: all 0.4s;
+        -ms-transition: all 0.4s;
+         -o-transition: all 0.4s;
+            transition: all 0.4s;
+}
+
+#QuestionNumbers span:not(:last-child):after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: gray;
+    position: absolute;
+    left: 35px;
+    top: 18px;
+    
+    -webkit-transition: all 0.4s;
+       -moz-transition: all 0.4s;
+        -ms-transition: all 0.4s;
+         -o-transition: all 0.4s;
+            transition: all 0.4s;
+}
+
+#QuestionNumbers .current-question {
+  width: 46px;
+  height: 46px;
+  line-height: 46px;
+  /* top: -5px; */
+}
+
+#QuestionNumbers .current-question:after {
+  left: 45px !important;
+  top: 23px !important;
+}
+
+#QuestionNumbers .red,
+#QuestionNumbers .red:after {
+    background-color: red !important;
+}
+
+.answer-images {
+  position: relative;
+  margin: 0 20px;
+}
+
+.answer-images img {
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+.answer-images img:first-child {
+    position: relative;
+}
+
+.pension-controlls {
+    width: 100%;
+}
+
+.pension-controlls td:first-child {
+  padding-left: 0;
+}
+
+.pension-controlls td:last-child {
+  padding-right: 0;
+}
+
+.question .side-controll-column {
+    width: 10%;
+    vertical-align: middle;
+    padding: 0;
+    padding-top: 12px;
+}
+
+.minus-btn-cell {
+  text-align: left;
+}
+
+.plus-btn-cell {
+  text-align: right;
+}
+
+.slider-controll-column {
+    width: 80%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.question-button {
+    color: red;
+    font-size: 76pt;
+    cursor: pointer;
+}

@@ -3,10 +3,14 @@
 }
 
 .question-card-section {
-  /* margin-top: 20px; */
-  /* margin-right: 0 !important; */
-  /* position: absolute; */
+  margin-top: 20px;
+  margin-right: 0 !important;
+  position: absolute;
   top: 0;
+}
+
+.current-card {
+  position: relative;
 }
 
 
@@ -20,7 +24,7 @@
   top: -35px;
   color: red;
   white-space: nowrap;
-  font-size: 14pt;
+  font-size: 17px;
 }
 
 .ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
@@ -162,9 +166,9 @@
   width: 100%;
 }
 
-.user-age-table .user-age-slider-cell {
+.user-age-table td.user-age-slider-cell {
   padding-left: 60px;
-  padding-right: 30px;
+  padding-right: 60px;
 }
 
 #SliderUserAge {
@@ -173,11 +177,10 @@
 
 #SliderUserAge:before,
 #SliderUserAge:after {
-  font: 14pt;
   position: absolute;
   top: 23px;
   color: #666666;
-  font-size: 14pt;
+  font-size: 14px;
 }
 
 #SliderUserAge:before {
@@ -446,6 +449,26 @@ td.slider-controll-column {
 .question-image-container img {
   width: 100%;
   height: 100%;
+}
+
+.slider-cell {
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.text-cell {
+  padding-top: 14px;
+}
+
+.text-cell h3 {
+  font-size: 26px;
+  margin: 0;
+  margin-bottom: 14px;
+  line-height: normal;
+}
+
+.text-cell p {
+  line-height: normal;
 }
 
 .final-table {

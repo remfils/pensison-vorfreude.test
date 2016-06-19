@@ -1,11 +1,111 @@
 function Application () {
   var self = this;
 
+  this.$app = $("#App");
+
   this.user_age = 28;
 
   this.real_pension = 0;
 
+  this.title_card = new TitleCard(this);
+
   this.question_age_card = new QuestionAgeCard(this);
+
+  this.question_form = new QuestionFormCard(this);
+
+  this.answers = [1,1,1];
+
+  this.result_card = new ResultCard(this);
+
+  this.title_card.$this.show();
+};
+
+Application.prototype.init = function() {
+    
+};
+
+Application.prototype.titleCardStartButtonListener = function (e) {
+  this.swapTwoCards(this.title_card, this.question_age_card);
+
+  e.preventDefault();
+  return false;
+}
+
+Application.prototype.questionAgeWeiterListener = function (e) {
+  this.swapTwoCards(this.question_age_card, this.question_form);
+
+  e.preventDefault();
+  return false;
+}
+
+Application.prototype.swapTwoCards = function(a, b, callback) {
+  var $a = a.$this;
+  var $b = b.$this;
+
+  this.$app.animate({height: $b.outerHeight(true)}, 1000);
+
+  $a.removeClass("current-question-card");
+  $b.addClass("current-question-card");
+
+  $b.css("opacity", 0).show();
+
+  $("html, body").animate({ scrollTop: $b.offset().top - 14 }, 1000);
+
+  $a.fadeOut({
+    duration: 1000,
+    complete: function() {
+
+      $b.animate({opacity: 1}, 1000);
+    }
+  });
+
+  console.log($b, $b.offset().top);
+};
+
+
+/* TITLE CARD */
+
+function TitleCard ( app ) {
+  this.$this = $("#TitleCard");
+
+  this.$this.hide();
+
+  this.app = app;
+
+  $("#TitleCardStartButton").click(app.titleCardStartButtonListener.bind(app));
+}
+
+
+/* QUESTION AGE CARD */
+
+QuestionAgeCard = function(app) {
+    this.app = app;
+
+    this.$this = $("#QuestionAge");
+    
+    this.age_slider = $("#SliderUserAge").slider({
+        min: 18,
+        max: 67,
+        animate: true,
+        range: "min",
+        value: app.user_age,
+        slide: function(event, ui) {
+          app.user_age = ui.value;
+          $("#SliderUserAge .ui-handle-text").text(ui.value + " Jahre");
+        }
+        });
+    $("#SliderUserAge .ui-slider-handle").append("<span class='ui-handle-text'>" + app.user_age + " Jahre</span>");
+
+    this.$this.hide();
+
+    this.$this.find("#QuestionAgeWeiter").click(this.app.questionAgeWeiterListener.bind(app));
+}
+
+
+/* QUESTION FORM CARD */
+
+function QuestionFormCard ( app ) {
+  this.$this = $("#QuestionsForm");
 
   this.questions = [
     "Auch im Alter wollen Sie einen gewissen Lebensstandard im Alltag und beim Wohnen erhalten. <br> Darf’s noch etwas mehr sein?",
@@ -13,16 +113,13 @@ function Application () {
     "Auch im Alter wollen Sie einen gewissen Lebensstandard im Alltag und beim Wohnen erhalten. <br> Darf’s noch etwas mehr sein?",
   ].map(function(question_text, index){
     var q = new QuestionCard(self, index + 1, question_text);
+    return q;
   });
 
-  this.answers = [1,1,1];
+  this.questions[0].$this.show();
 
-  this.result_card = new ResultCard(this);
-};
-
-Application.prototype.init = function() {
-    
-};
+  this.$this.hide();
+}
 
 
 /* QUESTION CARD */
@@ -56,28 +153,9 @@ function QuestionCard ( app, question_number, question_text ) {
       self.app.answers[ self.num - 1 ] = ui.value;
     }
   });
+
+  this.$this.hide();
 };
-
-
-QuestionAgeCard = function(app) {
-    this.app = app;
-    
-    this.age_slider = $("#SliderUserAge").slider({
-        min: 18,
-        max: 67,
-        animate: true,
-        range: "min",
-        value: app.user_age,
-        slide: function(event, ui) {
-          app.user_age = ui.value;
-          $("#SliderUserAge .ui-handle-text").text(ui.value + " Jahre");
-        }
-        });
-    $("#SliderUserAge .ui-slider-handle").append("<span class='ui-handle-text'>" + app.user_age + " Jahre</span>");
-
-    this.$this = $("#QuestionAge");
-    //this.$this.hide();
-}
 
 
 
@@ -97,7 +175,6 @@ function ResultCard(app) {
   this.$(".slider-cell").each(function(i, item) {
     var $item = $(item);
     $item.height(text_cell_height);
-    console.log($item.find(".pension-question-slider").height());
     var padding_top = ( text_cell_height) / 2;
     $item.css("padding-top", padding_top);
   });
@@ -107,6 +184,8 @@ function ResultCard(app) {
   this.$(".image-cell").each(function(i, item) {
     $(item).innerHeight(text_cell_height);
   });
+
+  this.$this.hide();
 };
 
 ResultCard.prototype.createSliders = function() {

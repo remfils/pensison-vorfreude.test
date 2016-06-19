@@ -357,11 +357,11 @@
           <div class="question-container">
 
 <!-- QUESTION START -->
-            <div id="Question_1" class="question">
+            <div id="Question_1" class="question current-question">
               <h2>Alltägliches</h2>
 
               <div class="answer-images">
-                <img id="Img_1_1" class="pension-image" src='img/q/q_1_1.jpg' alt="Image 1 for question 1" />
+                <img id="Img_1_1" class="pension-image current-question-image" src='img/q/q_1_1.jpg' alt="Image 1 for question 1" />
                 <img id="Img_1_2" class="pension-image" src='img/q/q_1_2.jpg' alt="Image 2 for question 1" />
                 <img id="Img_1_3" class="pension-image" src='img/q/q_1_3.jpg' alt="Image 3 for question 1" />
                 <img id="Img_1_4" class="pension-image" src='img/q/q_1_4.jpg' alt="Image 4 for question 1" />
@@ -372,7 +372,7 @@
                 <tr>
                   <td class="side-controll-column minus-btn-cell" style="{text-align: left}"><span class="question-button" onclick="(app.minusClickListener.bind(app))()">-</span></td>
                   <td class="slider-controll-column"><div id="PensionSlider1" class="pension-question-slider slider-icon-leben"></div></td>
-                  <td class="side-controll-column plus-btn-cell"><span class="question-button" onclick="(app.plusClickListener.bind(app))()">+</span></td>
+                  <td class="side-controll-column plus-btn-cell"><span class="question-button">+</span></td>
                 </tr>
               </table>
             </div>
@@ -383,7 +383,7 @@
               <h2>Alltägliches</h2>
 
               <div class="answer-images">
-                <img id="Img_2_1" class="pension-image" src='img/q/q_3_1.jpg' alt="Image 1 for question 2" />
+                <img id="Img_2_1" class="pension-image current-question-image" src='img/q/q_3_1.jpg' alt="Image 1 for question 2" />
                 <img id="Img_2_2" class="pension-image" src='img/q/q_3_2.jpg' alt="Image 2 for question 2" />
                 <img id="Img_2_3" class="pension-image" src='img/q/q_3_3.jpg' alt="Image 3 for question 2" />
                 <img id="Img_2_4" class="pension-image" src='img/q/q_3_4.jpg' alt="Image 4 for question 2" />
@@ -405,7 +405,7 @@
               <h2>Alltägliches</h2>
 
               <div class="answer-images">
-                <img id="Img_3_1" class="pension-image" src='img/q/q_2_1.jpg' alt="Image 1 for question 3" />
+                <img id="Img_3_1" class="pension-image current-question-image" src='img/q/q_2_1.jpg' alt="Image 1 for question 3" />
                 <img id="Img_3_2" class="pension-image" src='img/q/q_2_2.jpg' alt="Image 2 for question 3" />
                 <img id="Img_3_3" class="pension-image" src='img/q/q_2_3.jpg' alt="Image 3 for question 3" />
                 <img id="Img_3_4" class="pension-image" src='img/q/q_2_4.jpg' alt="Image 4 for question 3" />
@@ -433,7 +433,7 @@
           <span></span>
           <div class="buttonline_inner parsys">
             <div class="primary section"><span></span>
-              <a href="/de/home/service/online-mobile-banking/pushtan/antrag.html?n=true">Weiter</a>
+              <a id="QuestionFormWeiter" href="#">Weiter</a>
             </div>
           </div>
         </div>
@@ -464,8 +464,12 @@
               <div id="FinalPageSlider_1" class="pension-question-slider slider-icon-leben final-logo"></div>
             </div>
             <div class="col-sm-3 visual-cbox image-cell">
-              <div class="question-image-container">
-                <img src="img/q/q_3_1.jpg" alt="Image 1 for question 3">
+              <div  id="FinalSliderImages_1" class="question-image-container">
+                <img src="img/q/q_1_1.jpg" alt="Image 1 for question 1">
+                <img src="img/q/q_1_2.jpg" alt="Image 2 for question 1">
+                <img src="img/q/q_1_3.jpg" alt="Image 3 for question 1">
+                <img src="img/q/q_1_4.jpg" alt="Image 4 for question 1">
+                <img src="img/q/q_1_5.jpg" alt="Image 5 for question 1">
               </div>
             </div>
             <div class="col-sm-3 cbox text-cell">
@@ -481,8 +485,12 @@
               <div id="FinalPageSlider_2" class="pension-question-slider slider-icon-leben final-logo"></div>
             </div>
             <div class="col-sm-3 visual-cbox image-cell">
-              <div class="question-image-container">
-                <img src="img/q/q_3_1.jpg" alt="Image 1 for question 3">
+              <div  id="FinalSliderImages_2" class="question-image-container">
+                <img src="img/q/q_2_1.jpg" alt="Image 1 for question 1">
+                <img src="img/q/q_2_2.jpg" alt="Image 2 for question 1">
+                <img src="img/q/q_2_3.jpg" alt="Image 3 for question 1">
+                <img src="img/q/q_2_4.jpg" alt="Image 4 for question 1">
+                <img src="img/q/q_2_5.jpg" alt="Image 5 for question 1">
               </div>
             </div>
             <div class="col-sm-3 cbox text-cell">
@@ -499,8 +507,12 @@
               <div id="FinalPageSlider_3" class="pension-question-slider slider-icon-leben final-logo"></div>
             </div>
             <div class="col-sm-3 visual-cbox image-cell">
-              <div class="question-image-container">
-                <img src="img/q/q_3_1.jpg" alt="Image 1 for question 3">
+              <div  id="FinalSliderImages_3" class="question-image-container">
+                <img src="img/q/q_3_1.jpg" alt="Image 1 for question 1">
+                <img src="img/q/q_3_2.jpg" alt="Image 2 for question 1">
+                <img src="img/q/q_3_3.jpg" alt="Image 3 for question 1">
+                <img src="img/q/q_3_4.jpg" alt="Image 4 for question 1">
+                <img src="img/q/q_3_5.jpg" alt="Image 5 for question 1">
               </div>
             </div>
             <div class="col-sm-3 cbox text-cell">
@@ -515,7 +527,7 @@
               <h2>Eine lebenslange monatliche Rente in dieser Höhe kann Ihre Vorfreude steigern:</h2>
             </div>
             <div class="div-column imaginary-pension-cell">
-              <h1 id="PensionPrice">100</h1>
+              <h1 id="PensionPrice"></h1>
             </div>
         </div>
 

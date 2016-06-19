@@ -7,13 +7,12 @@
   margin-right: 0 !important;
   position: absolute;
   top: 0;
+  width: 100%;
 }
 
 .current-card {
   position: relative;
 }
-
-
 
 /* SLIDERS */
 
@@ -271,13 +270,27 @@
   position: absolute;
 }
 
-.answer-images img:first-child {
+img.current-question-image {
   position: relative;
 }
 
 .pension-controlls {
   width: 100%;
   margin-bottom: 20px;
+}
+
+.question-container {
+  position: relative;
+}
+
+.question {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.current-question {
+  position: relative;
 }
 
 .question h2 {
@@ -444,16 +457,28 @@ td.slider-controll-column {
 .question-image-container {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .question-image-container img {
   width: 100%;
   height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.question-image-container img:first-child {
+  position: relative;
 }
 
 .slider-cell {
   padding-left: 60px;
   padding-right: 60px;
+}
+
+.image-cell {
+  overflow: hidden;
 }
 
 .text-cell {

@@ -376,17 +376,11 @@ ResultCard.prototype.createSliders = function() {
     range: "min",
     value: 0,
     slide: function (e, ui) {
-      //self.$("#ResultPayment .value").text(ui.value);
-      //self.updateCalculatorResult();
+      self.$("#ResultPayment .value").text(ui.value);
+      self.updateCalculatorResult();
     },
     stop: function() {
-      //self.app.showGameOverScreen();
-
-      //var app = self.app;
-      //if ( app.real_pension < app.imag_pension ) {
-        // console.log("THIS IS IT");
-        
-      //}
+      // self.app.showGameOverScreen();
     }
   });
 
@@ -397,7 +391,7 @@ ResultCard.prototype.createSliders = function() {
     range: "min",
     value: self.app.user_age,
     slide: function(e, ui) {
-      /*self.app.user_age = ui.value;
+      self.app.user_age = ui.value;
 
       $("#ResultWorkYears .value").text(ui.value);
 
@@ -411,9 +405,34 @@ ResultCard.prototype.createSliders = function() {
       self.payment_slider.slider("option", "max", max);
       $("#ResultPayment .max").text(max);
 
-      self.updateCalculatorResult();*/
+      self.updateCalculatorResult();
     }
   });
+};
+
+ResultCard.prototype.updateCalculatorResult = function() {
+  var PENSIONS = [200, 400, 600, 800, 1000];
+  var payment = this.payment_slider.slider("value");
+  var year = this.app.user_age;
+
+  var pens_array = Application.PENSION_DATA_ARRAY[year];
+
+  for ( var i=0; i < pens_array.length; i++ ) {
+    if ( payment < pens_array[i] ) {
+      break;
+    }
+  }
+
+  if ( i == 0 || i >= pens_array.length  ) {
+    return;
+  }
+
+  var norm = (PENSIONS[i] - PENSIONS[i-1]) / (pens_array[i] - pens_array[i-1]);
+  var result = PENSIONS[i] - (pens_array[i] - payment) * norm;
+
+  self.app.real_pension = result;
+
+  $("#ResultPension").val( Math.round(result / 10) * 10 + " Euro");
 };
 
 

@@ -14,6 +14,10 @@ function Application () {
   ].map(function(question_text, index){
     var q = new QuestionCard(self, index + 1, question_text);
   });
+
+  this.answers = [1,1,1];
+
+  this.result_card = new ResultCard(this);
 };
 
 Application.prototype.init = function() {
@@ -74,6 +78,71 @@ QuestionAgeCard = function(app) {
     this.$this = $("#QuestionAge");
     //this.$this.hide();
 }
+
+
+
+function ResultCard(app) {
+  this.app = app;
+
+  this.createSliders();
+
+  this.$this = $("#Result");
+
+  this.$ = function(a) {
+    return this.$this.find(a);
+  }
+
+  var text_cell_height = this.$(".text-cell").height();
+
+  this.$(".slider-cell").each(function(i, item) {
+    var $item = $(item);
+    $item.height(text_cell_height);
+    console.log($item.find(".pension-question-slider").height());
+    var padding_top = ( text_cell_height) / 2;
+    $item.css("padding-top", padding_top);
+  });
+
+  text_cell_height = this.$(".text-cell").innerHeight();
+
+  this.$(".image-cell").each(function(i, item) {
+    $(item).innerHeight(text_cell_height);
+  });
+};
+
+ResultCard.prototype.createSliders = function() {
+  var self = this;
+
+  this.sliders = [];
+
+  this.app.answers.map(function(num, index) {
+    var i = index + 1;
+    self.sliders.push(
+        $("#FinalPageSlider_" + i).slider({
+          min: 1,
+          max: 5,
+          animate: false,
+          range: "min",
+          value: num,
+          change: function( event, ui ) {
+            self.app.answers[index] = ui.value;
+
+            /*TweenLite.to($("#PensionPrice"), 0.4, {"opacity": 0, onComplete: function() {
+              $("#PensionPrice").text( Math.round(self.app.imaginary_pension / 10 ) * 10 + " Euro*");
+
+              TweenLite.to($("#PensionPrice"), 0.4, {"opacity": 1});
+            }});*/
+
+            //self.app.calculateImaginaryPension();
+
+            //var $this = $("#FinalSliderImages_" + i);
+
+            //TweenLite.to( $this, 1, {x: -1 * $this.width() * (ui.value - 1)});
+          }
+        })
+      );
+  });
+};
+
 
 $(function() {
 

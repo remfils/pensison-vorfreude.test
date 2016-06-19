@@ -86,7 +86,6 @@
     background: white;
     outline: none;
     border: none;
-    top: 7px;
     background-color: red;
 }
 
@@ -163,6 +162,11 @@
   width: 100%;
 }
 
+.user-age-table .user-age-slider-cell {
+  padding-left: 60px;
+  padding-right: 30px;
+}
+
 #SliderUserAge {
   position: relative;
 }
@@ -193,8 +197,8 @@
 /* QUESTION CARD */
 
 #QuestionNumbers {
-    justify-content: center;
     text-align: center;
+    margin-bottom: 30px;
 }
 
 #QuestionNumbers span {
@@ -254,25 +258,31 @@
 .answer-images {
   position: relative;
   margin: 0 20px;
+  margin-bottom: 50px;
 }
 
 .answer-images img {
-    width: 100%;
-    top: 0;
-    left: 0;
-    position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
 }
 
 .answer-images img:first-child {
-    position: relative;
+  position: relative;
 }
 
 .pension-controlls {
-    width: 100%;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.question h2 {
+  margin-bottom: 50px;
+  text-align: center;
 }
 
 .question .side-controll-column {
-    width: 10%;
     vertical-align: middle;
     padding: 0;
     padding-top: 12px;
@@ -295,9 +305,9 @@
 }
 
 td.slider-controll-column {
-    width: 80%;
-    padding-left: 40px;
-    padding-right: 40px;
+    width: 100%;
+    padding-left: 60px;
+    padding-right: 60px;
 }
 
 
@@ -326,6 +336,15 @@ td.slider-controll-column {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: -20px 0 20px 0;
+}
+
+@media screen and (max-width: 999px) {
+  .visual-cbox {
+    
+    border-top-width: 10px;
+    border-right-width: 10px;
+    margin: -10px 0 10px 0;
+  }
 }
 
 .div-column {

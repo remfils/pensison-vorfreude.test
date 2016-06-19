@@ -116,6 +116,38 @@
     cursor: pointer;
 }
 
+/* slider icons */
+
+.slider-icon-leben .ui-slider-handle {
+    background-color: red !important;
+    background-image: url("../img/icons/icon-leben.png") !important;
+}
+
+.slider-icon-reisen .ui-slider-handle {
+    background-color: red !important;
+    background-image: url("../img/icons/icon-reisen.png") !important;
+}
+
+.slider-icon-wohnen .ui-slider-handle {
+    background-color: red !important;
+    background-image: url("../img/icons/icon-wohnen.png") !important;
+}
+
+.slider-icon-herzen .ui-slider-handle {
+    background-color: red !important;
+    background-image: url("../img/icons/icon-herzen.png") !important;
+}
+
+.slider-icon-leben .ui-slider-handle,
+.slider-icon-reisen .ui-slider-handle,
+.slider-icon-wohnen .ui-slider-handle,
+.slider-icon-herzen .ui-slider-handle {
+    background-repeat: no-repeat !important;
+    background-position: 50% !important;
+    background-size: 50% auto !important;
+}
+
+
 /* USER AGE CARD */
 
 #QuestionAge {
@@ -239,14 +271,6 @@
     width: 100%;
 }
 
-.pension-controlls td:first-child {
-  padding-left: 0;
-}
-
-.pension-controlls td:last-child {
-  padding-right: 0;
-}
-
 .question .side-controll-column {
     width: 10%;
     vertical-align: middle;
@@ -254,24 +278,26 @@
     padding-top: 12px;
 }
 
-.minus-btn-cell {
+.question td.minus-btn-cell {
   text-align: left;
+  padding-left: 0;
 }
 
-.plus-btn-cell {
+.question td.plus-btn-cell {
   text-align: right;
-}
-
-.slider-controll-column {
-    width: 80%;
-    padding-left: 20px;
-    padding-right: 20px;
+  padding-right: 0;
 }
 
 .question-button {
     color: red;
     font-size: 76pt;
     cursor: pointer;
+}
+
+td.slider-controll-column {
+    width: 80%;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 
@@ -302,6 +328,14 @@
   margin: -20px 0 20px 0;
 }
 
+.div-column {
+  float: left;
+}
+
+.div-column+.div-column {
+  clear: none;
+}
+
 .col-md-6, .col-sm-3 {
   float: left;
   box-sizing: border-box;
@@ -312,8 +346,6 @@
 .row .col-sm-3 {
   position: relative;
   min-height: 1px;
-  /* padding-left: 7.5px;
-  padding-right: 7.5px; */
 }
 
 .col-md-6 {
@@ -338,17 +370,24 @@
   background-color: white;
 }
 
-.result-first-message {
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 20px;
-    margin-bottom: 14px;
-    margin-top: 20px;
+.imaginary-pension-text-cell {
+  width: 60%;
 }
 
-.pension-price-row {
-    color: red;
-    margin-bottom: 14px;
+.imaginary-pension-cell {
+  width: 40%;
+}
+
+#PensionPrice {
+  font-size: 40px;
+  margin-bottom: 0;
+  font-weight: bold;
+  margin: 0;
+  text-align: right;
+}
+
+#PensionPrice:after {
+  content: " Euro*";
 }
 
 .pension-price-row h2 {
@@ -441,6 +480,16 @@ td.final-slider {
     margin-bottom: 60px;
 }
 
+.pension-calculator-result-cell {
+  width: 40%;
+}
+
+.pension-calculator-input-cell {
+  width: 60%;
+}
+
+
+
 .pension-calculator label {
     color: #666666;
     display: block;
@@ -479,6 +528,7 @@ td.final-slider {
     padding-right: 30px;
     margin-top: 60px;
 }
+
 
 #ResultWorkYears .min:after,
 #ResultWorkYears .max:after,

@@ -84,13 +84,13 @@ QuestionAgeCard = function(app) {
 function ResultCard(app) {
   this.app = app;
 
-  this.createSliders();
-
   this.$this = $("#Result");
 
   this.$ = function(a) {
     return this.$this.find(a);
   }
+
+  this.createSliders();
 
   var text_cell_height = this.$(".text-cell").height();
 
@@ -141,7 +141,64 @@ ResultCard.prototype.createSliders = function() {
         })
       );
   });
+
+  this.payment_slider = this.$("#ResultPayment").slider({
+    min: 20,
+    max: 500,
+    step: 1,
+    animate: true,
+    range: "min",
+    value: 0,
+    slide: function (e, ui) {
+      //self.$("#ResultPayment .value").text(ui.value);
+      //self.updateCalculatorResult();
+    },
+    stop: function() {
+      //self.app.showGameOverScreen();
+
+      //var app = self.app;
+      //if ( app.real_pension < app.imag_pension ) {
+        // console.log("THIS IS IT");
+        
+      //}
+    }
+  });
+
+  this.year_slider = $("#ResultWorkYears").slider({
+    min: 18,
+    max: 55,
+    animate: true,
+    range: "min",
+    value: self.app.user_age,
+    slide: function(e, ui) {
+      /*self.app.user_age = ui.value;
+
+      $("#ResultWorkYears .value").text(ui.value);
+
+      var pens_array = Application.PENSION_DATA_ARRAY[ui.value];
+      var min = pens_array[0];
+      var max = pens_array[4];
+
+      self.payment_slider.slider("option", "min", min);
+      $("#ResultPayment .min").text(min);
+
+      self.payment_slider.slider("option", "max", max);
+      $("#ResultPayment .max").text(max);
+
+      self.updateCalculatorResult();*/
+    }
+  });
 };
+
+
+ResultCard.prototype.createCalculator = function() {
+  var self = this;
+
+  
+
+  $("#ResultWorkYears .value").text(this.app.user_age);
+};
+
 
 
 $(function() {

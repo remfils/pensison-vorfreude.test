@@ -16,8 +16,13 @@
 }
 
 h1.card-title {
-  font-size: 39px;
   white-space: nowrap;
+}
+
+@media screen and (max-width: 999px) {
+  h1.card-title {
+    white-space: normal;
+  }
 }
 
 .if6_buttonline div.greyed-out-btn {
@@ -79,7 +84,7 @@ h1.card-title {
   position: absolute;
   width: 100%;
   text-align: center;
-  top: -35px;
+  top: -30px;
   color: red;
   white-space: nowrap;
   font-size: 17px;
@@ -99,8 +104,22 @@ h1.card-title {
   width: 30px;
   height: 30px;
   top: -13.5px;
-  border-radius: 15px;
+  border-radius: 50%;
   background: white;
+}
+
+@media screen and (max-width: 839px) {
+  .pension-simple-slider .ui-slider-handle {
+    width: 40px;
+    height: 40px;
+    top: -19px;
+    background: white;
+  }
+}
+
+.pension-simple-slider .ui-widget,
+.pension-question-slider .ui-widget, {
+  font-family: SparkasseRg;
 }
 
 .pension-simple-slider .ui-slider-handle:focus,
@@ -147,9 +166,11 @@ h1.card-title {
 
 .pension-question-slider.ui-widget-content {
   background: white;
-  outline: none;
   border: none;
   background-color: red;
+  display: inline-block;
+  outline: none;
+  width: 100%;
 }
 
 .pension-question-slider.ui-slider-horizontal {
@@ -176,6 +197,19 @@ h1.card-title {
   -o-transition: all 1s;
   transition: all 1s;
   cursor: pointer;
+}
+
+@media screen and (max-width: 539px) {
+  .pension-question-slider.ui-slider-horizontal {
+    height: 3px;
+  }
+
+  .pension-question-slider .ui-slider-handle {
+    width: 40px;
+    height: 40px;
+    margin-left: -20px;
+    margin-top: -20px;
+  }
 }
 
 /* slider icons */
@@ -227,13 +261,18 @@ h1.card-title {
   color: #777777;
 }
 
-#QuestionAge td {
-  width: 100%;
-}
-
 .user-age-table td.user-age-slider-cell {
   padding-left: 60px;
   padding-right: 60px;
+  width: 100%;
+}
+
+@media screen and (max-width: 649px) {
+  .user-age-table td.user-age-slider-cell {
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 
 #SliderUserAge {
@@ -323,10 +362,52 @@ h1.card-title {
   background-color: red !important;
 }
 
+
+@media screen and (max-width: 539px) {
+  #QuestionNumbers {
+    margin-bottom: 20px;
+  }
+
+  #QuestionNumbers span {
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    font-size: 11px;
+    margin-right: 14px;
+  }
+
+  #QuestionNumbers span:after {
+    width: 18px;
+    height: 1px;
+    left: 18px;
+    top: 8px;
+  }
+
+  #QuestionNumbers .current-question {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+  }
+
+  #QuestionNumbers .current-question:after {
+    left: 20px !important;
+    top: 10px !important;
+  }
+}
+
+
 .answer-images {
   position: relative;
   margin: 0 20px;
   margin-bottom: 50px;
+}
+
+@media screen and (max-width: 539px) {
+  .answer-images {
+    position: relative;
+    margin: 0;
+    margin-bottom: 16px;
+  }
 }
 
 .answer-images img {
@@ -364,6 +445,12 @@ img.current-question-image {
   text-align: center;
 }
 
+@media screen and (max-width: 539px) {
+  .question h2 {
+    margin-bottom: 24px;
+  }
+}
+
 .question .side-controll-column {
   vertical-align: middle;
   padding: 0;
@@ -390,6 +477,23 @@ td.slider-controll-column {
   width: 100%;
   padding-left: 60px;
   padding-right: 60px;
+}
+
+@media screen and (max-width: 539px) {
+  .question .side-controll-column {
+    padding-top: 0;
+  }
+
+  .question-button {
+    color: red;
+    font-size: 9pt;
+    cursor: pointer;
+  }
+
+  td.slider-controll-column {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
 }
 
 
@@ -568,6 +672,22 @@ td.slider-controll-column {
 
 .text-cell p {
   line-height: normal;
+}
+
+@media screen and (max-width: 539px) {
+  .slider-cell {
+    width: 100%;
+  }
+
+  .image-cell {
+    width: 50%;
+    height: auto;
+  }
+
+  .text-cell {
+    width: 50%;
+    padding-top: 14px;
+  }
 }
 
 .final-table {

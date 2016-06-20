@@ -3,6 +3,11 @@ function Application () {
 
   this.$app = $("#App");
 
+  this.DEBUG = false;
+  if ( this.DEBUG ) {
+    this.runDebugOptimisations();
+  }
+
   this.user_age = 28;
 
   this.answers = [1,1,1];
@@ -20,6 +25,11 @@ function Application () {
   this.title_card.$this.show();
 
   this.current_card = this.title_card;
+};
+
+Application.prototype.runDebugOptimisations = function() {
+  this.$app.height(9999);
+  $(".question-card-section").css("position", "relative");
 };
 
 Application.prototype.init = function() {
@@ -116,11 +126,15 @@ Application.prototype.calculateSavings = function() {
 function TitleCard ( app ) {
   this.$this = $("#TitleCard");
 
-  this.$this.hide();
-
   this.app = app;
 
   $("#TitleCardStartButton").click(app.titleCardStartButtonListener.bind(app));
+
+  if ( this.app.DEBUG ) {
+    return;
+  }
+
+  this.$this.hide();
 }
 
 
@@ -144,9 +158,13 @@ QuestionAgeCard = function(app) {
         });
     $("#SliderUserAge .ui-slider-handle").append("<span class='ui-handle-text'>" + app.user_age + " Jahre</span>");
 
-    this.$this.hide();
-
     this.$this.find("#QuestionAgeWeiter").click(this.app.questionAgeWeiterListener.bind(app));
+
+    if ( this.app.DEBUG ) {
+      return;
+    }
+
+    this.$this.hide();
 }
 
 
@@ -171,6 +189,9 @@ function QuestionFormCard ( app ) {
 
   $("#QuestionFormWeiter").click(this.questionFormWeiterClickListerner.bind(this));
 
+  if ( this.app.DEBUG ) {
+    return;
+  }
   this.$this.hide();
 }
 
@@ -233,6 +254,10 @@ function QuestionCard ( app, question_number, question_text ) {
   });
 
   this.updateSize();
+
+  if ( this.app.DEBUG ) {
+    return;
+  }
 
   this.$this.hide();
 };
@@ -334,6 +359,10 @@ function ResultCard(app) {
   });
 
   this.updateImagesLeftPosition();
+
+  if ( this.app.DEBUG ) {
+    return;
+  }
 
   this.$this.hide();
 };

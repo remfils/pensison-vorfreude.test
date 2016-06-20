@@ -39,7 +39,7 @@
 .pension-simple-slider .ui-slider-handle {
   width: 30px;
   height: 30px;
-  top: -11px;
+  top: -13.5px;
   border-radius: 15px;
   background: white;
 }
@@ -56,7 +56,7 @@
 }
 
 .pension-simple-slider.ui-slider-horizontal {
-  height: 0.6em;
+  height: 5px;
 }
 
 .pension-simple-slider .ui-slider-range-min {
@@ -130,6 +130,11 @@
   background-image: url("../img/icons/icon-reisen.png") !important;
 }
 
+.slider-icon-freizeit .ui-slider-handle {
+  background-color: red !important;
+  background-image: url("../img/icons/icon-freizeit.png") !important;
+}
+
 .slider-icon-wohnen .ui-slider-handle {
   background-color: red !important;
   background-image: url("../img/icons/icon-wohnen.png") !important;
@@ -143,7 +148,8 @@
 .slider-icon-leben .ui-slider-handle,
 .slider-icon-reisen .ui-slider-handle,
 .slider-icon-wohnen .ui-slider-handle,
-.slider-icon-herzen .ui-slider-handle {
+.slider-icon-herzen .ui-slider-handle,
+.slider-icon-freizeit .ui-slider-handle {
   background-repeat: no-repeat !important;
   background-position: 50% !important;
   background-size: 50% auto !important;

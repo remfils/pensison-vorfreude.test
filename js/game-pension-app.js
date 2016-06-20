@@ -3,7 +3,7 @@ function Application () {
 
   this.$app = $("#App");
 
-  this.DEBUG = true;
+  this.DEBUG = false;
   if ( this.DEBUG ) {
     this.runDebugOptimisations();
   }
@@ -176,8 +176,8 @@ function QuestionFormCard ( app ) {
 
   this.questions = [
     "Auch im Alter wollen Sie einen gewissen Lebensstandard im Alltag und beim Wohnen erhalten. <br> Darf’s noch etwas mehr sein?",
-    "Auch im Alter wollen Sie einen gewissen Lebensstandard im Alltag und beim Wohnen erhalten. <br> Darf’s noch etwas mehr sein?",
-    "Auch im Alter wollen Sie einen gewissen Lebensstandard im Alltag und beim Wohnen erhalten. <br> Darf’s noch etwas mehr sein?",
+    "Urlaub auf Balkonien oder unter Südseepalmen, einmal im Jahr wegfahren oder jederzeit ab <br />an den Strand – wie viel Reisefreiheit möchten Sie sich gönnen?",
+    "Endlich hab ich Zeit dafür! Schauen Sie sich an, wie viel Rente Sie brauchen, damit Ihre Vorstellungen <br />vom Ruhestand wahr werden – und wie viel Vorsorge dafür nötig ist.",
   ].map(function(question_text, index){
     var q = new QuestionCard(app, index + 1, question_text);
     return q;

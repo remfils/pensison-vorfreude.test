@@ -3,7 +3,7 @@ function Application () {
 
   this.$app = $("#App");
 
-  this.DEBUG = false;
+  this.DEBUG = true;
   if ( this.DEBUG ) {
     this.runDebugOptimisations();
   }
@@ -202,7 +202,16 @@ QuestionFormCard.prototype.questionFormWeiterClickListerner = function(e) {
     this.app.allQuestionsFinishedListener();
   }
   else {
-    var q = this.questions[this.current_question_index];
+    var current_question_index = this.current_question_index;
+    var q = this.questions[current_question_index];
+
+    $("#QuestionNumbers span").each(function(i, item) {
+      $(item).removeClass("current-question");
+      if ( i == current_question_index ) {
+        $(item).addClass("red");
+        $(item).addClass("current-question");
+      }
+    });
 
     this.swapTwoQuestions(prev_q, q);
   }
@@ -215,6 +224,8 @@ QuestionFormCard.prototype.swapTwoQuestions = function(q1, q2) {
   var $q1 = q1.$this;
   var $q2 = q2.$this;
 
+  this.changeQuestionText(q2.text);
+
   $q1.removeClass("current-question");
   $q2.addClass("current-question");
   $q2.css("opacity", 0).show();
@@ -224,6 +235,24 @@ QuestionFormCard.prototype.swapTwoQuestions = function(q1, q2) {
     complete: function() {
       $q2.animate({opacity: 1}, 1000);
     }
+  });
+};
+
+QuestionFormCard.prototype.changeQuestionText = function(text) {
+  var $c = $("#QuestionCardText");
+  var $t = $("#QuestionCardText p");
+  var h = $c.height();
+  var diff = $c.outerHeight(true) - h;
+
+  $c.height(h);
+
+  console.log($t.height());
+
+  $t.animate({opacity: 0}, 1000, function() {
+    $t.html(text);
+
+    $c.animate({height: $t.height() + diff}, 500);
+    $t.animate({opacity: 1}, 1000);
   });
 };
 
@@ -360,6 +389,11 @@ function ResultCard(app) {
 
   this.updateImagesLeftPosition();
 
+  $("#ResultCardDisplayCalculatorBtn").click(this.resultCardDisplayCalculatorBtnClickListener.bind(this));
+
+  this.$calculator_screen = $("#PensionCalculatorFirstMessage, #PensionCalculatorInput, #PensionCalculatorAfterMessage, #PensionCalculatorButtonLine");
+  this.$calculator_screen.hide();
+
   if ( this.app.DEBUG ) {
     return;
   }
@@ -464,6 +498,13 @@ ResultCard.prototype.updateCalculatorResult = function() {
   $("#ResultPension").val( Math.round(result / 10) * 10 + " Euro");
 };
 
+ResultCard.prototype.resultCardDisplayCalculatorBtnClickListener = function(e) {
+  this.displayPensionCalculator();
+
+  e.preventDefault();
+  return false;
+};
+
 
 ResultCard.prototype.createCalculator = function() {
   var self = this;
@@ -479,8 +520,6 @@ ResultCard.prototype.init = function() {
   });
 
   this.updatePension();
-
-  this.displayPensionCalculator();
 };
 
 ResultCard.prototype.updateImagesLeftPosition = function() {
@@ -502,20 +541,35 @@ ResultCard.prototype.updateImagesLeftPosition = function() {
 ResultCard.prototype.updatePension = function() {
   var p = Math.round( this.app.calculateImaginaryPension() / 10 ) * 10;
 
-  $("#PensionPrice")
-    .text(p)
-    .animate({"opacity": 1}, 1000);
+  var $pension_field = $("#PensionPrice");
+
+  $pension_field.animate({"opacity": 0}, 500, function() {
+    $pension_field
+      .text(p)
+      .animate({"opacity": 1}, 500);
+  });
 };
 
 ResultCard.prototype.displayPensionCalculator = function() {
-  var $calc = $(".pension-calculator");
+  var self = this;
+
+  self.$calculator_screen
+    .css("opacity", 0)
+    .show();
+
+  this.app.$app.animate({
+    height: this.$this.height()
+  }, 1000, function() {
+    self.$calculator_screen.animate({opacity: 1}, 1000);
+  });
+
+  $("html, body").animate({ scrollTop: $('#PensionCalculatorFirstMessage').offset().top - 14 }, 1000);
 
   var p = this.app.calculateImaginaryPension();
 
   var savings = Math.round(this.app.calculateSavings());
 
   var p_a = Application.PENSION_DATA_ARRAY[this.app.user_age];
-
   var min = p_a[0];
   var max = p_a[4];
 
@@ -529,8 +583,6 @@ ResultCard.prototype.displayPensionCalculator = function() {
 
   this.payment_slider.slider("value", savings);
   $("#ResultPayment .value").text( savings);
-
-  $("html, body").animate({ scrollTop: $('#PensionGoalDescription').offset().top }, 1000);
 };
 
 

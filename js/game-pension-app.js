@@ -535,28 +535,28 @@ ResultCard.prototype.init = function() {
     item.slider("value", self.app.answers[index]);
   });
 
-  this.updatePension(false);
+  this.updatePension(true);
 
   $("#PensionPrice")
     .stop(true)
     .animate({opacity: 1}, 300);
 };
 
-ResultCard.prototype.updatePension = function(is_animated) {
+ResultCard.prototype.updatePension = function(is_instant_change) {
   console.log("ResultCard.prototype.updatePension");
   var p = Math.round( this.app.calculateImaginaryPension() / 10 ) * 10;
 
   var $pension_field = $("#PensionPrice");
 
-  if ( is_animated ) {
+  if ( is_instant_change ) {
+    $pension_field.text(p);
+  }
+  else {
     $pension_field.animate({"opacity": 0}, 500, function() {
       $pension_field
         .text(p)
         .animate({"opacity": 1}, 500);
     });
-  }
-  else {
-    $pension_field.text(p);
   }
 };
 

@@ -29,6 +29,10 @@ h1.card-title {
   font-size: 39px;
 }
 
+.if6_breadcrumb {
+  margin-bottom: 10px;
+}
+
 @media screen and (max-width: 999px) {
   h1.card-title {
     white-space: normal;

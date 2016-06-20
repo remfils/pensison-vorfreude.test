@@ -32,6 +32,14 @@ html, body {
   top: 12px;
 }
 
+.angebot-btn {
+  padding: 10px 15px 10px 15px;
+  cursor: pointer;
+  font-size: 18pt;
+  font-family: SparkasseMedium;
+  position: relative;
+}
+
 .easy-hidden,
 div.easy-hidden {
   display: none;
@@ -99,7 +107,7 @@ div.easy-hidden {
 	background-color: red;
 	padding: 20px 20px 20px 20px;
 	color: white;
-  width: 360px;
+  width: 362px;
   bottom: 61px;
 }
 
@@ -121,12 +129,16 @@ div.easy-hidden {
   float: right;
 }
 
+.pension-header-menu {
+  padding: 15px 0px !important;
+}
+
 .navbar-default .navbar-nav > li > a {
 	color: red;
 }
 
 .bread-crumbs {
-  font-size: 18pt;
+  font-size: 18px;
   color: #777777;
   margin-bottom: 40px;
 }
@@ -304,7 +316,7 @@ div.easy-hidden {
     position: relative;
     min-height: 100%;
     height: auto !important;
-    _height: 100%;
+    height: 100%;
 }
 
 .footer-margin {
@@ -486,10 +498,15 @@ div.easy-hidden {
 
 .final-table td {
   background-color: white;
-  padding: 1em;
+  padding: 14px;
   border-collapse:separate;
   border: 1em solid #F1F1F1;
-  font-size: 20px;
+  font-size: 18px;
+}
+
+.final-table td p {
+  margin: 0px;
+  line-height: 20px;
 }
 
 .final-table tr:first-child th {

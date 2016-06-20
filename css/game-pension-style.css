@@ -32,11 +32,8 @@ h1.card-title {
 }
 
 .question-card-section {
-  margin-top: 20px;
-  margin-right: 0 !important;
-  position: absolute;
+/*   margin-top: 20px; */
   top: 0;
-  width: 100%;
 }
 
 .current-card {
@@ -539,7 +536,7 @@ td.slider-controll-column {
 .slider-cell {
   padding-left: 60px;
   padding-right: 60px;
-  width: 480px;
+  width: 460px;
 }
 
 .image-cell {

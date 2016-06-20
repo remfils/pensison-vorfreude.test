@@ -47,6 +47,14 @@ h1.card-title {
   font-family: Sparkasse;
 }
 
+/* HEADER FIX */
+
+.header-image {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
 
 /* HEADER IMAGE */
 

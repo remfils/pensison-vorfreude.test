@@ -1,3 +1,32 @@
+@font-face {
+    font-family:'Sparkasse';
+    src:url(../fonts/sparkasse_professionel/SparBd.ttf);
+    font-weight:bold;
+}
+
+@font-face {
+    font-family:'SparkasseHead';
+    src:url(../fonts/sparkasse_professionel/SparkasseHead_Rg.ttf);
+    font-weight:bold;
+    font-style:normal
+}
+
+*:focus {
+    outline: none;
+}
+
+h1.card-title {
+  font-size: 39px;
+}
+
+.if6_buttonline div.greyed-out-btn {
+  background-color: #777;
+}
+
+.sparkasse-bolder {
+  font-family: Sparkasse;
+}
+
 .question-cards-section {
   position: relative;
 }
@@ -13,6 +42,37 @@
 .current-card {
   position: relative;
 }
+
+/* OPENER */
+
+/* .if6_opener {
+  height: 100%;
+}
+
+.if6_outer.if6_openerstage .if6_inner {
+  max-width: 100%;
+  height: 100%;
+}
+
+.if6_opener .ty1 div.overlay {
+  width: 360px;
+  position: absolute;
+  bottom: 65px
+}
+
+.if6_opener .ty1 h2 {
+  color: #fff;
+  font: 55px SparkasseHead,Arial,sans-serif;
+  font-weight: bold;
+  line-height: normal;
+  margin-bottom: 20px;
+}
+
+.if6_opener .ty1 h1 {
+    font-size: 16px;
+    line-height: normal;
+    font-weight: bold;
+} */
 
 /* SLIDERS */
 
@@ -65,10 +125,11 @@
 
 .pension-simple-slider .min,
 .pension-simple-slider .max {
-  font-size: 14pt;
+  font-family: SparkasseRg;
+  font-size: 14px;
   color: #666666;
   position: absolute;
-  top: 20px;
+  top: 14px;
 }
 
 .pension-simple-slider .max {
@@ -77,10 +138,10 @@
 
 .pension-simple-slider .value {
   color: red;
-  font-size: 17pt;
+  font-size: 17px;
   position: absolute;
   right: 0;
-  top: -50px;
+  top: -34px;
 }
 
 /* pension-slider->pension-question-slider */
@@ -180,22 +241,10 @@
   position: relative;
 }
 
-#SliderUserAge:before,
-#SliderUserAge:after {
-  position: absolute;
-  top: 23px;
-  color: #666666;
-  font-size: 14px;
-}
-
-#SliderUserAge:before {
-  content: "18 Jahre";
-  left: 0;
-}
-
-#SliderUserAge:after {
-  content: "67 Jahre";
-  right: 0;
+#SliderUserAge .min:after,
+#SliderUserAge .max:after,
+#SliderUserAge .value:after {
+  content: " Jahre";
 }
 
 #SliderUserAge .ui-handle-text {
@@ -203,6 +252,10 @@
 }
 
 /* QUESTION CARD */
+
+.pagination-centered {
+  margin-top: 10px;
+}
 
 #QuestionNumbers {
   text-align: center;
@@ -342,6 +395,10 @@ td.slider-controll-column {
   margin-right: -5px; */
 }
 
+.row:last-child {
+  margin-bottom: -20px;
+}
+
 .row:before,
 .row:after {
   content: "";
@@ -425,6 +482,7 @@ td.slider-controll-column {
   font-weight: bold;
   margin: 0;
   text-align: right;
+  font-family: Sparkasse;
 }
 
 #PensionPrice:after {
@@ -481,13 +539,16 @@ td.slider-controll-column {
 .slider-cell {
   padding-left: 60px;
   padding-right: 60px;
+  width: 480px;
 }
 
 .image-cell {
   overflow: hidden;
+  width: 280px;
 }
 
 .text-cell {
+  width: 240px;
   padding-top: 14px;
 }
 
@@ -544,11 +605,6 @@ td.final-slider {
   width: 100%;
 }
 
-.pension-calculator {
-  height: 0;
-  overflow: hidden;
-}
-
 .pension-row {
   margin-bottom: 60px;
 }
@@ -561,9 +617,11 @@ td.final-slider {
   width: 60%;
 }
 
+#ResultPension {
+  color: red;
+}
 
-
-.pension-calculator label {
+#PensionCalculatorInput label {
   color: #666666;
   display: block;
   font-size: 14px;
@@ -571,7 +629,7 @@ td.final-slider {
   margin-bottom: 14px;
 }
 
-.pension-calculator input[type=text] {
+#PensionCalculatorInput input[type=text] {
   border: 2px solid #777777;
   -webkit-border-radius: 5px;
       border-radius: 5px;
@@ -595,13 +653,21 @@ td.final-slider {
   text-align: center;
 }
 
-.pension-calculator h2 {
+.calculator-memo {
+  margin-top: 50px;
+}
+
+#PensionCalculatorInput h2 {
   margin-top: 3em;
   font-size: 18px;
   padding-right: 30px;
   margin-top: 60px;
 }
 
+#ResultWorkYears,
+#ResultPayment {
+  margin-top: 20px;
+}
 
 #ResultWorkYears .min:after,
 #ResultWorkYears .max:after,

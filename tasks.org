@@ -9,3 +9,10 @@ https://www.sparkasse-koelnbonn.de/online_produkte/easysparen/vorteile/index.php
 d:\DOWNLOADS\mail-cloud\проекты\banke-test\notes\20160617\nl_rente_Vorfreude_Onlinetool_web_IF5_160617.pdf
 
 
+* TODO сделать игру с ориентиром на след страницы
+
+https://www.sparkasse-paderborn-detmold.de/de/home/service/online-mobile-banking.html?n=%252Fprivatkunden%252Fbanking%252Fonline-banking%252Fvorteile%252F
+
+- название вопросов
+- мелкий текст который идет не в белом блоке под названием вопроса
+

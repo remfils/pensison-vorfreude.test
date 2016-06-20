@@ -76,7 +76,7 @@ h1.card-title {
   background-color: red;
   padding: 20px 20px 20px 20px;
   color: white;
-  width: 362px;
+  width: 322px;
   bottom: 61px;
 }
 
@@ -85,6 +85,8 @@ h1.card-title {
   color: white;
   font-size: 55px;
   line-height: 66px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .text-logo h3 {
@@ -92,6 +94,16 @@ h1.card-title {
   color: white;
   line-height: 19px;
   margin: 0 0 14px 0;
+}
+
+#TitleStartButton {
+  float: right;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+#TitleStartButton img {
+  vertical-align: middle;
 }
 
 

@@ -390,7 +390,7 @@ function ResultCard(app) {
   this.$(".slider-cell").each(function(i, item) {
     var $item = $(item);
 
-    var margin = text_cell_height / 2 - 9;
+    var margin = text_cell_height / 2 - $item.height() / 2 + 2;
 
     $item.find(".pension-question-slider").css({
       "margin-top": margin,
@@ -542,7 +542,7 @@ ResultCard.prototype.init = function() {
     .animate({opacity: 1}, 300);
 };
 
-ResultCard.prototype.updatePension = function(is_animated = true) {
+ResultCard.prototype.updatePension = function(is_animated) {
   console.log("ResultCard.prototype.updatePension");
   var p = Math.round( this.app.calculateImaginaryPension() / 10 ) * 10;
 

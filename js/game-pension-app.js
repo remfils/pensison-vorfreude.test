@@ -537,10 +537,13 @@ ResultCard.prototype.init = function() {
 
   this.updatePension(false);
 
-  $("#PensionPrice").animate({opacity: 1}, 300);
+  $("#PensionPrice")
+    .stop(true)
+    .animate({opacity: 1}, 300);
 };
 
 ResultCard.prototype.updatePension = function(is_animated = true) {
+  console.log("ResultCard.prototype.updatePension");
   var p = Math.round( this.app.calculateImaginaryPension() / 10 ) * 10;
 
   var $pension_field = $("#PensionPrice");
@@ -585,6 +588,9 @@ ResultCard.prototype.displayPensionCalculator = function() {
   }, 1000, function() {
     self.$calculator_screen.animate({opacity: 1}, 1000);
   });
+
+  this.year_slider.slider("value", this.app.user_age);
+  this.year_slider.find(".value").text(this.app.user_age);
 
   $("html, body").animate({ scrollTop: $('#PensionCalculatorFirstMessage').offset().top - 14 }, 1000);
 

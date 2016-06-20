@@ -15,6 +15,15 @@
     outline: none;
 }
 
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 h1.card-title {
   white-space: nowrap;
 }
@@ -106,6 +115,7 @@ h1.card-title {
   top: -13.5px;
   border-radius: 50%;
   background: white;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 839px) {
@@ -117,15 +127,13 @@ h1.card-title {
   }
 }
 
-.pension-simple-slider .ui-widget,
-.pension-question-slider .ui-widget, {
+.ui-widget {
   font-family: SparkasseRg;
 }
 
 .pension-simple-slider .ui-slider-handle:focus,
 .pension-slider .ui-slider-handle:focus {
   outline: none;
-  cursor: default;
 }
 
 .pension-simple-slider.ui-widget-content {

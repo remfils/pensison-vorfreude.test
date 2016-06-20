@@ -356,7 +356,10 @@ QuestionCard.prototype.addClickListeners = function() {
 };
 
 QuestionCard.prototype.updateSize = function() {
-  this.$(".answer-images").height(this.$(".answer-images .current-question-image").height());
+  var image_height = this.$(".answer-images .current-question-image").height();
+  if ( image_height > 50 ) {
+    this.$(".answer-images").height(image_height);
+  }
 };
 
 QuestionCard.prototype.swapImages = function(img_from_index, img_to_index) {
@@ -532,7 +535,26 @@ ResultCard.prototype.init = function() {
     item.slider("value", self.app.answers[index]);
   });
 
-  this.updatePension();
+  this.updatePension(false);
+
+  $("#PensionPrice").animate({opacity: 1}, 300);
+};
+
+ResultCard.prototype.updatePension = function(is_animated = true) {
+  var p = Math.round( this.app.calculateImaginaryPension() / 10 ) * 10;
+
+  var $pension_field = $("#PensionPrice");
+
+  if ( is_animated ) {
+    $pension_field.animate({"opacity": 0}, 500, function() {
+      $pension_field
+        .text(p)
+        .animate({"opacity": 1}, 500);
+    });
+  }
+  else {
+    $pension_field.text(p);
+  }
 };
 
 ResultCard.prototype.updateImagesLeftPosition = function() {
@@ -551,18 +573,6 @@ ResultCard.prototype.updateImagesLeftPosition = function() {
   });
 }
 
-ResultCard.prototype.updatePension = function() {
-  var p = Math.round( this.app.calculateImaginaryPension() / 10 ) * 10;
-
-  var $pension_field = $("#PensionPrice");
-
-  $pension_field.animate({"opacity": 0}, 500, function() {
-    $pension_field
-      .text(p)
-      .animate({"opacity": 1}, 500);
-  });
-};
-
 ResultCard.prototype.displayPensionCalculator = function() {
   var self = this;
 
@@ -571,7 +581,7 @@ ResultCard.prototype.displayPensionCalculator = function() {
     .show();
 
   this.app.$app.animate({
-    height: this.$this.height()
+    height: this.$this.outerHeight(true)
   }, 1000, function() {
     self.$calculator_screen.animate({opacity: 1}, 1000);
   });

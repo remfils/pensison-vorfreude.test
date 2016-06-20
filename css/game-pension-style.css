@@ -17,6 +17,7 @@
 
 h1.card-title {
   font-size: 39px;
+  white-space: nowrap;
 }
 
 .if6_buttonline div.greyed-out-btn {
@@ -34,9 +35,10 @@ h1.card-title {
 .question-card-section {
 /*   margin-top: 20px; */
   top: 0;
+  position: absolute;
 }
 
-.current-card {
+.current-question-card {
   position: relative;
 }
 
@@ -279,7 +281,7 @@ h1.card-title {
       transition: all 0.4s;
 }
 
-#QuestionNumbers span:not(:last-child):after {
+#QuestionNumbers span:after {
   content: "";
   display: block;
   width: 50px;
@@ -294,6 +296,14 @@ h1.card-title {
     -ms-transition: all 0.4s;
      -o-transition: all 0.4s;
       transition: all 0.4s;
+}
+
+#QuestionNumbers span:last-child:after {
+  display: none;
+}
+
+#QuestionNumbers span:last-child {
+  margin-right: 0;
 }
 
 #QuestionNumbers .current-question {

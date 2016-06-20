@@ -72,12 +72,16 @@ Application.prototype.swapTwoCards = function(a, b, callback) {
 
   this.$app.animate({height: $b.outerHeight(true)}, 1000);
 
+  var left_offset = $a.offset().left;
+
   $a.removeClass("current-question-card");
   $b.addClass("current-question-card");
 
+  $a.css("left", left_offset);
+
   $b.css("opacity", 0).show();
 
-  $("html, body").animate({ scrollTop: $b.offset().top - 14 }, 1000);
+  $("html, body").animate({ scrollTop: $b.offset().top }, 1000);
 
   $a.fadeOut({
     duration: 1000,

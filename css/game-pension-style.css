@@ -546,6 +546,16 @@ img.current-question-image {
   cursor: pointer;
 }
 
+.minus-btn-cell .question-button {
+  top: 3px;
+  position: relative;
+}
+
+.plus-btn-cell .question-button {
+  top: 6px;
+  position: relative;
+}
+
 td.slider-controll-column {
   width: 100%;
   padding-left: 60px;

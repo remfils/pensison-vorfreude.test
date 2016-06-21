@@ -318,7 +318,7 @@ h1.card-title {
 .slider-icon-herzen .ui-slider-handle,
 .slider-icon-freizeit .ui-slider-handle {
   background-repeat: no-repeat !important;
-  background-position: 50% !important;
+  background-position: center !important;
   background-size: 50% auto !important;
 }
 

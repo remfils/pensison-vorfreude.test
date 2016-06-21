@@ -220,7 +220,7 @@ h1.card-title {
   font-size: 14px;
   color: #666666;
   position: absolute;
-  top: 14px;
+  top: 17px;
 }
 
 .pension-simple-slider .max {
@@ -232,7 +232,7 @@ h1.card-title {
   font-size: 17px;
   position: absolute;
   right: 0;
-  top: -34px;
+  top: -40px;
 }
 
 /* pension-slider->pension-question-slider */

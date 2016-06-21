@@ -387,16 +387,9 @@ function ResultCard(app) {
 
   var text_cell_height = this.$(".text-cell").height();
 
-  this.$(".slider-cell").each(function(i, item) {
-    var $item = $(item);
-
-    var margin = text_cell_height / 2 - $item.height() / 2 + 2;
-
-    $item.find(".pension-question-slider").css({
-      "margin-top": margin,
-      "margin-bottom": margin
+  this.$(".slider-cell").css({
+      "line-height": (text_cell_height - 6) + "px"
     });
-  });
   text_cell_height = this.$(".text-cell").innerHeight();
 
   this.$(".image-cell").each(function(i, item) {

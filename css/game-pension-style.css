@@ -736,6 +736,10 @@ td.slider-controll-column {
   width: 460px;
 }
 
+.slider-cell .pension-question-slider {
+  display: inline-block;
+}
+
 .image-cell {
   overflow: hidden;
   width: 280px;
@@ -877,6 +881,7 @@ td.final-slider {
 #ResultWorkYears,
 #ResultPayment {
   margin-top: 20px;
+  margin-right: 10px;
 }
 
 #ResultWorkYears .min:after,

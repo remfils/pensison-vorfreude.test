@@ -1,3 +1,52 @@
+@font-face {
+    font-family: Sparkasse;
+    src: url(../fonts/sparkasse_professionel/Sparkasse_Rg.ttf);
+}
+
+@font-face {
+    font-family: Sparkasse;
+    src: url(../fonts/sparkasse_professionel/Sparkasse_Bd.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Sparkasse;
+    src: url(../fonts/sparkasse_professionel/Sparkasse_It.ttf);
+    font-style: italic;
+}
+
+@font-face {
+    font-family: Sparkasse;
+    src: url(../fonts/sparkasse_professionel/Sparkasse_BdIt.ttf);
+    font-style: italic;
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: SparkasseHead;
+    src: url(../fonts/sparkasse_professionel/SparkasseHead_Rg.ttf);
+}
+
+@font-face {
+    font-family: SparkasseMedium;
+    src: url(../fonts/sparkasse_professionel/Sparkasse_Md.ttf);
+}
+
+@font-face {
+    font-family: SparkasseLt;
+    src: url(../fonts/sparkasse_professionel/Sparkasse_Lt.ttf);
+}
+
+@font-face {
+    font-family: SparkasseLt;
+    src: url(../fonts/sparkasse_professionel/Sparkasse_LtIt.ttf);
+    font-style: italic;
+}
+
+body {
+    font-family: Sparkasse;
+}
+
 .clearfix {
     zoom: 1;
 }
@@ -10,6 +59,28 @@
     clear: both;
 }
 
+.pension-container {
+    margin-right: auto;
+    margin-left: auto;
+    width: 960px;
+    position: relative;
+}
+
+.pension-title-logo {
+    background-image: url(../img/logo_desktop.jpg);
+    -webkit-background-size: cover;
+         -o-background-size: cover;
+            background-size: cover;
+    height: 90%;
+}
+
+#QuestionTitle {
+    color: red;
+    font-size: 39px;
+    margin-bottom: 20pt;
+    font-family: SparkasseLt;
+}
+
 
 #QuestionForm {
   position: relative;
@@ -19,10 +90,13 @@
 .pension-questions {
   /* position: absolute; */
   top: 0;
+  font-size: 18px;
 }
 
 .pagination-centered {
+    padding-top: 30px;
     padding-bottom: 0;
+    margin-top: 10px;
 }
 
 .pension-questions {
@@ -33,6 +107,10 @@ padding: 2em; */
 .question h2 {
     margin: 0;
     margin-top: 1pt;
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 50px;
+    color: red;
 }
 
 .question-table {
@@ -41,8 +119,8 @@ padding: 2em; */
 
 .pension-image {
     width: 100%;
-    height: 100%;
-    background-size: cover;
+    height: auto;
+    background-size: auto 100%;
     background-position: center;
     background-repeat: no-repeat;
     position: absolute;
@@ -55,17 +133,20 @@ padding: 2em; */
 .side-controll-column {
     width: 10%;
     text-align: center;
+    vertical-align: middle;
+    padding-top: 12px;
 }
 
 .slider-controll-column {
-    width: 100%;
-    padding-left: 40px;
-    padding-right: 40px;
+    width: 80%;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .question-button {
     color: red;
-    font-size: 7em;
+    font-size: 76pt;
+    cursor: pointer;
 }
 
 .answer-images {
@@ -76,6 +157,7 @@ padding: 2em; */
 
 .answer-images img {
     width: 100%;
+    padding: 0 5%;
 }
 
 .answer-images img:not(:first-child) {
@@ -84,13 +166,80 @@ padding: 2em; */
     position: absolute;
 }
 
+.weiter-block {
+    margin-top: 14px
+}
+
+/* QUESTION AGE */
+
+#UserAge:before,
+#UserAge:after {
+    font: 14pt;
+    position: absolute;
+    top: 23px;
+    color: #666666;
+    font-size: 14pt;
+}
+
+#UserAge:before {
+    content: "18 Jahre";
+    left: 0;
+}
+
+#UserAge:after {
+    content: "67 Jahre";
+    right: 0;
+}
+
+#UserAge .ui-handle-text {
+    left: -16px;
+}
+
+.user-age-table {
+    width: 100%;
+    
+    min-height: 120px;
+}
+
+.user-age-table .user-age-lable-cell {
+    width: 20%;
+    text-align: right;
+    font-size: 18px;
+    line-height: 18px;
+}
+
+.user-age-table .user-age-slider-cell {
+    padding: 0 30px 0 60px;
+}
+
+.user-age-lable-cell label {
+    font-weight: normal;
+    font-size: 18px;
+    color: #777777;
+}
+
 /* SCROLLBAR */
+
+.ui-handle-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: -35px;
+    color: red;
+    white-space: nowrap;
+    font-size: 14pt;
+}
 
 .pension-slider.ui-widget-content {
     background: white;
     outline: none;
     border: none;
     top: 7px;
+    background-color: red;
+}
+
+.pension-slider.ui-slider-horizontal {
+    height: 12px;
 }
 
 .pension-slider .ui-widget-header {
@@ -105,20 +254,67 @@ padding: 2em; */
     background: red;
     width: 80px;
     height: 80px;
-    border-radius: 40px;
+    border-radius: 50%;
+    border: none;
     margin-left: -40px;
     margin-top: -40px;
     top: 0;
     left: 0;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -ms-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+    cursor: pointer;
+}
+
+.pension-bottom-margin {
+    margin-bottom: 14px;
+}
+
+.pension-slider .ui-slider-handle:focus {
+    outline: none;
+    cursor: default;
 }
 
 .question-description {
-    margin-top: 1em;
-    height: 10%;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 
 /* RESULT CARD */
+
+.result-first-message {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 20px;
+    margin-bottom: 14px;
+    margin-top: 20px;
+}
+
+.pension-price-row {
+    color: red;
+    margin-bottom: 14px;
+}
+
+.pension-price-row h2 {
+    font-size: 26px;
+    margin: 0px;
+}
+
+.pension-price-row h1 {
+    font-size: 40px;
+    margin-bottom: 0;
+    font-weight: bold;
+    margin: 0;
+}
+
+#PensionGoalDescription {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 35px;
+}
 
 .category-bar {
     background-color: red;
@@ -128,11 +324,95 @@ padding: 2em; */
     left: 80px;
 }
 
+.final-table {
+    height: 100%;
+    table-layout: fixed
+}
+
+.final-table tr {
+    height: 100%;
+}
+
+.final-table h3 {
+    color: red;
+    margin: 0;
+    margin-bottom: 14px;
+}
+
+td.final-slider {
+    padding: 0 50px;
+    /* min-width: 400px; */
+    width: 50%;
+}
+
+.category-image {
+    height: 200px;
+    padding: 0 !important;
+    /* max-width: 280px; */
+    width: 25%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.category-image div {
+    height: 100%;
+    font-size: 0 !important;
+    object-fit: contain;
+    /* overflow: hidden; */
+}
+
+.category-image img {
+    height: auto;
+    width: 100%;
+}
+
 .pension-calculator {
     height: 0;
     overflow: hidden;
 }
 
+.pension-row {
+    margin-bottom: 60px;
+}
+
+.pension-calculator label {
+    color: #666666;
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 14px;
+}
+
+.pension-calculator input[type=text] {
+    border: 2px solid #777777;
+    -webkit-border-radius: 5px;
+            border-radius: 5px;
+    color: red;
+    padding: 5px;
+    font-size: 17px;
+}
+
+.helper-button {
+    border: 1px solid #777777;
+    -webkit-border-radius: 50%;
+            border-radius: 50%;
+    color: #777777;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 10pt;
+    line-height: 20px;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    text-align: center;
+}
+
+.pension-calculator h2 {
+    margin-top: 3em;
+    font-size: 18px;
+    padding-right: 30px;
+    margin-top: 60px;
+}
 
 .pension-result-slider {
     margin: 2em 0;
@@ -146,6 +426,11 @@ padding: 2em; */
     background: white;
 }
 
+.pension-result-slider .ui-slider-handle:focus {
+    outline: none;
+    cursor: default;
+}
+
 .pension-result-slider.ui-widget-content {
     border: none;
     background: #F0F0F0;
@@ -157,4 +442,64 @@ padding: 2em; */
 
 .pension-result-slider .ui-slider-range-min {
     background: red;
+}
+
+.pension-result-slider .min,
+.pension-result-slider .max {
+    font-size: 14pt;
+    color: #666666;
+    position: absolute;
+    top: 20px;
+}
+
+.pension-result-slider .max {
+    right: 0;
+}
+
+.pension-result-slider .value {
+    color: red;
+    font-size: 17pt;
+    position: absolute;
+    right: 0;
+    top: -50px;
+}
+
+#ResultWorkYears .min:after,
+#ResultWorkYears .max:after,
+#ResultWorkYears .value:after {
+    content: " Jahre";
+}
+
+#ResultPayment .min:after,
+#ResultPayment .max:after,
+#ResultPayment .value:after {
+    content: " Euro";
+}
+
+.small-message-box {
+    font-size: 18px;
+}
+
+#GameOverScreen {
+    padding: 0 30px 5px 30px;
+}
+
+#GameOverScreen h1 {
+    font-size: 26px;
+    color: red;
+    margin-bottom: 20px;
+}
+
+#GameOverScreen p {
+    margin-bottom: 20px;
+}
+
+.ui-dialog {
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    0px 0px 8px 0px rgba(50, 50, 50, 0.75);
+    box-shadow:         0px 0px 8px 0px rgba(50, 50, 50, 0.75);
+}
+
+.ui-widget-overlay {
+    background: black;
 }

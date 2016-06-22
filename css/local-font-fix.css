@@ -1,0 +1,18 @@
+@font-face {
+    font-family:'SparkasseRg';
+    src:url(../fonts/sparkasse_professionel/SparRg.eot) format('embedded-opentype'),url(../fonts/sparkasse_professionel/SparRg.woff) format('woff'),url(../fonts/sparkasse_professionel/SparRg.ttf) format('truetype');
+    font-weight:normal;
+    font-style:normal
+}
+@font-face {
+    font-family:'SparkasseLt';
+    src:url(../fonts/sparkasse_professionel/SparLt.eot) format('embedded-opentype'),url(../fonts/sparkasse_professionel/SparLt.woff) format('woff'),url(../fonts/sparkasse_professionel/SparLt.ttf) format('truetype');
+    font-weight:normal;
+    font-style:normal
+}
+@font-face {
+    font-family:'Pictos-IF';
+    src:url(../fonts/sparkasse_professionel/pictos-if.eot) format('embedded-opentype'),url(../fonts/sparkasse_professionel/pictos-if.woff) format('woff'),url(../fonts/sparkasse_professionel/pictos-if.ttf) format('truetype');
+    font-weight:normal;
+    font-style:normal
+}

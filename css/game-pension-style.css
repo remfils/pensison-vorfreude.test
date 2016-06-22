@@ -43,6 +43,10 @@ h1.card-title {
   background-color: #777;
 }
 
+.no-touch .if6_buttonline div.greyed-out-btn:hover a:after {
+  color: #777;
+}
+
 .sparkasse-bolder {
   font-family: Sparkasse;
 }

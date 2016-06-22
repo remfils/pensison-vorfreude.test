@@ -16,3 +16,4 @@ https://www.sparkasse-paderborn-detmold.de/de/home/service/online-mobile-banking
 - название вопросов
 - мелкий текст который идет не в белом блоке под названием вопроса
 
+* TODO шрифт в IE не подгружается, скорее всего из за того, что он не правильного формата

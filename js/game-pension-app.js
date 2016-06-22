@@ -32,15 +32,12 @@ function Application () {
     autoOpen: false,
     modal: true,
     width: 440,
+    position: { my: "center top", at: "center top-20", of: $("#PensionDisplayRow") },
     /*height: 255,*/
     create: function (event, ui) {
         $('.ui-dialog-titlebar').css({'background':'none','border':'none'});
         $("#dialog-model").css({ 'padding': '0' });
         $(".ui-dialog-titlebar").html('');
-    },
-    show: {
-      effect: "shake",
-      duration: 300
     }
   });
 };
@@ -147,6 +144,7 @@ Application.prototype.calculateSavings = function() {
 };
 
 Application.prototype.showGameOverScreen = function() {
+  $("html, body").animate({ scrollTop: $('#PensionPrice').offset().top - 14 }, 1000);
   $("#GameOverScreen").dialog("open");
 };
 

@@ -15,6 +15,11 @@
     outline: none;
 }
 
+#Game {
+  position: absolute;
+  top: 120px;  
+}
+
 .noselect {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -670,6 +675,10 @@ td.slider-controll-column {
 
 .imaginary-pension-text-cell {
   width: 60%;
+}
+
+.imaginary-pension-text-cell h2 {
+  margin-top: -7px;
 }
 
 .imaginary-pension-cell {

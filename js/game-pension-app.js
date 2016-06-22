@@ -56,7 +56,7 @@ Application.prototype.init = function() {
 };
 
 Application.prototype.titleCardStartButtonListener = function (e) {
-  this.swapTwoCards(this.title_card, this.question_age_card);
+  this.swapTwoCardsWithoutScroll(this.title_card, this.question_age_card);
 
   e.preventDefault();
   return false;
@@ -74,6 +74,31 @@ Application.prototype.allQuestionsFinishedListener = function() {
 
   this.swapTwoCards(this.question_form, this.result_card, function() {
     self.result_card.init();
+  });
+};
+
+Application.prototype.swapTwoCardsWithoutScroll = function(a, b, callback) {
+  var $a = a.$this;
+  var $b = b.$this;
+
+  this.current_card = b;
+
+  this.$app.animate({height: $b.outerHeight(true)}, 1000);
+
+  var left_offset = $a.offset().left;
+
+  $a.removeClass("current-question-card");
+  $b.addClass("current-question-card");
+
+  $a.css("left", left_offset);
+
+  $b.css("opacity", 0).show();
+
+  $a.fadeOut({
+    duration: 1000,
+    complete: function() {
+      $b.animate({opacity: 1}, 1000, callback);
+    }
   });
 };
 

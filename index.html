@@ -27,6 +27,8 @@
 </head>
 <body class="if6">
 
+<div id="Game"></div>
+
   <div class="if6_outer if6_header ">
     <div class="if6_inner">
       <div class="logo parbase">  <a href="/de/home.html" title="Logo der Sparkasse Paderborn-Detmold">
@@ -165,7 +167,7 @@
           <div class="opener_inner" title="Geld w&auml;chst"> 
             <div>
               <div class="overlay">
-                <a title="Mehr erfahren" href="#App" target="_blank">
+                <a title="Mehr erfahren" href="#Game" target="_blank">
                   <h2>Vorfreude ist&nbsp;einfach.</h2>
 
                   <p>Sorgen Sie dafür, dass Ihre Rente Sie nicht alt aussehen lässt.</p>
@@ -537,7 +539,7 @@
 
         <div class="section cbox cbox-large">
           <div class="div-column imaginary-pension-text-cell">
-              <h2>Eine lebenslange monatliche Rente in dieser Höhe kann Ihre Vorfreude steigern:</h2>
+            <h2>Eine lebenslange monatliche Rente in dieser Höhe kann Ihre Vorfreude steigern:</h2>
             </div>
             <div class="div-column imaginary-pension-cell">
               <h1 id="PensionPrice"></h1>
@@ -613,7 +615,7 @@
     </div>
   </section>
 
-    <div class="if6_outer if6_sitemap">
+    <div id="Footer" class="if6_outer if6_sitemap">
       <div class="if6_inner">
         <ul>
           <li>
@@ -707,6 +709,21 @@
     </div>
 
     <script src="js/game-pension-app.js"></script>
+
+    <script>
+      if (location.hash) {
+        setTimeout(function() {
+          window.scrollTo(0, 0);
+        }, 1);
+      }
+
+      if(window.location.hash) {
+        setTimeout(function() {
+          console.log($("#Footer").offset().top + $(window).outerHeight(true));
+          $("html, body").animate({ scrollTop: $("#Footer").offset().top - $(window).outerHeight(true) }, 400);
+        }, 600);
+      }
+    </script>
 
     <!-- <script src="js/app.js"></script> -->
 

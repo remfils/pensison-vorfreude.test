@@ -734,6 +734,12 @@ td.slider-controll-column {
   position: relative;
 }
 
+.slider-cell,
+.image-cell,
+.text-cell {
+  height: 183px !important;
+}
+
 .slider-cell {
   padding-left: 60px;
   padding-right: 60px;

@@ -912,6 +912,7 @@ td.final-slider {
 #GameOverScreen {
   /* padding: 0 30px 5px 30px; */
   margin-bottom: 0;
+  padding-bottom: 0px;
 }
 
 #GameOverScreen h1 {
@@ -926,6 +927,7 @@ td.final-slider {
   /* margin-bottom: 20px; */
   font-size: 18px;
   margin-bottom: 20px;
+  line-height: 150%;
 }
 
 .ui-dialog {

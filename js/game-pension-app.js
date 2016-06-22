@@ -27,6 +27,22 @@ function Application () {
   this.current_card = this.title_card;
 
   $(window).on("resize", this.onResizeListener.bind(this));
+
+  $("#GameOverScreen").dialog({
+    autoOpen: false,
+    modal: true,
+    width: 440,
+    /*height: 255,*/
+    create: function (event, ui) {
+        $('.ui-dialog-titlebar').css({'background':'none','border':'none'});
+        $("#dialog-model").css({ 'padding': '0' });
+        $(".ui-dialog-titlebar").html('');
+    },
+    show: {
+      effect: "shake",
+      duration: 300
+    }
+  });
 };
 
 Application.prototype.runDebugOptimisations = function() {
@@ -128,6 +144,10 @@ Application.prototype.calculateSavings = function() {
   }
 
   return savings;
+};
+
+Application.prototype.showGameOverScreen = function() {
+  $("#GameOverScreen").dialog("open");
 };
 
 
@@ -452,7 +472,7 @@ ResultCard.prototype.createSliders = function() {
       self.updateCalculatorResult();
     },
     stop: function() {
-      // self.app.showGameOverScreen();
+      self.app.showGameOverScreen();
     }
   });
 

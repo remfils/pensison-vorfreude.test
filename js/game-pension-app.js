@@ -51,8 +51,8 @@ Application.prototype.onResizeListener = function(e) {
   var current_card = this.current_card;
   this.$app.css({height: current_card.$this.outerHeight(true)});
 
-  if ( current_card.onResizeListener ) {
-    current_card.onResizeListener(e);
+  if ( current_card.updateSize ) {
+    current_card.updateSize();
   }
 };
 
@@ -113,16 +113,17 @@ Application.prototype.swapTwoCards = function(a, b, callback) {
 
   this.current_card = b;
 
-  this.$app.animate({height: $b.outerHeight(true)}, 1000);
-
   var left_offset = $a.offset().left;
-
   $a.removeClass("current-question-card");
   $b.addClass("current-question-card");
-
   $a.css("left", left_offset);
-
   $b.css("opacity", 0).show();
+
+  if ( b.updateSize ) {
+    b.updateSize();
+  }
+
+  this.$app.animate({height: $b.outerHeight(true)}, 1000);
 
   $("html, body").animate({ scrollTop: $b.offset().top }, 1000);
 
@@ -288,6 +289,8 @@ QuestionFormCard.prototype.swapTwoQuestions = function(q1, q2) {
   $q2.addClass("current-question");
   $q2.css("opacity", 0).show();
 
+  q2.updateSize();
+
   $q1.fadeOut({
     duration: 1000,
     complete: function() {
@@ -314,8 +317,7 @@ QuestionFormCard.prototype.changeQuestionText = function(text) {
   });
 };
 
-QuestionFormCard.prototype.onResizeListener = function(event) {
-  console.log("question form onResizeListener");
+QuestionFormCard.prototype.updateSize = function() {
   this.questions[this.current_question_index].updateSize()
 };
 

@@ -48,7 +48,12 @@ Application.prototype.runDebugOptimisations = function() {
 };
 
 Application.prototype.onResizeListener = function(e) {
-  // $(".if6_outer.if6_openerstage").height(window.outerHeight - $(".if6_outer.if6_header").height());
+  var current_card = this.current_card;
+  this.$app.css({height: current_card.$this.outerHeight(true)});
+
+  if ( current_card.onResizeListener ) {
+    current_card.onResizeListener(e);
+  }
 };
 
 Application.prototype.init = function() {
@@ -307,6 +312,11 @@ QuestionFormCard.prototype.changeQuestionText = function(text) {
     $c.animate({height: $t.height() + diff}, 500);
     $t.animate({opacity: 1}, 1000);
   });
+};
+
+QuestionFormCard.prototype.onResizeListener = function(event) {
+  console.log("question form onResizeListener");
+  this.questions[this.current_question_index].updateSize()
 };
 
 

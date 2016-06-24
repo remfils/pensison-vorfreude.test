@@ -34,6 +34,20 @@ h1.card-title {
   font-size: 39px;
 }
 
+@media screen and (max-width: 839px) {
+  h1.card-title {
+    white-space: normal;
+    font-size: 31px;
+  }
+}
+
+@media screen and (max-width: 539px) {
+  h1.card-title {
+    white-space: normal;
+    font-size: 21px;
+  }
+}
+
 .if6_breadcrumb {
   margin-bottom: 10px;
 }
@@ -349,6 +363,12 @@ h1.card-title {
   width: 100%;
 }
 
+@media screen and (max-width: 539px) {
+  #QuestionAge th {
+    font-size: 15px;
+  }
+}
+
 @media screen and (max-width: 649px) {
   .user-age-table td.user-age-slider-cell {
     width: auto;
@@ -449,6 +469,7 @@ h1.card-title {
 @media screen and (max-width: 539px) {
   #QuestionNumbers {
     margin-bottom: 20px;
+    height: 20px;
   }
 
   #QuestionNumbers span {
@@ -580,13 +601,21 @@ td.slider-controll-column {
 
   .question-button {
     color: red;
-    font-size: 9pt;
+    font-size: 27px;
     cursor: pointer;
   }
 
   td.slider-controll-column {
     padding-left: 25px;
     padding-right: 25px;
+  }
+
+  .minus-btn-cell .question-button {
+    top: -4px;
+  }
+
+  .plus-btn-cell .question-button {
+    top: 0;
   }
 }
 

@@ -47,10 +47,6 @@ Application.prototype.runDebugOptimisations = function() {
   $(".question-card-section").css("position", "relative");
 };
 
-Application.prototype.onResizeEndListener = function() {
-  this.$app.css({height: this.current_card.$this.outerHeight(true)});
-};
-
 var doit;
 Application.prototype.onResizeListener = function(e) {
   var current_card = this.current_card;
@@ -61,6 +57,10 @@ Application.prototype.onResizeListener = function(e) {
   if ( current_card.updateSize ) {
     current_card.updateSize();
   }
+};
+
+Application.prototype.onResizeEndListener = function() {
+  this.$app.css({height: this.current_card.$this.outerHeight(true)});
 };
 
 Application.prototype.init = function() {
@@ -627,6 +627,8 @@ ResultCard.prototype.updateSize = function() {
 
   /* fix text next to images on screen changing size */
 
+  this.$(".text-cell").css("height", null);
+
   //if ( window_width < 539 ) {
   if ( window_width < 999 ) {
     if ( !this.is_short_text_displayed ) {
@@ -647,13 +649,13 @@ ResultCard.prototype.updateSize = function() {
 
   /* fix width of images for tablet and mobile versions */
 
-  if ( window_width < 539 ) {
+  if ( window_width <= 539 ) {
     this.$(".slider-cell, .image-cell, .text-cell").css({
       width: "",
       height: ""
     });
   }
-  else if ( window_width < 999 ) {
+  else if ( window_width <= 999 ) {
 
     var row_height = this.$(".text-cell").outerHeight(true);
 

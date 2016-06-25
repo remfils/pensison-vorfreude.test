@@ -10,16 +10,16 @@
   <link rel="stylesheet" href="css/local-font-fix.css">
 
   <link rel="stylesheet" href="css/game-pension-style.css">
-  <script src="js/internetfiliale.min.8c238320942179a3685d62c11f71591d.js"></script>
+  <!-- <script src="js/internetfiliale.min.8c238320942179a3685d62c11f71591d.js"></script> -->
 
   <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
   <!-- <link rel="stylesheet" href="css/jquery-ui.css"> -->
   <!-- <link rel="stylesheet" href="css/style.css"> -->
-<!--   <script src="js/jquery-1.9.1.js"></script>
+<script src="js/jquery-1.9.1.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/jquery.ui.touch-punch.min.js"></script>
 <script src="js/jquery.easing.1.3.js"></script>
-<script src="js/jquery.autocomplete.js"></script> -->
+<script src="js/jquery.autocomplete.js"></script>
 
   <!-- <link rel="stylesheet" href="css/pension-style.css"> -->
 
@@ -719,7 +719,6 @@
 
       if(window.location.hash) {
         setTimeout(function() {
-          console.log($("#Footer").offset().top + $(window).outerHeight(true));
           $("html, body").animate({ scrollTop: $("#Footer").offset().top - $(window).outerHeight(true) }, 400);
         }, 600);
       }

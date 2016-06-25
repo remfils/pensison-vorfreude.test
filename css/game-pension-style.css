@@ -845,6 +845,8 @@ td.slider-controll-column {
 @media screen and (max-width: 999px) {
   .slider-cell {
     width: 50%;
+    padding-left: 40px;
+    padding-right: 40px;
   }
 
   .image-cell {

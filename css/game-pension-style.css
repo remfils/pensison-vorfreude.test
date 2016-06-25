@@ -808,7 +808,7 @@ td.slider-controll-column {
 .slider-cell,
 .image-cell,
 .text-cell {
-  height: 183px !important;
+  height: 183px;
 }
 
 .slider-cell {
@@ -842,18 +842,41 @@ td.slider-controll-column {
   line-height: normal;
 }
 
+@media screen and (max-width: 999px) {
+  .slider-cell {
+    width: 50%;
+  }
+
+  .image-cell {
+    width: 20%;
+    height: auto;
+  }
+
+  .text-cell {
+    width: 30%;
+    height: auto;
+    padding-top: 14px;
+  }
+}
+
 @media screen and (max-width: 539px) {
+  .slider-cell,
+  .image-cell,
+  .text-cell {
+    height: auto;
+  }
+
   .slider-cell {
     width: 100%;
   }
 
   .image-cell {
-    width: 50%;
+    width: 45%;
     height: auto;
   }
 
   .text-cell {
-    width: 50%;
+    width: 55%;
     padding-top: 14px;
   }
 

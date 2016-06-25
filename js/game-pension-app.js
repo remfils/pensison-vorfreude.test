@@ -47,9 +47,16 @@ Application.prototype.runDebugOptimisations = function() {
   $(".question-card-section").css("position", "relative");
 };
 
+Application.prototype.onResizeEndListener = function() {
+  this.$app.css({height: this.current_card.$this.outerHeight(true)});
+};
+
+var doit;
 Application.prototype.onResizeListener = function(e) {
   var current_card = this.current_card;
-  this.$app.css({height: current_card.$this.outerHeight(true)});
+
+  clearTimeout(doit);
+  doit = setTimeout(this.onResizeEndListener.bind(this), 100);
 
   if ( current_card.updateSize ) {
     current_card.updateSize();
@@ -446,8 +453,6 @@ function ResultCard(app) {
     "line-height": (text_cell_height - 6) + "px"
   });
 
-  // this.updateImagesLeftPosition();
-
   $("#ResultCardDisplayCalculatorBtn").click(this.resultCardDisplayCalculatorBtnClickListener.bind(this));
 
   this.$calculator_screen = $("#PensionCalculatorFirstMessage, #PensionCalculatorInput, #PensionCalculatorAfterMessage, #PensionCalculatorButtonLine");
@@ -618,7 +623,12 @@ ResultCard.prototype.updatePension = function(is_instant_change) {
 ResultCard.prototype.updateSize = function() {
   var self = this;
 
-  if ( window.innerWidth < 539 ) {
+  var window_width = window.innerWidth;
+
+  /* fix text next to images on screen changing size */
+
+  //if ( window_width < 539 ) {
+  if ( window_width < 999 ) {
     if ( !this.is_short_text_displayed ) {
       this.$(".text-cell p").each(function(i, item) {
         $(item).html(self.question_short_labels[i]);
@@ -633,6 +643,35 @@ ResultCard.prototype.updateSize = function() {
       });
     }
     this.is_short_text_displayed = false;
+  }
+
+  /* fix width of images for tablet and mobile versions */
+
+  if ( window_width < 539 ) {
+    this.$(".slider-cell, .image-cell, .text-cell").css({
+      width: "",
+      height: ""
+    });
+  }
+  else if ( window_width < 999 ) {
+
+    var row_height = this.$(".text-cell").outerHeight(true);
+
+    var image_width = row_height * 1000 / 667;
+
+    this.$(".image-cell")
+      .outerWidth(image_width)
+      .outerHeight(row_height);
+
+    this.$(".slider-cell")
+      .outerWidth(this.$(".row").width() - this.$(".image-cell").outerWidth(true) - this.$(".text-cell").outerWidth(true) - 2)
+      .outerHeight(row_height);
+  }
+  else {
+    this.$(".slider-cell, .image-cell, .text-cell").css({
+      width: "",
+      height: ""
+    });
   }
 };
 

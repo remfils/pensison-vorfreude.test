@@ -449,10 +449,6 @@ function ResultCard(app) {
 
   var text_cell_height = this.$(".text-cell").height();
 
-  this.$(".slider-cell").css({
-    "line-height": (text_cell_height - 6) + "px"
-  });
-
   $("#ResultCardDisplayCalculatorBtn").click(this.resultCardDisplayCalculatorBtnClickListener.bind(this));
 
   this.$calculator_screen = $("#PensionCalculatorFirstMessage, #PensionCalculatorInput, #PensionCalculatorAfterMessage, #PensionCalculatorButtonLine");
@@ -627,9 +623,10 @@ ResultCard.prototype.updateSize = function() {
 
   /* fix text next to images on screen changing size */
 
+  var $slider_cell = this.$(".slider-cell");
+
   this.$(".text-cell").css("height", null);
 
-  //if ( window_width < 539 ) {
   if ( window_width < 999 ) {
     if ( !this.is_short_text_displayed ) {
       this.$(".text-cell p").each(function(i, item) {
@@ -654,12 +651,15 @@ ResultCard.prototype.updateSize = function() {
       width: "",
       height: ""
     });
+
+    this.$(".slider-cell").css("padding-top", "");
   }
   else if ( window_width <= 999 ) {
-
     var row_height = this.$(".text-cell").outerHeight(true);
 
     var image_width = row_height * 1000 / 667;
+
+    $slider_cell.css("padding-top", (row_height / 2 - 20 + 7) + "px");
 
     this.$(".image-cell")
       .outerWidth(image_width)
@@ -674,6 +674,8 @@ ResultCard.prototype.updateSize = function() {
       width: "",
       height: ""
     });
+
+    this.$(".slider-cell").css("padding-top", "");
   }
 };
 

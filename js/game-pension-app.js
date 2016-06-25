@@ -443,19 +443,26 @@ function ResultCard(app) {
   var text_cell_height = this.$(".text-cell").height();
 
   this.$(".slider-cell").css({
-      "line-height": (text_cell_height - 6) + "px"
-    });
-  text_cell_height = this.$(".text-cell").innerHeight();
-
-  this.$(".image-cell").each(function(i, item) {
-    $(item).innerHeight(text_cell_height);
+    "line-height": (text_cell_height - 6) + "px"
   });
 
-  this.updateImagesLeftPosition();
+  // this.updateImagesLeftPosition();
 
   $("#ResultCardDisplayCalculatorBtn").click(this.resultCardDisplayCalculatorBtnClickListener.bind(this));
 
   this.$calculator_screen = $("#PensionCalculatorFirstMessage, #PensionCalculatorInput, #PensionCalculatorAfterMessage, #PensionCalculatorButtonLine");
+
+  this.question_short_labels = [
+    "Rinotera allundum Rinotera allundum est erando entalia.",
+    "Rinotera allundum Rinotera allundum est erando entalia.",
+    "Rinotera allundum Rinotera allundum est erando entalia."
+  ];
+
+  this.question_normal_labels = [
+    "Rinotera allundum est erando entalia bueno kanitustra enorum klibum espana",
+    "Rinotera allundum est erando entalia bueno kanitustra enorum klibum espana",
+    "Rinotera allundum est erando entalia bueno kanitustra enorum klibum espana"
+  ];
 
   if ( this.app.DEBUG ) {
     return;
@@ -605,6 +612,27 @@ ResultCard.prototype.updatePension = function(is_instant_change) {
         .text(p)
         .animate({"opacity": 1}, 500);
     });
+  }
+};
+
+ResultCard.prototype.updateSize = function() {
+  var self = this;
+
+  if ( window.innerWidth < 539 ) {
+    if ( !this.is_short_text_displayed ) {
+      this.$(".text-cell p").each(function(i, item) {
+        $(item).html(self.question_short_labels[i]);
+      });
+    }
+    this.is_short_text_displayed = true;
+  }
+  else {
+    if ( this.is_short_text_displayed ) {
+      this.$(".text-cell p").each(function(i, item) {
+        $(item).html(self.question_normal_labels[i]);
+      });
+    }
+    this.is_short_text_displayed = false;
   }
 };
 

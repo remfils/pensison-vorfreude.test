@@ -70,6 +70,12 @@ h1.card-title {
   font-family: Sparkasse;
 }
 
+@media screen and (max-width: 539px) {
+  .sparkasse-bolder {
+    font-family: SparkasseRg;
+  }
+}
+
 /* HEADER FIX */
 
 .header-image {
@@ -204,12 +210,14 @@ h1.card-title {
   border-radius: 50%;
   background: white;
   cursor: pointer;
+  margin-left: -15px;
 }
 
 @media screen and (max-width: 839px) {
   .pension-simple-slider .ui-slider-handle {
     width: 40px;
     height: 40px;
+    margin-left: -20px;
     top: -19px;
     background: white;
   }
@@ -297,14 +305,19 @@ h1.card-title {
 
 @media screen and (max-width: 539px) {
   .pension-question-slider.ui-slider-horizontal {
-    height: 3px;
+    height: 8px;
   }
 
   .pension-question-slider .ui-slider-handle {
     width: 40px;
     height: 40px;
     margin-left: -20px;
-    margin-top: -20px;
+    margin-top: -17px;
+  }
+
+  .pension-simple-slider .min,
+  .pension-simple-slider .max {
+    top: 20px;
   }
 }
 
@@ -753,6 +766,22 @@ td.slider-controll-column {
   left: 80px;
 }
 
+@media screen and (max-width: 539px) {
+  .imaginary-pension-text-cell {
+    width: 100%;
+  }
+
+  .imaginary-pension-cell {
+    width: 100%;
+  }
+
+  #PensionPrice {
+    font-size: 25px;
+    font-family: SparkasseRg;
+    font-weight: normal;
+  }
+}
+
 
 /* RESULT: QUESTION ANSWERS */
 
@@ -760,12 +789,14 @@ td.slider-controll-column {
   width: 100%;
   height: 100%;
   position: relative;
+  white-space: nowrap;
+  font-size: 0;
 }
 
 .question-image-container img {
   width: 100%;
-  height: 100%;
-  position: absolute;
+  height: auto;
+  /* position: absolute; */
   left: 0;
   top: 0;
 }
@@ -824,6 +855,12 @@ td.slider-controll-column {
   .text-cell {
     width: 50%;
     padding-top: 14px;
+  }
+
+  .text-cell h3 {
+    font-size: 17px;
+    margin-bottom: 14px;
+    line-height: normal;
   }
 }
 
@@ -928,10 +965,62 @@ td.final-slider {
   margin-top: 60px;
 }
 
+@media screen and (max-width: 539px) {
+  .pension-calculator-result-cell {
+    display: table;
+  }
+
+  .pension-calculator-result {
+    display: table-footer-group;
+  }
+
+  .calculator-memo {
+    display: table-caption;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 40px;
+  }
+
+  .pension-calculator-result-cell {
+    width: 100%;
+  }
+
+  #PensionCalculatorInput label {
+    font-size: 15px;
+  }
+
+  .pension-calculator-result label {
+    float: left;
+    width: 40%;
+  }
+
+  .pension-calculator-result input[type=text] {
+    font-size: 17px;
+    float: left;
+    width: 45%;
+  }
+
+  .pension-calculator-input-cell {
+    width: 100%;
+  }
+
+  .pension-calculator-input-cell label {
+    margin-bottom: 40px;
+  }
+}
+
 #ResultWorkYears,
 #ResultPayment {
   margin-top: 20px;
   margin-right: 10px;
+}
+
+@media screen and (max-width: 539px) {
+  #ResultWorkYears,
+  #ResultPayment {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
 }
 
 #ResultWorkYears .min:after,

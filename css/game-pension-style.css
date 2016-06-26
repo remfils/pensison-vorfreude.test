@@ -494,6 +494,38 @@ h1.card-title {
   background-color: red !important;
 }
 
+@media screen and (max-width: 999px) {
+  #QuestionNumbers {
+    height: 30px;
+  }
+
+  #QuestionNumbers span {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 11px;
+    margin-right: 14px;
+  }
+
+  #QuestionNumbers span:after {
+    width: 25px;
+    height: 1px;
+    left: 25px;
+    top: 12px;
+  }
+
+  #QuestionNumbers .current-question {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+  }
+
+  #QuestionNumbers .current-question:after {
+    left: 30px !important;
+    top: 15px !important;
+  }
+}
+
 
 @media screen and (max-width: 600px) {
   #QuestionNumbers {
@@ -579,6 +611,12 @@ img.current-question-image {
   text-align: center;
 }
 
+@media screen and (max-width: 999px) {
+  .question h2 {
+    margin-bottom: 30px;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .question h2 {
     margin-bottom: 24px;
@@ -630,17 +668,17 @@ td.slider-controll-column {
 
   .question-button {
     color: red;
-    font-size: 27px;
+    font-size: 50px;
     cursor: pointer;
   }
 
   td.slider-controll-column {
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 
   .minus-btn-cell .question-button {
-    top: -4px;
+    top: -1px;
   }
 
   .plus-btn-cell .question-button {

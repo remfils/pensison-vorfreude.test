@@ -445,7 +445,15 @@ function ResultCard(app) {
     return this.$this.find(a);
   }
 
+  ResultCard.MOBILE_STATE = 1;
+  ResultCard.TABLET_STATE = 2;
+  ResultCard.WEB_STATE = 3;
+
+  this.display_width_state = ResultCard.WEB_STATE;
+
   this.createSliders();
+
+  this.createMobileFunctions();
 
   var text_cell_height = this.$(".text-cell").height();
 
@@ -545,6 +553,55 @@ ResultCard.prototype.createSliders = function() {
   });
 };
 
+ResultCard.prototype.createMobileFunctions = function() {
+  var $all_cells = this.$(".slider-cell, .image-cell, .text-cell");
+  var $slider_cell = this.$(".slider-cell");
+  var $image_cell = this.$(".image-cell");
+  var $text_cell = this.$(".text-cell");
+
+  this.clearSizeOfResultCells = function() {
+    $all_cells.css({
+        width: "",
+        height: ""
+      });
+
+    $slider_cell.css("padding-top", "");
+  }
+
+  this.updateMobileSize = function() {
+    var image_cell_height = $image_cell.height();
+    var text_cell_height;
+
+    $text_cell.css("height", "");
+
+    text_cell_height = $text_cell.innerHeight();
+
+    if ( image_cell_height > text_cell_height ) {
+      $text_cell.outerHeight(image_cell_height);
+    }
+  };
+
+  this.updateTabletSize = function() {
+    var row_height = $text_cell.outerHeight(true);
+
+    var image_width = row_height * 1000 / 667;
+
+    $slider_cell.css("padding-top", (row_height / 2 - 20 + 7) + "px");
+
+    $image_cell
+      .outerWidth(image_width)
+      .outerHeight(row_height);
+
+    $slider_cell
+      .outerWidth(this.$(".row").width() - $image_cell.outerWidth(true) - $text_cell.outerWidth(true) - 2)
+      .outerHeight(row_height);
+  };
+
+  this.updateWebSize = function() {
+
+  };
+};
+
 ResultCard.prototype.updateCalculatorResult = function() {
   var PENSIONS = [200, 400, 600, 800, 1000];
   var payment = this.payment_slider.slider("value");
@@ -623,9 +680,7 @@ ResultCard.prototype.updateSize = function() {
 
   /* fix text next to images on screen changing size */
 
-  var $slider_cell = this.$(".slider-cell");
-
-  this.$(".text-cell").css("height", null);
+  // this.$(".text-cell").css("height", null);
 
   if ( window_width < 999 ) {
     if ( !this.is_short_text_displayed ) {
@@ -647,35 +702,25 @@ ResultCard.prototype.updateSize = function() {
   /* fix width of images for tablet and mobile versions */
 
   if ( window_width <= 600 ) {
-    this.$(".slider-cell, .image-cell, .text-cell").css({
-      width: "",
-      height: ""
-    });
+    if ( this.display_width_state != ResultCard.MOBILE_STATE ) {
+      this.clearSizeOfResultCells();
+    }
 
-    this.$(".slider-cell").css("padding-top", "");
+    this.updateMobileSize();
+
+    this.display_width_state = ResultCard.MOBILE_STATE;
   }
   else if ( window_width <= 999 ) {
-    var row_height = this.$(".text-cell").outerHeight(true);
+    this.updateTabletSize();
 
-    var image_width = row_height * 1000 / 667;
-
-    $slider_cell.css("padding-top", (row_height / 2 - 20 + 7) + "px");
-
-    this.$(".image-cell")
-      .outerWidth(image_width)
-      .outerHeight(row_height);
-
-    this.$(".slider-cell")
-      .outerWidth(this.$(".row").width() - this.$(".image-cell").outerWidth(true) - this.$(".text-cell").outerWidth(true) - 2)
-      .outerHeight(row_height);
+    this.display_width_state = ResultCard.TABLET_STATE;
   }
   else {
-    this.$(".slider-cell, .image-cell, .text-cell").css({
-      width: "",
-      height: ""
-    });
+    if ( this.display_width_state != ResultCard.WEB_STATE ) {
+      this.clearSizeOfResultCells();
+    }
 
-    this.$(".slider-cell").css("padding-top", "");
+    this.display_width_state = ResultCard.WEB_STATE;
   }
 };
 

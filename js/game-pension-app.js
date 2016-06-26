@@ -646,7 +646,7 @@ ResultCard.prototype.updateSize = function() {
 
   /* fix width of images for tablet and mobile versions */
 
-  if ( window_width <= 539 ) {
+  if ( window_width <= 600 ) {
     this.$(".slider-cell, .image-cell, .text-cell").css({
       width: "",
       height: ""

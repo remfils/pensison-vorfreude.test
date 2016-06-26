@@ -41,7 +41,7 @@ h1.card-title {
   }
 }
 
-@media screen and (max-width: 539px) {
+@media screen and (max-width: 600px) {
   h1.card-title {
     white-space: normal;
     font-size: 21px;
@@ -70,7 +70,7 @@ h1.card-title {
   font-family: Sparkasse;
 }
 
-@media screen and (max-width: 539px) {
+@media screen and (max-width: 600px) {
   .sparkasse-bolder {
     font-family: SparkasseRg;
   }
@@ -200,7 +200,7 @@ h1.card-title {
 /* pension-result-slider -> pension-simple-slider */
 
 .pension-simple-slider {
-  margin: 2em 0;
+  margin: 50px 0;
 }
 
 .pension-simple-slider .ui-slider-handle {
@@ -211,16 +211,6 @@ h1.card-title {
   background: white;
   cursor: pointer;
   margin-left: -15px;
-}
-
-@media screen and (max-width: 839px) {
-  .pension-simple-slider .ui-slider-handle {
-    width: 40px;
-    height: 40px;
-    margin-left: -20px;
-    top: -19px;
-    background: white;
-  }
 }
 
 .ui-widget {
@@ -266,6 +256,23 @@ h1.card-title {
   top: -40px;
 }
 
+
+
+@media screen and (max-width: 839px) {
+  .pension-simple-slider .ui-slider-handle {
+    width: 40px;
+    height: 40px;
+    margin-left: -20px;
+    top: -19px;
+    background: white;
+  }
+
+  .pension-simple-slider .min,
+  .pension-simple-slider .max {
+    top: 23px;
+  }
+}
+
 /* pension-slider->pension-question-slider */
 
 .pension-question-slider.ui-widget-content {
@@ -303,7 +310,7 @@ h1.card-title {
   cursor: pointer;
 }
 
-@media screen and (max-width: 539px) {
+@media screen and (max-width: 600px) {
   .pension-question-slider.ui-slider-horizontal {
     height: 8px;
   }
@@ -376,7 +383,7 @@ h1.card-title {
   width: 100%;
 }
 
-@media screen and (max-width: 539px) {
+@media screen and (max-width: 600px) {
   #QuestionAge th {
     font-size: 15px;
   }
@@ -479,7 +486,7 @@ h1.card-title {
 }
 
 
-@media screen and (max-width: 539px) {
+@media screen and (max-width: 600px) {
   #QuestionNumbers {
     margin-bottom: 20px;
     height: 20px;
@@ -520,7 +527,7 @@ h1.card-title {
   height: 587px;
 }
 
-@media screen and (max-width: 539px) {
+@media screen and (max-width: 600px) {
   .answer-images {
     position: relative;
     margin: 0;
@@ -563,7 +570,7 @@ img.current-question-image {
   text-align: center;
 }
 
-@media screen and (max-width: 539px) {
+@media screen and (max-width: 600px) {
   .question h2 {
     margin-bottom: 24px;
   }
@@ -607,7 +614,7 @@ td.slider-controll-column {
   padding-right: 60px;
 }
 
-@media screen and (max-width: 539px) {
+@media screen and (max-width: 600px) {
   .question .side-controll-column {
     padding-top: 0;
   }
@@ -701,7 +708,7 @@ td.slider-controll-column {
   width: 25%;
 }
 
-@media screen and (max-width: 539px) {
+@media screen and (max-width: 600px) {
   .col-md-6 {
     width: 100%;
   }
@@ -766,7 +773,7 @@ td.slider-controll-column {
   left: 80px;
 }
 
-@media screen and (max-width: 539px) {
+@media screen and (max-width: 600px) {
   .imaginary-pension-text-cell {
     width: 100%;
   }
@@ -863,7 +870,7 @@ td.slider-controll-column {
   }
 }
 
-@media screen and (max-width: 539px) {
+@media screen and (max-width: 600px) {
   .slider-cell,
   .image-cell,
   .text-cell {
@@ -958,6 +965,11 @@ td.final-slider {
   margin-bottom: 14px;
 }
 
+.pension-calculator-result label {
+  padding-right: 14px;
+  margin-bottom: 20px;
+}
+
 #PensionCalculatorInput input[type=text] {
   border: 2px solid #777777;
   -webkit-border-radius: 5px;
@@ -965,6 +977,7 @@ td.final-slider {
   color: red;
   padding: 5px;
   font-size: 17px;
+  width: 45%;
 }
 
 .helper-button {
@@ -984,6 +997,7 @@ td.final-slider {
 
 .calculator-memo {
   margin-top: 50px;
+  padding-right: 14px;
 }
 
 #PensionCalculatorInput h2 {
@@ -993,7 +1007,7 @@ td.final-slider {
   margin-top: 60px;
 }
 
-@media screen and (max-width: 539px) {
+@media screen and (max-width: 600px) {
   .pension-calculator-result-cell {
     display: table;
   }
@@ -1025,7 +1039,6 @@ td.final-slider {
   .pension-calculator-result input[type=text] {
     font-size: 17px;
     float: left;
-    width: 45%;
   }
 
   .pension-calculator-input-cell {
@@ -1043,11 +1056,10 @@ td.final-slider {
   margin-right: 10px;
 }
 
-@media screen and (max-width: 539px) {
+@media screen and (max-width: 600px) {
   #ResultWorkYears,
   #ResultPayment {
-    margin-right: 15px;
-    margin-left: 15px;
+    margin: 40px 15px;
   }
 }
 

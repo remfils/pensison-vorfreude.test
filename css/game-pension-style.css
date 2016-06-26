@@ -310,16 +310,25 @@ h1.card-title {
   cursor: pointer;
 }
 
+@media screen and (max-width: 999px) {
+  .pension-question-slider .ui-slider-handle {
+    width: 60px;
+    height: 60px;
+    margin-left: -30px;
+    margin-top: -25px;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .pension-question-slider.ui-slider-horizontal {
     height: 8px;
   }
 
   .pension-question-slider .ui-slider-handle {
-    width: 40px;
-    height: 40px;
-    margin-left: -20px;
-    margin-top: -17px;
+    width: 54px;
+    height: 54px;
+    margin-left: -27px;
+    margin-top: -23px;
   }
 
   .pension-simple-slider .min,
@@ -792,6 +801,10 @@ td.slider-controll-column {
 
 /* RESULT: QUESTION ANSWERS */
 
+#Result .result-question-table {
+  margin-bottom: 20px;
+}
+
 .question-image-container {
   width: 100%;
   height: 100%;
@@ -839,15 +852,13 @@ td.slider-controll-column {
   padding-top: 14px;
 }
 
-.text-cell h3 {
-  font-size: 26px;
-  margin: 0;
+.text-cell h2 {
   margin-bottom: 14px;
-  line-height: normal;
 }
 
 .text-cell p {
   line-height: normal;
+  margin-right: -10px;
 }
 
 @media screen and (max-width: 999px) {
@@ -856,17 +867,25 @@ td.slider-controll-column {
     padding-left: 40px;
     padding-right: 40px;
     padding-top: 0;
+    height: 116px;
+    padding-top: 40px;
+    padding-bottom: 0;
   }
 
   .image-cell {
-    width: 20%;
-    height: auto;
+    width: 175px;
+    height: 116px;
   }
 
   .text-cell {
-    width: 30%;
-    height: auto;
     padding-top: 14px;
+    width: 176px;
+    height: 116px;
+  }
+
+  .text-cell h2 {
+    margin-top: -10px;
+    margin-bottom: 4px;
   }
 }
 
@@ -882,21 +901,31 @@ td.slider-controll-column {
     line-height: 70px;
   }
 
+  .slider-cell {
+    width: 100%;
+    height: 100px;
+    padding-top: 10px;
+    padding-bottom: 0;
+  }
+
   .image-cell {
-    width: 45%;
+    width: 50%;
     height: auto;
     margin-bottom: 0;
   }
 
   .text-cell {
-    width: 55%;
+    width: 50%;
     padding-top: 14px;
   }
 
-  .text-cell h3 {
-    font-size: 17px;
-    margin-bottom: 14px;
-    line-height: normal;
+  .text-cell h2 {
+    margin-bottom: 10px;
+    margin-top: -10px;
+  }
+
+  .text-cell p {
+    margin-right: -7px;
   }
 }
 

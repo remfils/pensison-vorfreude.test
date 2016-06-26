@@ -599,15 +599,8 @@ ResultCard.prototype.createMobileFunctions = function() {
 
     var image_width = row_height * 1000 / 667;
 
-    $slider_cell.css("padding-top", (row_height / 2 - 20 + 7) + "px");
-
-    $image_cell
-      .outerWidth(image_width)
-      .outerHeight(row_height);
-
     $slider_cell
-      .outerWidth(this.$(".row").width() - $image_cell.outerWidth(true) - $text_cell.outerWidth(true) - 2)
-      .outerHeight(row_height);
+      .outerWidth(this.$(".row").width() - $image_cell.outerWidth(true) - $text_cell.outerWidth(true) - 2);
   };
 
   this.updateWebSize = function() {
@@ -691,11 +684,7 @@ ResultCard.prototype.updateSize = function() {
 
   var window_width = window.innerWidth;
 
-  /* fix text next to images on screen changing size */
-
-  // this.$(".text-cell").css("height", null);
-
-  if ( window_width < 999 ) {
+  if ( window_width < 400 ) {
     if ( !this.is_short_text_displayed ) {
       this.$(".text-cell p").each(function(i, item) {
         $(item).html(self.question_short_labels[i]);
@@ -712,10 +701,6 @@ ResultCard.prototype.updateSize = function() {
     this.is_short_text_displayed = false;
   }
 
-  /* fix left margins of answers */
-
-  /* fix width of images for tablet and mobile versions */
-
   if ( window_width <= 600 ) {
     if ( this.display_width_state != ResultCard.MOBILE_STATE ) {
       this.clearSizeOfResultCells();
@@ -726,6 +711,10 @@ ResultCard.prototype.updateSize = function() {
     this.display_width_state = ResultCard.MOBILE_STATE;
   }
   else if ( window_width <= 999 ) {
+    if ( this.display_width_state != ResultCard.TABLET_STATE ) {
+      this.clearSizeOfResultCells();
+    }
+
     this.updateTabletSize();
 
     this.display_width_state = ResultCard.TABLET_STATE;

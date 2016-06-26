@@ -505,7 +505,7 @@ ResultCard.prototype.createSliders = function() {
             var $container = $("#FinalSliderImages_" + i);
             var width = $container.width();
 
-            $container.animate({left: -1 * width * (ui.value - 1)}, 1000);
+            $container.animate({left: - $container[0].getBoundingClientRect().width * (ui.value - 1)}, 1000);
           }
         })
       );
@@ -566,10 +566,23 @@ ResultCard.prototype.createMobileFunctions = function() {
       });
 
     $slider_cell.css("padding-top", "");
-  }
+  };
+
+  var $question_image_containers = this.$(".question-image-container");
+  var answers = this.app.answers;
+  var fixImageContainerPosition = function(index, container) {
+    console.log("This is timeout");
+    var $container = $(container);
+
+    $container.css("left", - $container[0].getBoundingClientRect().width * (answers[index] - 1) );
+  };
+
+  this.updatePositionsOfAnswerImages = function() {
+    $question_image_containers.each(fixImageContainerPosition);
+  };
 
   this.updateMobileSize = function() {
-    var image_cell_height = $image_cell.height();
+    var image_cell_height = $image_cell.innerHeight();
     var text_cell_height;
 
     $text_cell.css("height", "");
@@ -699,6 +712,8 @@ ResultCard.prototype.updateSize = function() {
     this.is_short_text_displayed = false;
   }
 
+  /* fix left margins of answers */
+
   /* fix width of images for tablet and mobile versions */
 
   if ( window_width <= 600 ) {
@@ -718,9 +733,14 @@ ResultCard.prototype.updateSize = function() {
   else {
     if ( this.display_width_state != ResultCard.WEB_STATE ) {
       this.clearSizeOfResultCells();
+      this.updatePositionsOfAnswerImages();
     }
 
     this.display_width_state = ResultCard.WEB_STATE;
+  }
+
+  if ( window_width <= 999 ) {
+    this.updatePositionsOfAnswerImages();
   }
 };
 

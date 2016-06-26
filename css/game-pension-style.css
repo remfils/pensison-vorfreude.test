@@ -885,6 +885,7 @@ td.slider-controll-column {
   .image-cell {
     width: 45%;
     height: auto;
+    margin-bottom: 0;
   }
 
   .text-cell {

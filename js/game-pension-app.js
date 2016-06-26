@@ -32,8 +32,6 @@ function Application () {
     autoOpen: false,
     modal: true,
     width: 440,
-    position: { my: "center top", at: "center top-20", of: $("#PensionDisplayRow") },
-    /*height: 255,*/
     create: function (event, ui) {
         $('.ui-dialog-titlebar').css({'background':'none','border':'none'});
         $("#dialog-model").css({ 'padding': '0' });
@@ -183,7 +181,16 @@ Application.prototype.calculateSavings = function() {
 
 Application.prototype.showGameOverScreen = function() {
   $("html, body").animate({ scrollTop: $('#PensionPrice').offset().top - 14 }, 1000);
-  $("#GameOverScreen").dialog("open");
+
+  var window_width = window.innerWidth;
+
+  if ( window_width <= 400 ) {
+    $("#GameOverScreen").dialog("option", "width", window_width - 40);
+  }
+
+  $("#GameOverScreen")
+    .dialog("option", "position", { my: "center-5 bottom", at: "center top", of: $("#PensionDisplayRow") })
+    .dialog("open");
 };
 
 

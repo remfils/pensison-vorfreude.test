@@ -1127,6 +1127,21 @@ td.final-slider {
   line-height: 150%;
 }
 
+@media screen and (max-width: 539px) {
+  #GameOverScreen .primary {
+    margin-bottom: 0;
+  }
+
+  #GameOverScreen h1 {
+    margin-top: 20px;
+    margin-bottom: 15px;
+  }
+
+  #GameOverScreen p {
+    font-size: 13px;
+  }
+}
+
 .ui-dialog {
     -webkit-box-shadow: 0px 0px 8px 0px rgba(50, 50, 50, 0.75);
     -moz-box-shadow:    0px 0px 8px 0px rgba(50, 50, 50, 0.75);

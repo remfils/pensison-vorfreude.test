@@ -209,6 +209,21 @@ Application.prototype.showGameOverScreen = function() {
   $("#GameOverScreen")
     .dialog("option", "position", { my: "center-5 bottom", at: "center top", of: $("#PensionDisplayRow") })
     .dialog("open");
+
+  $("#RestartGameButton").on("click", this.restartGameButtonClickListener.bind(this));
+};
+
+Application.prototype.restartGameButtonClickListener = function(e) {
+  this.result_card.hideCalculator();
+
+  $("html, body").animate({ scrollTop: this.result_card.$this.offset().top - 14 - $(".if6_iconbar").outerHeight() }, 1000);
+
+  $("#GameOverScreen").dialog("close");
+
+  $("#RestartGameButton").off("click", this.restartGameButtonClickListener);
+
+  e.preventDefault();
+  return false;
 };
 
 
@@ -493,6 +508,8 @@ function ResultCard(app) {
   $("#ResultCardDisplayCalculatorBtn").click(this.resultCardDisplayCalculatorBtnClickListener.bind(this));
 
   this.$calculator_screen = $("#PensionCalculatorFirstMessage, #PensionCalculatorInput, #PensionCalculatorAfterMessage, #PensionCalculatorButtonLine");
+
+  this.is_calculator_displayed = false;
 
   this.question_short_labels = [
     "Rinotera allundum Rinotera allundum est erando entalia.",
@@ -783,6 +800,13 @@ ResultCard.prototype.updateImagesLeftPosition = function() {
 }
 
 ResultCard.prototype.displayPensionCalculator = function() {
+  if ( this.is_calculator_displayed ) {
+    return;
+  }
+
+  this.is_calculator_displayed = true;
+
+
   var self = this;
 
   self.$calculator_screen
@@ -818,6 +842,20 @@ ResultCard.prototype.displayPensionCalculator = function() {
 
   this.payment_slider.slider("value", savings);
   $("#ResultPayment .value").text( savings);
+};
+
+ResultCard.prototype.hideCalculator = function() {
+  if ( !this.is_calculator_displayed ) {
+    return;
+  }
+
+  this.is_calculator_displayed = false;
+
+  var self = this;
+  this.$calculator_screen.fadeOut(400, function () {
+    self.$calculator_screen.hide();
+    self.app.animatedChangeApplicationHeight(self.$this.outerHeight(true), 100);
+  });
 };
 
 

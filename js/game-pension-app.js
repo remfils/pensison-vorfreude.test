@@ -28,6 +28,8 @@ function Application () {
 
   $(window).on("resize", this.onResizeListener.bind(this));
 
+  $(window).on("scroll", this.onScrollListener.bind(this));
+
   $("#GameOverScreen").dialog({
     autoOpen: false,
     modal: true,
@@ -54,6 +56,17 @@ Application.prototype.onResizeListener = function(e) {
 
   if ( current_card.updateSize ) {
     current_card.updateSize();
+  }
+};
+
+Application.prototype.onScrollListener = function(e) {
+  var $icon_bar = $(".if6_iconbar");
+  var $window = $(window);
+  if ( $window.scrollTop() > $icon_bar.offset().top ) {
+    $icon_bar.addClass("iconbar-fixed");
+  }
+  else {
+    $icon_bar.removeClass("iconbar-fixed");
   }
 };
 
@@ -128,9 +141,9 @@ Application.prototype.swapTwoCards = function(a, b, callback) {
     b.updateSize();
   }
 
-  this.$app.animate({height: $b.outerHeight(true)}, 1000);
+  this.animatedChangeApplicationHeight($b.outerHeight(true));
 
-  $("html, body").animate({ scrollTop: $b.offset().top }, 1000);
+  $("html, body").animate({ scrollTop: $b.offset().top - $(".if6_iconbar").outerHeight() }, 1000);
 
   $a.fadeOut({
     duration: 1000,
@@ -138,6 +151,11 @@ Application.prototype.swapTwoCards = function(a, b, callback) {
       $b.animate({opacity: 1}, 1000, callback);
     }
   });
+};
+
+Application.prototype.animatedChangeApplicationHeight = function(height, time) {
+  time = time ? time : 1000;
+  this.$app.animate({height: height}, time);
 };
 
 Application.prototype.calculateImaginaryPension = function() {
@@ -180,7 +198,7 @@ Application.prototype.calculateSavings = function() {
 };
 
 Application.prototype.showGameOverScreen = function() {
-  $("html, body").animate({ scrollTop: $('#PensionPrice').offset().top - 14 }, 1000);
+  $("html, body").animate({ scrollTop: $('#PensionPrice').offset().top - 14 - $(".if6_iconbar").outerHeight() }, 1000);
 
   var window_width = window.innerWidth;
 
@@ -314,6 +332,7 @@ QuestionFormCard.prototype.swapTwoQuestions = function(q1, q2) {
 };
 
 QuestionFormCard.prototype.changeQuestionText = function(text) {
+  var self = this;
   var $c = $("#QuestionCardText");
   var $t = $("#QuestionCardText p");
   var h = $c.height();
@@ -321,12 +340,19 @@ QuestionFormCard.prototype.changeQuestionText = function(text) {
 
   $c.height(h);
 
-  console.log($t.height());
+  console.log();
+  var text_height_diff = $t.height();
 
   $t.animate({opacity: 0}, 1000, function() {
     $t.html(text);
 
-    $c.animate({height: $t.height() + diff}, 500);
+    text_height_diff -= $t.height();
+
+    self.app.animatedChangeApplicationHeight(self.$this.outerHeight(true) - text_height_diff, 500);
+
+    $c.animate({height: $t.height() + diff}, 500, function() {
+      $c.css("height", "");
+    });
     $t.animate({opacity: 1}, 1000);
   });
 };

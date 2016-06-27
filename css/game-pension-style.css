@@ -572,7 +572,7 @@ h1.card-title {
   .answer-images {
     position: relative;
     margin: 0;
-    margin-bottom: 16px;
+    margin-bottom: 30px;
   }
 }
 
@@ -1045,7 +1045,7 @@ td.final-slider {
   color: red;
   padding: 5px;
   font-size: 17px;
-  width: 45%;
+  width: 35%;
 }
 
 .helper-button {
@@ -1101,7 +1101,7 @@ td.final-slider {
 
   .pension-calculator-result label {
     float: left;
-    width: 40%;
+    width: 45%;
   }
 
   .pension-calculator-result input[type=text] {

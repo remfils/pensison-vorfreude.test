@@ -25,6 +25,7 @@ function Application () {
     autoOpen: false,
     modal: true,
     width: 440,
+    resizable: true,
     create: function (event, ui) {
         $('.ui-dialog-titlebar').css({'background':'none','border':'none'});
         $("#dialog-model").css({ 'padding': '0' });
@@ -167,6 +168,16 @@ Application.prototype.calculateSavings = function() {
   return savings;
 };
 
+function gameOverResizeListener () {
+  var window_width = window.innerWidth;
+
+  if ( window_width <= 400 ) {
+    $("#GameOverScreen").dialog("option", "width", window_width - 40);
+  }
+  
+  $("#GameOverScreen").dialog("option", "position", { my: "center-5 bottom", at: "center top", of: $("#PensionDisplayRow") } );
+};
+
 Application.prototype.showGameOverScreen = function() {
   this.scrollTo($('#PensionPrice'), 1000);
 
@@ -180,10 +191,14 @@ Application.prototype.showGameOverScreen = function() {
     .dialog("option", "position", { my: "center-5 bottom", at: "center top", of: $("#PensionDisplayRow") })
     .dialog("open");
 
+  $(window).on("resize", gameOverResizeListener);
+
   $("#RestartGameButton").on("click", this.restartGameButtonClickListener.bind(this));
 };
 
 Application.prototype.restartGameButtonClickListener = function(e) {
+  $(window).off("resize", gameOverResizeListener);
+
   this.result_card.hideCalculator();
 
   this.scrollTo(this.result_card.$this, 1000);

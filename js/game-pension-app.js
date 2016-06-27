@@ -416,7 +416,11 @@ QuestionCard.prototype.createSlider = function() {
   var prev_value = 1;
   var self = this;
 
-  this.slider = this.$( ".pension-question-slider" ).slider({
+  var $slider = this.$( ".pension-question-slider" );
+
+  var percents = [0, 25, 50, 75, 100];
+
+  this.slider = $slider.slider({
     min: 1,
     max: 5,
     animate: false,
@@ -430,8 +434,11 @@ QuestionCard.prototype.createSlider = function() {
     },
     change: function( event, ui ) {
       self.app.answers[ self.num - 1 ] = ui.value;
+      $slider.find(".ui-handle-text").text( percents[ui.value-1] + " %" );
     }
   });
+
+  $slider.find(".ui-slider-handle").append("<span class='ui-handle-text'>" + 0 + " %</span>");
 
 };
 

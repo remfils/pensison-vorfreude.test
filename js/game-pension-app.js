@@ -3,11 +3,6 @@ function Application () {
 
   this.$app = $("#App");
 
-  this.DEBUG = false;
-  if ( this.DEBUG ) {
-    this.runDebugOptimisations();
-  }
-
   this.user_age = 28;
 
   this.answers = [1,1,1];
@@ -26,10 +21,6 @@ function Application () {
 
   this.current_card = this.title_card;
 
-  $(window).on("resize", this.onResizeListener.bind(this));
-
-  $(window).on("scroll", this.onScrollListener.bind(this));
-
   $("#GameOverScreen").dialog({
     autoOpen: false,
     modal: true,
@@ -40,11 +31,10 @@ function Application () {
         $(".ui-dialog-titlebar").html('');
     }
   });
-};
 
-Application.prototype.runDebugOptimisations = function() {
-  this.$app.height(9999);
-  $(".question-card-section").css("position", "relative");
+  $(window).on("resize", this.onResizeListener.bind(this));
+
+  $(window).on("scroll", this.onScrollListener.bind(this));
 };
 
 var doit;
@@ -59,6 +49,10 @@ Application.prototype.onResizeListener = function(e) {
   }
 };
 
+Application.prototype.onResizeEndListener = function() {
+  this.$app.css({height: this.current_card.$this.outerHeight(true)});
+};
+
 Application.prototype.onScrollListener = function(e) {
   var $icon_bar = $(".if6_iconbar");
   var $window = $(window);
@@ -70,23 +64,15 @@ Application.prototype.onScrollListener = function(e) {
   }
 };
 
-Application.prototype.onResizeEndListener = function() {
-  this.$app.css({height: this.current_card.$this.outerHeight(true)});
-};
-
-Application.prototype.init = function() {
-    
-};
-
 Application.prototype.titleCardStartButtonListener = function (e) {
-  this.swapTwoCardsWithoutScroll(this.title_card, this.question_age_card);
+  this.swapTwoCards(this.title_card, this.question_age_card);
 
   e.preventDefault();
   return false;
 }
 
 Application.prototype.questionAgeWeiterListener = function (e) {
-  this.swapTwoCards(this.question_age_card, this.question_form);
+  this.swapTwoCardsWithAnimation(this.question_age_card, this.question_form);
 
   e.preventDefault();
   return false;
@@ -95,12 +81,12 @@ Application.prototype.questionAgeWeiterListener = function (e) {
 Application.prototype.allQuestionsFinishedListener = function() {
   var self = this;
 
-  this.swapTwoCards(this.question_form, this.result_card, function() {
+  this.swapTwoCardsWithAnimation(this.question_form, this.result_card, function() {
     self.result_card.init();
   });
 };
 
-Application.prototype.swapTwoCardsWithoutScroll = function(a, b, callback) {
+Application.prototype.swapTwoCards = function(a, b, callback) {
   var $a = a.$this;
   var $b = b.$this;
 
@@ -125,32 +111,16 @@ Application.prototype.swapTwoCardsWithoutScroll = function(a, b, callback) {
   });
 };
 
-Application.prototype.swapTwoCards = function(a, b, callback) {
-  var $a = a.$this;
-  var $b = b.$this;
+Application.prototype.swapTwoCardsWithAnimation = function(a, b, callback) {
+  this.swapTwoCards(a, b, callback);
 
-  this.current_card = b;
+  this.animatedChangeApplicationHeight(b.$this.outerHeight(true));
 
-  var left_offset = $a.offset().left;
-  $a.removeClass("current-question-card");
-  $b.addClass("current-question-card");
-  $a.css("left", left_offset);
-  $b.css("opacity", 0).show();
+  this.scrollTo(b.$this, 1000);
+};
 
-  if ( b.updateSize ) {
-    b.updateSize();
-  }
-
-  this.animatedChangeApplicationHeight($b.outerHeight(true));
-
-  $("html, body").animate({ scrollTop: $b.offset().top - $(".if6_iconbar").outerHeight() }, 1000);
-
-  $a.fadeOut({
-    duration: 1000,
-    complete: function() {
-      $b.animate({opacity: 1}, 1000, callback);
-    }
-  });
+Application.prototype.scrollTo = function($item, duration) {
+  $("html, body").animate({ scrollTop: $item.offset().top - $(".if6_iconbar").outerHeight() }, duration);
 };
 
 Application.prototype.animatedChangeApplicationHeight = function(height, time) {
@@ -198,7 +168,7 @@ Application.prototype.calculateSavings = function() {
 };
 
 Application.prototype.showGameOverScreen = function() {
-  $("html, body").animate({ scrollTop: $('#PensionPrice').offset().top - 14 - $(".if6_iconbar").outerHeight() }, 1000);
+  this.scrollTo($('#PensionPrice'), 1000);
 
   var window_width = window.innerWidth;
 
@@ -216,7 +186,7 @@ Application.prototype.showGameOverScreen = function() {
 Application.prototype.restartGameButtonClickListener = function(e) {
   this.result_card.hideCalculator();
 
-  $("html, body").animate({ scrollTop: this.result_card.$this.offset().top - 14 - $(".if6_iconbar").outerHeight() }, 1000);
+  this.scrollTo(this.result_card.$this, 1000);
 
   $("#GameOverScreen").dialog("close");
 
@@ -235,10 +205,6 @@ function TitleCard ( app ) {
   this.app = app;
 
   $("#TitleCardStartButton").click(app.titleCardStartButtonListener.bind(app));
-
-  if ( this.app.DEBUG ) {
-    return;
-  }
 
   this.$this.hide();
 }
@@ -266,10 +232,6 @@ QuestionAgeCard = function(app) {
 
     this.$this.find("#QuestionAgeWeiter").click(this.app.questionAgeWeiterListener.bind(app));
 
-    if ( this.app.DEBUG ) {
-      return;
-    }
-
     this.$this.hide();
 }
 
@@ -295,9 +257,6 @@ function QuestionFormCard ( app ) {
 
   $("#QuestionFormWeiter").click(this.questionFormWeiterClickListerner.bind(this));
 
-  if ( this.app.DEBUG ) {
-    return;
-  }
   this.$this.hide();
 }
 
@@ -829,7 +788,7 @@ ResultCard.prototype.displayPensionCalculator = function() {
   this.year_slider.slider("value", this.app.user_age);
   this.year_slider.find(".value").text(this.app.user_age);
 
-  $("html, body").animate({ scrollTop: $('#PensionCalculatorFirstMessage').offset().top - 14 }, 1000);
+  this.app.scrollTo($('#PensionCalculatorFirstMessage'), 1000);
 
   var p = this.app.calculateImaginaryPension();
 
@@ -870,7 +829,6 @@ ResultCard.prototype.hideCalculator = function() {
 $(function() {
 
   window.app = new Application();
-  app.init();
 });
 
 

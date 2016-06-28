@@ -1066,6 +1066,11 @@ td.final-slider {
   margin-left: 10px;
   text-align: center;
 }
+@media screen and (max-width: 539px) {
+  .helper-button {
+    margin-left: 5px;
+  }
+}
 
 .calculator-memo {
   margin-top: 50px;

@@ -104,6 +104,10 @@ Application.prototype.swapTwoCards = function(a, b, callback) {
 
   $b.css("opacity", 0).show();
 
+  if ( b.updateSize ) {
+    b.updateSize();
+  }
+
   $a.fadeOut({
     duration: 1000,
     complete: function() {
@@ -126,6 +130,7 @@ Application.prototype.scrollTo = function($item, duration) {
 
 Application.prototype.animatedChangeApplicationHeight = function(height, time) {
   time = time ? time : 1000;
+  this.$app.finish();
   this.$app.animate({height: height}, time);
 };
 
@@ -167,14 +172,24 @@ Application.prototype.calculateSavings = function() {
 
   return savings;
 };
-
+var resize_listener_timer;
 function gameOverResizeListener () {
+  clearTimeout(resize_listener_timer);
+  resize_listener_timer = setTimeout(gameOverResizeTimeout, 100);
+};
+
+function gameOverResizeTimeout() {
   var window_width = window.innerWidth;
+
+  $("html, body").scrollTop( $('#PensionPrice').offset().top - $(".if6_iconbar").outerHeight());
 
   if ( window_width <= 400 ) {
     $("#GameOverScreen").dialog("option", "width", window_width - 40);
   }
-  
+  else {
+    $("#GameOverScreen").dialog("option", "width", 440);
+  }
+
   $("#GameOverScreen").dialog("option", "position", { my: "center-5 bottom", at: "center top", of: $("#PensionDisplayRow") } );
 };
 

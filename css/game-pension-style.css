@@ -1,15 +1,16 @@
 @font-face {
-    font-family:'Sparkasse';
-    src:url(../fonts/sparkasse_professionel/SparBd.ttf);
-    font-weight:bold;
-}
-
-@font-face {
     font-family:'SparkasseHead';
-    src:url(../fonts/sparkasse_professionel/SparkasseHead_Rg.ttf);
+    src:url(../fonts/sparkasse_professionel/SparkasseHead_Rg.eot) format('embedded-opentype'),url(../fonts/sparkasse_professionel/SparkasseHead_Rg.woff) format('woff'),url(../fonts/sparkasse_professionel/SparkasseHead_Rg.ttf) format('truetype');
     font-weight:bold;
     font-style:normal
 }
+
+@font-face {
+    font-family:'Sparkasse';
+    src:url(../fonts/sparkasse_professionel/SparBd.eot) format('embedded-opentype'),url(../fonts/sparkasse_professionel/SparBd.woff) format('woff'),url(../fonts/sparkasse_professionel/SparBd.ttf) format('truetype');
+    font-weight:bold;
+}
+
 
 *:focus {
     outline: none;
@@ -1197,4 +1198,11 @@ td.final-slider {
 
 .ui-widget-overlay {
     background: black;
+}
+
+.ie-line-fix::after {
+  line-height: 60% !important;
+}
+.ie-header-fix::before {
+  margin-top: 0 !important;
 }

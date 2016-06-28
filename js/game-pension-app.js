@@ -507,6 +507,8 @@ function ResultCard(app) {
 
   this.is_calculator_displayed = false;
 
+  this.is_short_calculator_label_displayed = false;
+
   this.question_short_labels = [
     "Rinotera allundum Rinotera allundum est erando entalia.",
     "Rinotera allundum Rinotera allundum est erando entalia.",
@@ -568,6 +570,10 @@ ResultCard.prototype.createSliders = function() {
       self.$("#ResultPayment .value").text(ui.value);
       self.updateCalculatorResult();
     },
+    change: function (e, ui) {
+      self.$("#ResultPayment .value").text(ui.value);
+      self.updateCalculatorResult();
+    },
     stop: function() {
       self.app.showGameOverScreen();
     }
@@ -580,6 +586,23 @@ ResultCard.prototype.createSliders = function() {
     range: "min",
     value: self.app.user_age,
     slide: function(e, ui) {
+      self.app.user_age = ui.value;
+
+      $("#ResultWorkYears .value").text(ui.value);
+
+      var pens_array = Application.PENSION_DATA_ARRAY[ui.value];
+      var min = pens_array[0];
+      var max = pens_array[4];
+
+      self.payment_slider.slider("option", "min", min);
+      $("#ResultPayment .min").text(min);
+
+      self.payment_slider.slider("option", "max", max);
+      $("#ResultPayment .max").text(max);
+
+      self.updateCalculatorResult();
+    },
+    change: function(e, ui) {
       self.app.user_age = ui.value;
 
       $("#ResultWorkYears .value").text(ui.value);
@@ -747,6 +770,19 @@ ResultCard.prototype.updateSize = function() {
     this.is_short_text_displayed = false;
   }
 
+  if ( window_width < 400 ) {
+    if ( !this.is_short_calculator_label_displayed ) {
+      $("#ResultCardDisplayCalculatorBtn").text("Vorfreude berechnen");
+      this.is_short_calculator_label_displayed = true;
+    }
+  }
+  else {
+    if ( this.is_short_calculator_label_displayed ) {
+      $("#ResultCardDisplayCalculatorBtn").text("Wie wenig kostet meine Vorfreude?");
+      this.is_short_calculator_label_displayed = false;
+    }
+  }
+
   if ( window_width <= 600 ) {
     if ( this.display_width_state != ResultCard.MOBILE_STATE ) {
       this.clearSizeOfResultCells();
@@ -857,7 +893,6 @@ ResultCard.prototype.hideCalculator = function() {
 
 
 $(function() {
-
   window.app = new Application();
 });
 

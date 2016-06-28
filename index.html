@@ -714,6 +714,47 @@
     <script src="js/game-pension-app.js?v=2"></script>
 
     <script>
+      if( /MSIE \d|Trident.*rv:/.test(navigator.userAgent) ) {
+        $(".loginlogout div.login, .if6_opener .ty1 .overlay .linktext, .if6_buttonline div.primary a, .buttonline .bgroup1>a:last-child, .buttonline .bgroup1>div:last-child").addClass("ie-line-fix");
+
+        $("#head_ftsearch").addClass("ie-header-fix");
+
+        var ie_mobile_mode = !window.innerWidth <= 999;
+
+        function applyContactIconsFixes() {
+          $(".if6_navigation > span, .if6_contact > span, .if6_contact > a").height(60);
+
+          $(".if6_contact > span + span").css("top", "173px");
+
+          $(".if6_contact > span + span + span").css("top", "233px");
+        };
+
+        function onResizeIE() {
+          var window_size = window.innerWidth;
+          if ( window_size <= 999 ) {
+            if ( !ie_mobile_mode ) {
+              $(".if6_navigation > span, .if6_contact > span, .if6_contact > a, .if6_contact > span + span, .if6_contact > span + span + span").css({
+                height: "",
+                top: ""
+              });
+            }
+
+            ie_mobile_mode = true;
+          }
+          else {
+            if ( ie_mobile_mode ) {
+              applyContactIconsFixes();
+            }
+
+            ie_mobile_mode = false;
+          }
+        }
+
+        $(window).on("resize", onResizeIE);
+
+        onResizeIE();
+      };
+
       if (location.hash) {
         setTimeout(function() {
           window.scrollTo(0, 0);

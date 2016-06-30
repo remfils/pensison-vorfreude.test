@@ -70,14 +70,14 @@ Application.prototype.titleCardStartButtonListener = function (e) {
 
   e.preventDefault();
   return false;
-}
+};
 
 Application.prototype.questionAgeWeiterListener = function (e) {
   this.swapTwoCardsWithAnimation(this.question_age_card, this.question_form);
 
   e.preventDefault();
   return false;
-}
+};
 
 Application.prototype.allQuestionsFinishedListener = function() {
   var self = this;
@@ -125,12 +125,14 @@ Application.prototype.swapTwoCardsWithAnimation = function(a, b, callback) {
 };
 
 Application.prototype.scrollTo = function($item, duration) {
-  $("html, body").animate({ scrollTop: $item.offset().top - $(".if6_iconbar").outerHeight() }, duration);
+  console.log("ScrollTo started");
+  $("html, body").animate({ scrollTop: $item.offset().top - $(".if6_iconbar").outerHeight() }, duration, function() {
+    console.log("Scroll To finished");
+  });
 };
 
 Application.prototype.animatedChangeApplicationHeight = function(height, time) {
   time = time ? time : 1000;
-  this.$app.finish();
   this.$app.animate({height: height}, time);
 };
 
@@ -148,12 +150,38 @@ Application.prototype.calculateImaginaryPension = function() {
 
   this.imaginary_pension = imag_pension;
 
-  return imag_pension;
+  return Math.round(imag_pension / 10) * 10;
 };
 
-Application.prototype.calculateSavings = function() {
-  var p = this.imaginary_pension;
-  var p_a = Application.PENSION_DATA_ARRAY[this.user_age];
+var PENSIONS = [200, 400, 600, 800, 1000]
+Application.prototype.calculateRealPension = function(age, savings) {
+  var pens_array = PENSION_ARRAY[age];
+
+  for ( var i=0; i < pens_array.length; i++ ) {
+    if ( savings < pens_array[i] ) {
+      break;
+    }
+  }
+
+  if ( i == 0  ) {
+    i = 1;
+  }
+
+  if ( i >= pens_array.length ) {
+    i = pens_array.length - 1;
+  }
+
+  var norm = (PENSIONS[i] - PENSIONS[i-1]) / (pens_array[i] - pens_array[i-1]);
+  var result = PENSIONS[i] - (pens_array[i] - savings) * norm;
+
+  console.log(result, pens_array[i] - pens_array[i-1]);
+
+  return result;
+};
+
+Application.prototype.calculateSavings = function(pension) {
+  var p = pension || this.imaginary_pension;
+  var p_a = PENSION_ARRAY[this.user_age];
 
   var savings = 0;
 
@@ -213,14 +241,13 @@ Application.prototype.showGameOverScreen = function() {
 
 Application.prototype.restartGameButtonClickListener = function(e) {
   $(window).off("resize", gameOverResizeListener);
+  $("#RestartGameButton").unbind("click");
+
+  $("#GameOverScreen").dialog("close");
 
   this.result_card.hideCalculator();
 
   this.scrollTo(this.result_card.$this, 1000);
-
-  $("#GameOverScreen").dialog("close");
-
-  $("#RestartGameButton").off("click", this.restartGameButtonClickListener);
 
   e.preventDefault();
   return false;
@@ -237,7 +264,7 @@ function TitleCard ( app ) {
   $("#TitleCardStartButton").click(app.titleCardStartButtonListener.bind(app));
 
   this.$this.hide();
-}
+};
 
 
 /* QUESTION AGE CARD */
@@ -263,7 +290,7 @@ QuestionAgeCard = function(app) {
     this.$this.find("#QuestionAgeWeiter").click(this.app.questionAgeWeiterListener.bind(app));
 
     this.$this.hide();
-}
+};
 
 
 /* QUESTION FORM CARD */
@@ -288,7 +315,7 @@ function QuestionFormCard ( app ) {
   $("#QuestionFormWeiter").click(this.questionFormWeiterClickListerner.bind(this));
 
   this.$this.hide();
-}
+};
 
 QuestionFormCard.prototype.questionFormWeiterClickListerner = function(e) {
   var prev_q = this.questions[this.current_question_index++];
@@ -362,7 +389,7 @@ QuestionFormCard.prototype.changeQuestionText = function(text) {
 };
 
 QuestionFormCard.prototype.updateSize = function() {
-  this.questions[this.current_question_index].updateSize()
+  this.questions[this.current_question_index].updateSize();
 };
 
 
@@ -534,7 +561,7 @@ ResultCard.prototype.createSliders = function() {
 
   this.sliders = [];
 
-  $("#PensionPrice").css("opacity", 0)
+  $("#PensionPrice").css("opacity", 0);
 
   this.app.answers.map(function(num, index) {
     var i = index + 1;
@@ -559,25 +586,47 @@ ResultCard.prototype.createSliders = function() {
       );
   });
 
+  var paymentResultSlideListener = function (e, ui) {
+    self.$("#ResultPayment .value").text( Math.round(ui.value * 100) / 100 );
+    self.updateCalculatorResult();
+  }
+
   this.payment_slider = this.$("#ResultPayment").slider({
     min: 20,
     max: 500,
-    step: 1,
+    step: 0.01,
     animate: true,
     range: "min",
     value: 0,
-    slide: function (e, ui) {
-      self.$("#ResultPayment .value").text(ui.value);
-      self.updateCalculatorResult();
-    },
-    change: function (e, ui) {
-      self.$("#ResultPayment .value").text(ui.value);
-      self.updateCalculatorResult();
-    },
+    slide: paymentResultSlideListener,
+    change: paymentResultSlideListener,
     stop: function() {
       self.app.showGameOverScreen();
     }
   });
+
+  var yearSlideFunction = function(e, ui) {
+    self.app.user_age = ui.value;
+
+    $("#ResultWorkYears .value").text(ui.value);
+
+    var pens_array = PENSION_ARRAY[ui.value];
+    var min = Math.round( pens_array[0] * 100 ) / 100;
+    var max = Math.round( pens_array[4] * 100 ) / 100;
+
+    self.payment_slider.slider("option", "min", min);
+    $("#ResultPayment .min").text(min);
+
+    self.payment_slider.slider("option", "max", max);
+    $("#ResultPayment .max").text(max);
+
+    var val = Math.round( (max - 0.5) * 100 ) / 100;
+
+    var savings = self.payment_slider.slider("option", "value");
+    self.payment_slider.slider("option", "value", savings);
+
+    self.updateCalculatorResult();
+  }
 
   this.year_slider = $("#ResultWorkYears").slider({
     min: 18,
@@ -585,40 +634,8 @@ ResultCard.prototype.createSliders = function() {
     animate: true,
     range: "min",
     value: self.app.user_age,
-    slide: function(e, ui) {
-      self.app.user_age = ui.value;
-
-      $("#ResultWorkYears .value").text(ui.value);
-
-      var pens_array = Application.PENSION_DATA_ARRAY[ui.value];
-      var min = pens_array[0];
-      var max = pens_array[4];
-
-      self.payment_slider.slider("option", "min", min);
-      $("#ResultPayment .min").text(min);
-
-      self.payment_slider.slider("option", "max", max);
-      $("#ResultPayment .max").text(max);
-
-      self.updateCalculatorResult();
-    },
-    change: function(e, ui) {
-      self.app.user_age = ui.value;
-
-      $("#ResultWorkYears .value").text(ui.value);
-
-      var pens_array = Application.PENSION_DATA_ARRAY[ui.value];
-      var min = pens_array[0];
-      var max = pens_array[4];
-
-      self.payment_slider.slider("option", "min", min);
-      $("#ResultPayment .min").text(min);
-
-      self.payment_slider.slider("option", "max", max);
-      $("#ResultPayment .max").text(max);
-
-      self.updateCalculatorResult();
-    }
+    slide: yearSlideFunction,
+    change: yearSlideFunction
   });
 };
 
@@ -678,28 +695,12 @@ ResultCard.prototype.createMobileFunctions = function() {
 };
 
 ResultCard.prototype.updateCalculatorResult = function() {
-  var PENSIONS = [200, 400, 600, 800, 1000];
   var payment = this.payment_slider.slider("value");
   var year = this.app.user_age;
 
-  var pens_array = Application.PENSION_DATA_ARRAY[year];
+  var result = self.app.real_pension = this.app.calculateRealPension(year, payment);
 
-  for ( var i=0; i < pens_array.length; i++ ) {
-    if ( payment < pens_array[i] ) {
-      break;
-    }
-  }
-
-  if ( i == 0 || i >= pens_array.length  ) {
-    return;
-  }
-
-  var norm = (PENSIONS[i] - PENSIONS[i-1]) / (pens_array[i] - pens_array[i-1]);
-  var result = PENSIONS[i] - (pens_array[i] - payment) * norm;
-
-  self.app.real_pension = result;
-
-  $("#ResultPension").val( Math.round(result / 10) * 10 + " Euro");
+  $("#ResultPension").val( Math.round(result / 10 ) * 10 + " Euro");
 };
 
 ResultCard.prototype.resultCardDisplayCalculatorBtnClickListener = function(e) {
@@ -731,8 +732,7 @@ ResultCard.prototype.init = function() {
 };
 
 ResultCard.prototype.updatePension = function(is_instant_change) {
-  console.log("ResultCard.prototype.updatePension");
-  var p = Math.round( this.app.calculateImaginaryPension() / 10 ) * 10;
+  var p = this.app.calculateImaginaryPension();
 
   var $pension_field = $("#PensionPrice");
 
@@ -829,7 +829,7 @@ ResultCard.prototype.updateImagesLeftPosition = function() {
   $(".question-image-container").each(function(i, item) {
     $(item).children().each(iterateThroughImages);
   });
-}
+};
 
 ResultCard.prototype.displayPensionCalculator = function() {
   if ( this.is_calculator_displayed ) {
@@ -837,7 +837,6 @@ ResultCard.prototype.displayPensionCalculator = function() {
   }
 
   this.is_calculator_displayed = true;
-
 
   var self = this;
 
@@ -848,23 +847,21 @@ ResultCard.prototype.displayPensionCalculator = function() {
   this.app.$app.animate({
     height: this.$this.outerHeight(true)
   }, 1000, function() {
-    self.$calculator_screen.animate({opacity: 1}, 1000);
+    self.$calculator_screen.animate({opacity: 1}, 400);
   });
+
+  this.app.scrollTo($('#PensionCalculatorFirstMessage'), 1000);
 
   this.year_slider.slider("value", this.app.user_age);
   this.year_slider.find(".value").text(this.app.user_age);
 
-  this.app.scrollTo($('#PensionCalculatorFirstMessage'), 1000);
-
   var p = this.app.calculateImaginaryPension();
 
-  var savings = Math.round(this.app.calculateSavings());
+  var savings = Math.round(this.app.calculateSavings(p));
 
-  var p_a = Application.PENSION_DATA_ARRAY[this.app.user_age];
+  var p_a = PENSION_ARRAY[this.app.user_age];
   var min = p_a[0];
   var max = p_a[4];
-
-  $("#ResultPension").val( Math.round(p / 10) * 10 + " Euro");
 
   $("#ResultPayment .min").text(min);
   this.payment_slider.slider("option", "min", min);
@@ -874,6 +871,8 @@ ResultCard.prototype.displayPensionCalculator = function() {
 
   this.payment_slider.slider("value", savings);
   $("#ResultPayment .value").text( savings);
+
+  $("#ResultPension").val( p + " Euro");
 };
 
 ResultCard.prototype.hideCalculator = function() {
@@ -884,10 +883,12 @@ ResultCard.prototype.hideCalculator = function() {
   this.is_calculator_displayed = false;
 
   var self = this;
-  this.$calculator_screen.fadeOut(400, function () {
+  this.$calculator_screen.fadeOut(400);
+
+  setTimeout(function () {
     self.$calculator_screen.hide();
-    self.app.animatedChangeApplicationHeight(self.$this.outerHeight(true), 100);
-  });
+    self.app.animatedChangeApplicationHeight(self.$this.outerHeight(true), 1000);
+  }, 400);
 };
 
 
@@ -898,43 +899,42 @@ $(function() {
 
 
 
-var pens_array = [];
-pens_array[18] = [27.07, 51.86, 76.65, 101.42, 126.23];
-pens_array[19] = [28.41, 54.54, 80.67, 106.79, 132.92];
-pens_array[20] = [29.83, 57.37, 136.59, 112.46, 140.01];
-pens_array[21] = [31.34, 60.39, 129.52, 118.47, 147.53];
-pens_array[22] = [32.93, 63.56, 122.83, 124.82, 155.46];
-pens_array[23] = [34.62, 66.94, 116.39, 131.59, 163.92];
-pens_array[24] = [36.41, 70.52, 110.32, 138.73, 172.86];
-pens_array[25] = [38.3, 74.31, 104.63, 146.33, 182.35];
-pens_array[26] = [40.32, 78.36, 99.27, 154.41, 192.44];
-pens_array[27] = [42.47, 82.65, 94.2, 163.01, 203.19];
-pens_array[28] = [42.47, 87.1, 89.42, 171.92, 214.32];
-pens_array[29] = [42.47, 91.81, 84.92, 181.35, 226.11];
-pens_array[30] = [42.47, 96.88, 80.67, 191.46, 238.74];
-pens_array[31] = [52.26, 102.24, 76.65, 202.19, 252.16];
-pens_array[32] = [55.12, 107.97, 160.8, 213.64, 266.48];
-pens_array[33] = [58.19, 114.08, 169.99, 225.91, 281.8];
-pens_array[34] = [61.46, 120.65, 179.83, 239.03, 298.21];
-pens_array[35] = [64.96, 127.65, 190.34, 253.03, 315.72];
-pens_array[36] = [68.73, 135.21, 201.68, 268.14, 334.61];
-pens_array[37] = [72.79, 143.3, 213.81, 284.32, 354.85];
-pens_array[38] = [77.14, 152.02, 226.9, 301.77, 376.65];
-pens_array[39] = [81.86, 161.43, 241.03, 320.62, 400.21];
-pens_array[40] = [86.95, 171.63, 256.31, 341.01, 425.69];
-pens_array[41] = [92.45, 182.64, 272.84, 363.03, 453.22];
-pens_array[42] = [98.46, 194.66, 290.88, 387.07, 483.28];
-pens_array[43] = [4.99, 207.73, 310.45, 413.19, 515.93];
-pens_array[44] = [12.13, 222.01, 331.89, 441.76, 551.63];
-pens_array[45] = [19.97, 237.68, 355.39, 473.1, 590.82];
-pens_array[46] = [28.57, 254.88, 381.19, 507.52, 633.82];
-pens_array[47] = [38.1, 273.97, 409.82, 545.69, 681.54];
-pens_array[48] = [48.67, 295.09, 441.52, 587.95, 734.37];
-pens_array[49] = [60.46, 318.68, 476.9, 635.11, 793.33];
-pens_array[50] = [73.65, 345.07, 516.48, 687.9, 859.31];
-pens_array[51] = [88.61, 374.97, 561.33, 747.7, 934.05];
-pens_array[52] = [25.56, 408.89, 612.21, 815.53, 1018.85];
-pens_array[53] = [25.01, 447.77, 670.54, 893.31, 1116.07];
-pens_array[54] = [47.52, 492.79, 738.06, 983.35, 1228.63];
-pens_array[55] = [73.78, 545.33, 816.89, 1088.44, 1359.99];
-Application.PENSION_DATA_ARRAY = pens_array;
+var PENSION_ARRAY = [];
+PENSION_ARRAY[18] = [27.07, 51.86, 76.65, 101.42, 126.23];
+PENSION_ARRAY[19] = [28.41, 54.54, 80.67, 106.79, 132.92];
+PENSION_ARRAY[20] = [29.83, 57.37, 84.92, 112.46, 140.01];
+PENSION_ARRAY[21] = [31.34, 60.39, 89.42, 118.47, 147.53];
+PENSION_ARRAY[22] = [32.93, 63.56, 94.2, 124.82, 155.46];
+PENSION_ARRAY[23] = [34.62, 66.94, 99.27, 131.59, 163.92];
+PENSION_ARRAY[24] = [36.41, 70.52, 104.63, 138.73, 172.86];
+PENSION_ARRAY[25] = [38.3, 74.31, 110.32, 146.33, 182.35];
+PENSION_ARRAY[26] = [40.32, 78.36, 116.39, 154.41, 192.44];
+PENSION_ARRAY[27] = [42.47, 82.65, 122.83, 163.01, 203.19];
+PENSION_ARRAY[28] = [42.47, 87.1, 129.52, 171.92, 214.32];
+PENSION_ARRAY[29] = [42.47, 91.81, 136.59, 181.35, 226.11];
+PENSION_ARRAY[30] = [42.47, 96.88, 144.16, 191.46, 238.74];
+PENSION_ARRAY[31] = [52.260, 102.24, 152.22, 202.19, 252.16];
+PENSION_ARRAY[32] = [55.12, 107.97, 160.8, 213.64, 266.48];
+PENSION_ARRAY[33] = [58.19, 114.08, 169.99, 225.91, 281.8];
+PENSION_ARRAY[34] = [61.46, 120.65, 179.83, 239.03, 298.21];
+PENSION_ARRAY[35] = [64.96, 127.65, 190.34, 253.03, 315.72];
+PENSION_ARRAY[36] = [68.73, 135.21, 201.68, 268.14, 334.61];
+PENSION_ARRAY[37] = [72.79, 143.3, 213.81, 284.32, 354.85];
+PENSION_ARRAY[38] = [77.14, 152.02, 226.9, 301.77, 376.65];
+PENSION_ARRAY[39] = [81.86, 161.43, 241.03, 320.62, 400.21];
+PENSION_ARRAY[40] = [86.95, 171.63, 256.31, 341.01, 425.69];
+PENSION_ARRAY[41] = [92.45, 182.64, 272.84, 363.03, 453.22];
+PENSION_ARRAY[42] = [98.46, 194.66, 290.88, 387.07, 483.28];
+PENSION_ARRAY[43] = [104.99, 207.73, 310.45, 413.19, 515.93];
+PENSION_ARRAY[44] = [112.13, 222.01, 331.89, 441.76, 551.63];
+PENSION_ARRAY[45] = [119.97, 237.68, 355.39, 473.1, 590.82];
+PENSION_ARRAY[46] = [128.57, 254.88, 381.19, 507.52, 633.82];
+PENSION_ARRAY[47] = [138.1, 273.97, 409.82, 545.69, 681.54];
+PENSION_ARRAY[48] = [148.67, 295.09, 441.52, 587.95, 734.37];
+PENSION_ARRAY[49] = [160.46, 318.68, 476.9, 635.11, 793.33];
+PENSION_ARRAY[50] = [173.65, 345.07, 516.48, 687.9, 859.31];
+PENSION_ARRAY[51] = [188.61, 374.97, 561.33, 747.7, 934.05];
+PENSION_ARRAY[52] = [205.56, 408.89, 612.21, 815.53, 1018.85];
+PENSION_ARRAY[53] = [225.01, 447.77, 670.54, 893.31, 1116.07];
+PENSION_ARRAY[54] = [247.52, 492.79, 738.06, 983.35, 1228.63];
+PENSION_ARRAY[55] = [273.78, 545.33, 816.89, 1088.44, 1359.99];

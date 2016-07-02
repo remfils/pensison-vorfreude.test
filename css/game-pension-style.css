@@ -318,10 +318,6 @@ h1.card-title {
     margin-left: -30px;
     margin-top: -26px;
   }
-
-  .pension-question-slider .ui-handle-text {
-    display: none;
-  }
 }
 
 @media screen and (max-width: 600px) {
@@ -330,10 +326,15 @@ h1.card-title {
   }
 
   .pension-question-slider .ui-slider-handle {
-    width: 54px;
-    height: 54px;
-    margin-left: -27px;
-    margin-top: -25px;
+    width: 44px;
+    height: 44px;
+    margin-left: -21px;
+    margin-top: -20px;
+  }
+
+  .pension-question-slider .ui-handle-text {
+    top: -20px;
+    font-size: 12px;
   }
 
   .pension-simple-slider .min,
@@ -577,7 +578,7 @@ h1.card-title {
   .answer-images {
     position: relative;
     margin: 0;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
   }
 }
 

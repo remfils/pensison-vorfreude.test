@@ -893,7 +893,7 @@ td.slider-controll-column {
   display: inline-block;
   height: 100%;
   position: absolute;
-  width: 40px;
+  width: 35px;
 }
 
 #Result .pension-question-slider:before {
@@ -952,7 +952,7 @@ td.slider-controll-column {
 
   #Result .pension-question-slider:before,
   #Result .pension-question-slider:after {
-    width: 20px;
+    width: 15px;
   }
 }
 

@@ -299,7 +299,7 @@ h1.card-title {
   height: 80px;
   border-radius: 50%;
   border: 1px solid red;
-  margin-left: -40px;
+  margin-left: -41px;
   margin-top: -37px;
   top: 0;
   left: 0;
@@ -328,7 +328,7 @@ h1.card-title {
   .pension-question-slider .ui-slider-handle {
     width: 44px;
     height: 44px;
-    margin-left: -21px;
+    margin-left: -22px;
     margin-top: -20px;
   }
 
@@ -886,6 +886,24 @@ td.slider-controll-column {
   display: inline-block;
 }
 
+#Result .pension-question-slider:before,
+#Result .pension-question-slider:after {
+  content: " ";
+  background-color: red;
+  display: inline-block;
+  height: 100%;
+  position: absolute;
+  width: 40px;
+}
+
+#Result .pension-question-slider:before {
+  right: 100%;
+}
+
+#Result .pension-question-slider:after {
+  left: 100%;
+}
+
 .image-cell {
   overflow: hidden;
   width: 280px;
@@ -930,6 +948,11 @@ td.slider-controll-column {
   .text-cell h2 {
     margin-top: -10px;
     margin-bottom: 4px;
+  }
+
+  #Result .pension-question-slider:before,
+  #Result .pension-question-slider:after {
+    width: 20px;
   }
 }
 
@@ -1071,6 +1094,7 @@ td.final-slider {
 @media screen and (max-width: 539px) {
   .helper-button {
     margin-left: 5px;
+    margin-top: 4px;
   }
 }
 

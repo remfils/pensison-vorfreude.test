@@ -52,6 +52,24 @@ Application.prototype.onResizeListener = function(e) {
 
 Application.prototype.onResizeEndListener = function() {
   this.$app.css({height: this.current_card.$this.outerHeight(true)});
+
+  if ( !this.tryToFixFooterHeight() ) {
+    $(".if6_footer").css("height", "");
+
+    this.tryToFixFooterHeight();
+  }
+};
+
+Application.prototype.tryToFixFooterHeight = function() {
+  var $footer = $(".if6_footer");
+  var empty_footer_height = window.innerHeight - $footer.offset().top - $footer.innerHeight();
+
+  if ( empty_footer_height > 0 ) {
+    $footer.height($footer.height() + empty_footer_height);
+    return true;
+  }
+  
+  return false;
 };
 
 Application.prototype.onScrollListener = function(e) {

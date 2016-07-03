@@ -572,6 +572,7 @@ h1.card-title {
   margin: 0 20px;
   margin-bottom: 50px;
   height: 587px;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 600px) {
@@ -993,6 +994,16 @@ td.slider-controll-column {
 
   .text-cell p {
     margin-right: -7px;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .text-cell h2 {
+    margin-bottom: 5px;
+  }
+
+  .text-cell p {
+    font-size: 12px;
   }
 }
 

@@ -52,6 +52,13 @@ Application.prototype.onResizeListener = function(e) {
 
 Application.prototype.onResizeEndListener = function() {
   this.$app.css({height: this.current_card.$this.outerHeight(true)});
+
+  var $footer = $(".if6_footer");
+  var empty_footer_height = window.innerHeight - $footer.offset().top - $footer.innerHeight();
+
+  if ( empty_footer_height > 0 ) {
+    $footer.height($footer.height() + empty_footer_height);
+  }
 };
 
 Application.prototype.onScrollListener = function(e) {

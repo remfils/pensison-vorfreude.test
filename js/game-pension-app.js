@@ -106,7 +106,10 @@ Application.prototype.swapTwoCards = function(a, b, callback) {
 
   $a.css("left", left_offset);
 
-  $b.css("opacity", 0).show();
+  $b.css({
+    "opacity": 0,
+    "left": 0
+  }).show();
 
   if ( b.updateSize ) {
     b.updateSize();
@@ -304,9 +307,9 @@ function QuestionFormCard ( app ) {
   this.$this = $("#QuestionsForm");
 
   this.questions = [
-    "Auch im Alter wollen Sie einen gewissen Lebensstandard im Alltag und beim Wohnen erhalten. <br> Darf’s noch etwas mehr sein?",
-    "Urlaub auf Balkonien oder unter Südseepalmen, einmal im Jahr wegfahren oder jederzeit ab <br />an den Strand – wie viel Reisefreiheit möchten Sie sich gönnen?",
-    "Endlich hab ich Zeit dafür! Schauen Sie sich an, wie viel Rente Sie brauchen, damit Ihre Vorstellungen <br />vom Ruhestand wahr werden – und wie viel Vorsorge dafür nötig ist.",
+    "Auch im Alter wollen Sie einen gewissen Lebensstandard im Alltag und beim Wohnen erhalten. Darf’s noch etwas mehr sein?",
+    "Urlaub auf Balkonien oder unter Südseepalmen, einmal im Jahr wegfahren oder jederzeit ab an den Strand – wie viel Reisefreiheit möchten Sie sich gönnen?",
+    "Endlich hab ich Zeit dafür! Schauen Sie sich an, wie viel Rente Sie brauchen, damit Ihre Vorstellungen vom Ruhestand wahr werden – und wie viel Vorsorge dafür nötig ist.",
   ].map(function(question_text, index){
     var q = new QuestionCard(app, index + 1, question_text);
     return q;

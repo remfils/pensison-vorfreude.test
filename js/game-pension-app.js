@@ -79,6 +79,10 @@ Application.prototype.questionAgeWeiterListener = function (e) {
   return false;
 };
 
+Application.prototype.goBackToAgeQuestion = function() {
+  this.swapTwoCardsWithAnimation(this.question_form, this.question_age_card);
+};
+
 Application.prototype.allQuestionsFinishedListener = function() {
   var self = this;
 
@@ -314,32 +318,44 @@ function QuestionFormCard ( app ) {
 
   $("#QuestionFormWeiter").click(this.questionFormWeiterClickListerner.bind(this));
 
+  $("#QuestionFormBack").click(this.questionFormBackClickListener.bind(this));
+
   this.$this.hide();
 };
 
 QuestionFormCard.prototype.questionFormWeiterClickListerner = function(e) {
-  var prev_q = this.questions[this.current_question_index++];
-
-  if ( this.current_question_index >= this.questions.length ) {
+  if ( this.current_question_index >= this.questions.length - 1 ) {
     this.app.allQuestionsFinishedListener();
   }
   else {
-    var current_question_index = this.current_question_index;
-    var q = this.questions[current_question_index];
-
-    $("#QuestionNumbers span").each(function(i, item) {
-      $(item).removeClass("current-question");
-      if ( i == current_question_index ) {
-        $(item).addClass("red");
-        $(item).addClass("current-question");
-      }
-    });
-
-    this.swapTwoQuestions(prev_q, q);
+    this.displayQuestion(this.current_question_index + 1);
   }
 
   e.preventDefault();
   return false;
+};
+
+QuestionFormCard.prototype.displayQuestion = function(question_index) {
+  var prev_q = this.questions[this.current_question_index];
+  var q = this.questions[question_index];
+
+  this.current_question_index = question_index;
+
+  this.updateQuestionNumbers();
+
+  this.swapTwoQuestions(prev_q, q);
+};
+
+QuestionFormCard.prototype.updateQuestionNumbers = function() {
+  var current_question_index = this.current_question_index;
+
+  $("#QuestionNumbers span").each(function(i, item) {
+    $(item).removeClass("current-question");
+    if ( i == current_question_index ) {
+      $(item).addClass("red");
+      $(item).addClass("current-question");
+    }
+  });
 };
 
 QuestionFormCard.prototype.swapTwoQuestions = function(q1, q2) {
@@ -373,7 +389,6 @@ QuestionFormCard.prototype.changeQuestionText = function(text) {
 
   $c.height(h);
 
-  console.log();
   var text_height_diff = $t.height();
 
   $t.animate({opacity: 0}, 1000, function() {
@@ -388,6 +403,18 @@ QuestionFormCard.prototype.changeQuestionText = function(text) {
     });
     $t.animate({opacity: 1}, 1000);
   });
+};
+
+QuestionFormCard.prototype.questionFormBackClickListener = function(e) {
+  if ( this.current_question_index < 1 ) {
+    this.app.goBackToAgeQuestion();
+  }
+  else {
+    this.displayQuestion(this.current_question_index - 1);
+  }
+
+  e.preventDefault();
+  return false;
 };
 
 QuestionFormCard.prototype.updateSize = function() {

@@ -360,6 +360,8 @@ QuestionFormCard.prototype.swapTwoQuestions = function(q1, q2) {
       $q2.animate({opacity: 1}, 1000);
     }
   });
+
+  this.app.scrollTo(this.$this);
 };
 
 QuestionFormCard.prototype.changeQuestionText = function(text) {

@@ -1,3 +1,6 @@
+var SCREEN_GAME_OVER_MIN_WIDTH = 480;
+
+
 function Application () {
   var self = this;
 
@@ -36,6 +39,8 @@ function Application () {
   $(window).on("resize", this.onResizeListener.bind(this));
 
   $(window).on("scroll", this.onScrollListener.bind(this));
+
+  this.onResizeListener(null);
 };
 
 var doit;
@@ -84,7 +89,7 @@ Application.prototype.onScrollListener = function(e) {
 };
 
 Application.prototype.titleCardStartButtonListener = function (e) {
-  this.swapTwoCards(this.title_card, this.question_age_card);
+  this.swapTwoCardsWithAnimation(this.title_card, this.question_age_card);
 
   e.preventDefault();
   return false;
@@ -114,8 +119,6 @@ Application.prototype.swapTwoCards = function(a, b, callback) {
   var $b = b.$this;
 
   this.current_card = b;
-
-  this.$app.animate({height: $b.outerHeight(true)}, 1000);
 
   var left_offset = $a.offset().left;
 
@@ -157,8 +160,14 @@ Application.prototype.scrollTo = function($item, duration) {
 };
 
 Application.prototype.animatedChangeApplicationHeight = function(height, time) {
+  var self = this;
+
+  var before_height = this.$app.height();
+
   time = time ? time : 1000;
-  this.$app.animate({height: height}, time);
+  this.$app.animate({height: height}, time, function() {
+    self.onResizeListener(null);
+  });
 };
 
 Application.prototype.calculateImaginaryPension = function() {
@@ -236,7 +245,7 @@ function gameOverResizeTimeout() {
 
   $("html, body").scrollTop( $('#PensionPrice').offset().top - $(".if6_iconbar").outerHeight());
 
-  if ( window_width <= 400 ) {
+  if ( window_width <= SCREEN_GAME_OVER_MIN_WIDTH ) {
     $("#GameOverScreen").dialog("option", "width", window_width - 40);
   }
   else {
@@ -251,7 +260,7 @@ Application.prototype.showGameOverScreen = function() {
 
   var window_width = window.innerWidth;
 
-  if ( window_width <= 400 ) {
+  if ( window_width <= SCREEN_GAME_OVER_MIN_WIDTH ) {
     $("#GameOverScreen").dialog("option", "width", window_width - 40);
   }
 
@@ -510,8 +519,9 @@ QuestionCard.prototype.createSlider = function() {
 
 QuestionCard.prototype.addClickListeners = function() {
   var self = this;
+  var $span = this.$(".plus-btn-cell span");
 
-  this.$(".plus-btn-cell span").click(function() {
+  $span.click(function() {
     var $s = self.$(".pension-question-slider");
     var value = $s.slider( "option", "value" ) + 1;
 
@@ -524,7 +534,11 @@ QuestionCard.prototype.addClickListeners = function() {
     self.swapImages(value-1, value);
   });
 
-  this.$(".minus-btn-cell span").click(function() {
+  disableSelection($span[0]);
+
+  $span = this.$(".minus-btn-cell span");
+
+  $span.click(function() {
     var $s = self.$(".pension-question-slider");
     var value = $s.slider( "option", "value" ) - 1;
 
@@ -536,7 +550,19 @@ QuestionCard.prototype.addClickListeners = function() {
 
     self.swapImages(value+1, value);
   });
+
+  disableSelection($span[0]);
 };
+
+function disableSelection(target){
+if (typeof target.onselectstart!="undefined") //IE route
+  target.onselectstart=function(){return false}
+else if (typeof target.style.MozUserSelect!="undefined") //Firefox route
+  target.style.MozUserSelect="none"
+else //All other route (ie: Opera)
+  target.onmousedown=function(e){if(e && e.target && e.target.tagName){if(/^(input|select)$/i.test(e.target.tagName)){return true;}}return false;}
+target.style.cursor = "default"
+}
 
 QuestionCard.prototype.updateSize = function() {
   var image_height = this.$(".answer-images .current-question-image").height();
@@ -726,7 +752,7 @@ ResultCard.prototype.createMobileFunctions = function() {
     text_cell_height = $text_cell.innerHeight();
 
     if ( image_cell_height > text_cell_height ) {
-      $text_cell.outerHeight(image_cell_height);
+      $text_cell.outerHeight(image_cell_height - 1);
     }
   };
 
@@ -803,7 +829,7 @@ ResultCard.prototype.updateSize = function() {
 
   var window_width = window.innerWidth;
 
-  if ( window_width < 400 ) {
+  if ( window_width < 425 ) {
     if ( !this.is_short_text_displayed ) {
       this.$(".text-cell p").each(function(i, item) {
         $(item).html(self.question_short_labels[i]);
@@ -820,7 +846,7 @@ ResultCard.prototype.updateSize = function() {
     this.is_short_text_displayed = false;
   }
 
-  if ( window_width < 400 ) {
+  if ( window_width < 425 ) {
     if ( !this.is_short_calculator_label_displayed ) {
       $("#ResultCardDisplayCalculatorBtn").text("Vorfreude berechnen");
       this.is_short_calculator_label_displayed = true;

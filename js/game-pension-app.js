@@ -162,7 +162,16 @@ Application.prototype.scrollTo = function($item, duration) {
 Application.prototype.animatedChangeApplicationHeight = function(height, time) {
   var self = this;
 
-  var before_height = this.$app.height();
+  var delta_height = height - this.$app.height();
+
+  var $footer = $(".if6_footer");
+  var empty_footer_height = window.innerHeight - delta_height - $footer.offset().top - $footer.innerHeight();
+
+  if ( empty_footer_height > 0 ) {
+    $footer
+      .delay(100)
+      .animate({"height":$footer.height() + empty_footer_height}, 100);
+  }
 
   time = time ? time : 1000;
   this.$app.animate({height: height}, time, function() {
@@ -493,8 +502,6 @@ QuestionCard.prototype.createSlider = function() {
 
   var $slider = this.$( ".pension-question-slider" );
 
-  var percents = [0, 25, 50, 75, 100];
-
   this.slider = $slider.slider({
     min: 1,
     max: 5,
@@ -504,17 +511,39 @@ QuestionCard.prototype.createSlider = function() {
     start: function( event, ui ) {
       prev_value = ui.value;
     },
-    stop: function( event, ui ) {
-      self.swapImages(prev_value, ui.value);
-    },
-    change: function( event, ui ) {
+    slide: function( event, ui ) {
       self.app.answers[ self.num - 1 ] = ui.value;
-      $slider.find(".ui-handle-text").text( percents[ui.value-1] + " %" );
+
+      self.swapImages(prev_value, ui.value);
+      prev_value = ui.value;
     }
   });
 
   $slider.find(".ui-slider-handle").append("<span class='ui-handle-text'>" + 0 + " %</span>");
 
+};
+
+QuestionCard.prototype.swapImages = function(img_from_index, img_to_index) {
+  var $from = this.$("#Img_" + this.num + "_" + img_from_index);
+  var $to = this.$("#Img_" + this.num + "_" + img_to_index);
+
+  this.setSliderHandleText(img_to_index);
+
+  $from.removeClass("current-question-image");
+  $to.addClass("current-question-image");
+
+  $from
+    .stop()
+    .clearQueue()
+    .fadeOut();
+    
+  $to.fadeIn();
+};
+
+var percents = [0, 25, 50, 75, 100];
+QuestionCard.prototype.setSliderHandleText = function(ui_value) {
+  var $handle = this.$( ".pension-question-slider .ui-handle-text" );
+  $handle.text(percents[ui_value-1] + " %");
 };
 
 QuestionCard.prototype.addClickListeners = function() {
@@ -529,9 +558,8 @@ QuestionCard.prototype.addClickListeners = function() {
       return;
     }
 
-    $s.slider("option", "value", value);
-
     self.swapImages(value-1, value);
+    $s.slider( "option", "value", value )
   });
 
   disableSelection($span[0]);
@@ -561,7 +589,6 @@ else if (typeof target.style.MozUserSelect!="undefined") //Firefox route
   target.style.MozUserSelect="none"
 else //All other route (ie: Opera)
   target.onmousedown=function(e){if(e && e.target && e.target.tagName){if(/^(input|select)$/i.test(e.target.tagName)){return true;}}return false;}
-target.style.cursor = "default"
 }
 
 QuestionCard.prototype.updateSize = function() {
@@ -571,20 +598,10 @@ QuestionCard.prototype.updateSize = function() {
   }
 };
 
-QuestionCard.prototype.swapImages = function(img_from_index, img_to_index) {
-  var $from = this.$("#Img_" + this.num + "_" + img_from_index);
-  var $to = this.$("#Img_" + this.num + "_" + img_to_index);
-
-  $from.removeClass("current-question-image");
-  $to.addClass("current-question-image");
-
-  $from.fadeOut();
-  $to.fadeIn();
-};
-
 
 function ResultCard(app) {
   this.app = app;
+  this.answers = [1,1,1];
 
   this.$this = $("#Result");
 
@@ -639,7 +656,7 @@ ResultCard.prototype.createSliders = function() {
 
   $("#PensionPrice").css("opacity", 0);
 
-  this.app.answers.map(function(num, index) {
+  this.answers.map(function(num, index) {
     var i = index + 1;
     self.sliders.push(
         $("#FinalPageSlider_" + i).slider({
@@ -648,15 +665,12 @@ ResultCard.prototype.createSliders = function() {
           animate: false,
           range: "min",
           value: num,
-          change: function( event, ui ) {
-            self.app.answers[index] = ui.value;
+          slide: function( event, ui ) {
+            self.answers[index] = ui.value;
 
             self.updatePension();
 
-            var $container = $("#FinalSliderImages_" + i);
-            var width = $container.width();
-
-            $container.animate({left: - $container[0].getBoundingClientRect().width * (ui.value - 1)}, 1000);
+            self.changeAnswerImageInQuestion(i, ui.value);
           }
         })
       );
@@ -715,6 +729,15 @@ ResultCard.prototype.createSliders = function() {
   });
 };
 
+ResultCard.prototype.changeAnswerImageInQuestion = function(question_id, ui_value) {
+  var $container = $("#FinalSliderImages_" + question_id);
+
+  $container
+    .stop()
+    .clearQueue()
+    .animate({left: - $container[0].getBoundingClientRect().width * (ui_value - 1)}, 1000);
+};
+
 ResultCard.prototype.createMobileFunctions = function() {
   var $all_cells = this.$(".slider-cell, .image-cell, .text-cell");
   var $slider_cell = this.$(".slider-cell");
@@ -731,7 +754,7 @@ ResultCard.prototype.createMobileFunctions = function() {
   };
 
   var $question_image_containers = this.$(".question-image-container");
-  var answers = this.app.answers;
+  var answers = this.answers;
   var fixImageContainerPosition = function(index, container) {
     console.log("This is timeout");
     var $container = $(container);
@@ -786,7 +809,7 @@ ResultCard.prototype.resultCardDisplayCalculatorBtnClickListener = function(e) {
   return false;
 };
 
-
+// D!
 ResultCard.prototype.createCalculator = function() {
   var self = this;
 
@@ -796,8 +819,14 @@ ResultCard.prototype.createCalculator = function() {
 };
 
 ResultCard.prototype.init = function() {
+  var self = this;
+
+  this.answers = this.app.answers;
+
   this.sliders.map(function(item, index) {
-    item.slider("value", self.app.answers[index]);
+    item.slider("value", self.answers[index]);
+
+    self.changeAnswerImageInQuestion(index + 1, self.answers[index]);
   });
 
   this.updatePension(true);
@@ -816,10 +845,13 @@ ResultCard.prototype.updatePension = function(is_instant_change) {
     $pension_field.text(p);
   }
   else {
-    $pension_field.animate({"opacity": 0}, 500, function() {
-      $pension_field
-        .text(p)
-        .animate({"opacity": 1}, 500);
+    $pension_field
+      .stop()
+      .clearQueue()
+      .animate({"opacity": 0}, 500, function() {
+        $pension_field
+          .text(p)
+          .animate({"opacity": 1}, 500);
     });
   }
 };

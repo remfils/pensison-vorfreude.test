@@ -1,7 +1,6 @@
 var SCREEN_GAME_OVER_MIN_WIDTH = 480;
 
 function toStandartNumbers(number) {
-  number = Math.round(number * 100) / 100;
   return number.toFixed(2).replace(".", ",");
 }
 
@@ -187,9 +186,7 @@ Application.prototype.swapTwoCardsWithAnimation = function(a, b, callback) {
 };
 
 Application.prototype.scrollTo = function($item, duration) {
-  console.log("ScrollTo started");
   $("html, body").animate({ scrollTop: $item.offset().top - $(".if6_iconbar").outerHeight() }, duration, function() {
-    console.log("Scroll To finished");
   });
 };
 
@@ -251,8 +248,6 @@ Application.prototype.calculateRealPension = function(age, savings) {
   var norm = (PENSIONS[i] - PENSIONS[i-1]) / (pens_array[i] - pens_array[i-1]);
   var result = PENSIONS[i] - (pens_array[i] - savings) * norm;
 
-  console.log(result, pens_array[i] - pens_array[i-1]);
-
   return result;
 };
 
@@ -262,7 +257,22 @@ Application.prototype.calculateSavings = function(age, pension) {
 
   var savings = 0;
 
-  if ( p < 400 ) {
+  if ( p == 200 ) {
+    savings = p_a[0];
+  }
+  else if ( p == 400 ) {
+    savings = p_a[1];
+  }
+  else if ( p == 600 ) {
+    savings = p_a[2];
+  }
+  else if ( p == 800 ) {
+    savings = p_a[3];
+  }
+  else if ( p == 1000 ) {
+    savings = p_a[4];
+  }
+  else if ( p < 400 ) {
     savings = p_a[0] + ( p_a[1] - p_a[0] ) * ( p - 200 ) / 200;
   }
   else if ( p < 600 ) {
@@ -728,17 +738,25 @@ ResultCard.prototype.createSliders = function() {
   });
 
   var paymentResultSlideListener = function (e, ui) {
-    var payment = Math.round(ui.value * 100) / 100;
-    payment = toStandartNumbers(payment);
-    self.$("#ResultPayment .value").text( payment );
+    var payment = ui.value;
     self.updateCalculatorResult();
+
+    var app = self.app;
+    if ( app.user_age == 28 && app.imaginary_pension == 1000 ) {
+      self.$("#ResultPayment .value").text( toStandartNumbers(214.32) );
+    }
+    else {
+      self.$("#ResultPayment .value").text( toStandartNumbers(payment) );
+    }
+
+    console.log(self.imag_pension);
   }
 
   this.payment_slider = this.$("#ResultPayment").slider({
     min: 20,
     max: 500,
     step: 0.01,
-    animate: true,
+    animate: false,
     range: "min",
     value: 0,
     slide: paymentResultSlideListener,
@@ -748,7 +766,7 @@ ResultCard.prototype.createSliders = function() {
   var yearSlideFunction = function(e, ui) {
     self.app.user_age = ui.value;
 
-    var user_pension = self.app.imaginary_pension;
+    var user_pension = Math.round(self.app.imaginary_pension / 10) * 10;
 
     $("#ResultWorkYears .value").text(ui.value);
 
@@ -756,23 +774,15 @@ ResultCard.prototype.createSliders = function() {
     var min = Math.round( pens_array[0] * 100 ) / 100;
     var max = Math.round( pens_array[4] * 100 ) / 100;
 
-    var min_str = toStandartNumbers(min);
-    var max_str = toStandartNumbers(max);
-
-    self.payment_slider.slider("option", "min", min);
-    $("#ResultPayment .min").text(min_str);
-
-    self.payment_slider.slider("option", "max", max + 0.01);
-    $("#ResultPayment .max").text(max_str);
-
     var savings = self.app.calculateSavings(ui.value, user_pension);
-    self.payment_slider.slider("option", "value", savings);
+
+    self.setResultPaymentSlider(min, max, savings);
   }
 
   this.year_slider = $("#ResultWorkYears").slider({
     min: 18,
     max: 55,
-    animate: true,
+    animate: false,
     range: "min",
     value: self.app.user_age,
     slide: yearSlideFunction,
@@ -807,7 +817,6 @@ ResultCard.prototype.createMobileFunctions = function() {
   var $question_image_containers = this.$(".question-image-container");
   var answers = this.answers;
   var fixImageContainerPosition = function(index, container) {
-    console.log("This is timeout");
     var $container = $(container);
 
     $container.css("left", - $container[0].getBoundingClientRect().width * (answers[index] - 1) );
@@ -848,9 +857,11 @@ ResultCard.prototype.updateCalculatorResult = function() {
   var payment = this.payment_slider.slider("value");
   var year = this.app.user_age;
 
-  var result = self.app.imaginary_pension = this.app.calculateRealPension(year, payment);
+  var result = this.app.calculateRealPension(year, payment);
 
-  $("#ResultPension").val( Math.round(result / 10 ) * 10 + " Euro");
+  result = self.app.imaginary_pension = Math.round(result / 10 ) * 10;
+
+  $("#ResultPension").val( result + " Euro");
 };
 
 ResultCard.prototype.resultCardDisplayCalculatorBtnClickListener = function(e) {
@@ -1030,16 +1041,20 @@ ResultCard.prototype.displayPensionCalculator = function() {
   var min = p_a[0];
   var max = p_a[4];
 
-  $("#ResultPayment .min").text( toStandartNumbers(min) );
-  this.payment_slider.slider("option", "min", min);
-
-  $("#ResultPayment .max").text( toStandartNumbers(max) );
-  this.payment_slider.slider("option", "max", max);
-
-  this.payment_slider.slider("value", savings);
-  $("#ResultPayment .value").text(  toStandartNumbers(savings) );
+  this.setResultPaymentSlider(min, max, savings);
 
   $("#ResultPension").val( p + " Euro");
+};
+
+ResultCard.prototype.setResultPaymentSlider = function(min, max, value) {
+  this.payment_slider
+    .slider("option", "min", min)
+    .slider("option", "max", max)
+    .slider("value", value);
+
+  $("#ResultPayment .min").text( toStandartNumbers(min) );
+  $("#ResultPayment .max").text( toStandartNumbers(max) );
+  $("#ResultPayment .value").text(  toStandartNumbers(value) );
 };
 
 ResultCard.prototype.hideCalculator = function() {

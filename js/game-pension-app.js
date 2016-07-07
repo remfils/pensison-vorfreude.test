@@ -672,6 +672,10 @@ ResultCard.prototype.createSliders = function() {
             self.updatePension();
 
             self.changeAnswerImageInQuestion(i, ui.value);
+
+            if ( self.is_calculator_displayed ) {
+              self.updateSavings();
+            }
           }
         })
       );
@@ -830,6 +834,14 @@ ResultCard.prototype.init = function() {
   $("#PensionPrice")
     .stop(true)
     .animate({opacity: 1}, 300);
+};
+
+ResultCard.prototype.updateSavings = function() {
+  var pension = this.app.imaginary_pension;
+  var age = this.app.user_age;
+
+  var savings = this.app.calculateSavings(age, pension);
+  this.payment_slider.slider("value", savings);
 };
 
 ResultCard.prototype.updatePension = function(is_instant_change) {

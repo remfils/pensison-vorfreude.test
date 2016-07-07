@@ -547,9 +547,7 @@ QuestionCard.prototype.createSlider = function() {
       self.swapImages(prev_value, ui.value);
       prev_value = ui.value;
     },
-    change: function( event, ui) {
-      self.app.answers[ self.num - 1 ] = ui.value;
-      self.swapImages(prev_value, ui.value);
+    change: function ( event, ui) {
       prev_value = ui.value;
     }
   });
@@ -593,6 +591,8 @@ QuestionCard.prototype.addClickListeners = function() {
       return;
     }
 
+    self.app.answers[ self.num - 1 ] = value;
+
     self.swapImages(value-1, value);
     $s.slider( "option", "value", value );
   });
@@ -608,6 +608,8 @@ QuestionCard.prototype.addClickListeners = function() {
     if ( value <= 0 ) {
       return;
     }
+
+    self.app.answers[ self.num - 1 ] = value;
 
     $s.slider("option", "value", value);
 

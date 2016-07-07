@@ -6,6 +6,8 @@ function Application () {
 
   this.$app = $("#App");
 
+  this.is_game_started = false;
+
   this.user_age = 28;
 
   this.answers = [1,1,1];
@@ -36,11 +38,38 @@ function Application () {
     }
   });
 
+  $("#TitleStartButton").on("click", this.titleStartButtonClickListener.bind(this));
+
   $(window).on("resize", this.onResizeListener.bind(this));
 
   $(window).on("scroll", this.onScrollListener.bind(this));
 
   this.onResizeListener(null);
+};
+
+Application.prototype.titleStartButtonClickListener = function(e) {
+  e.preventDefault();
+
+  if ( this.is_game_started ) {
+    return false;
+  }
+
+  this.startGame();
+
+  $("html, body")
+    .stop()
+    .clearQueue()
+    .animate({ scrollTop: $("#Footer").offset().top - $(window).outerHeight(true) }, 400);
+
+  return false;
+};
+
+Application.prototype.startGame = function() {
+  this.is_game_started = true;
+
+  this.swapTwoCardsWithAnimation(this.title_card, this.question_age_card);
+
+  $("#TitleStartButton .linktext").animate({opacity: 0});
 };
 
 var doit;
@@ -89,7 +118,7 @@ Application.prototype.onScrollListener = function(e) {
 };
 
 Application.prototype.titleCardStartButtonListener = function (e) {
-  this.swapTwoCardsWithAnimation(this.title_card, this.question_age_card);
+  this.startGame();
 
   e.preventDefault();
   return false;

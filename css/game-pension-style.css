@@ -30,6 +30,10 @@
   user-select: none;
 }
 
+.if6_opener .ty1 .linktext {
+  padding-top: 0;
+}
+
 h1.card-title {
   white-space: nowrap;
   font-size: 39px;

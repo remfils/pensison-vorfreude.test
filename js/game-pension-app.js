@@ -1,5 +1,10 @@
 var SCREEN_GAME_OVER_MIN_WIDTH = 480;
 
+function toStandartNumbers(number) {
+  number = Math.round(number * 100) / 100;
+  return number.toFixed(2).replace(".", ",");
+}
+
 
 function Application () {
   var self = this;
@@ -719,7 +724,7 @@ ResultCard.prototype.createSliders = function() {
 
   var paymentResultSlideListener = function (e, ui) {
     var payment = Math.round(ui.value * 100) / 100;
-    payment = payment.toString().replace(".", ",");
+    payment = toStandartNumbers(payment);
     self.$("#ResultPayment .value").text( payment );
     self.updateCalculatorResult();
   }
@@ -746,8 +751,8 @@ ResultCard.prototype.createSliders = function() {
     var min = Math.round( pens_array[0] * 100 ) / 100;
     var max = Math.round( pens_array[4] * 100 ) / 100;
 
-    var min_str = min.toString().replace(".", ",");
-    var max_str = max.toString().replace(".", ",");
+    var min_str = toStandartNumbers(min);
+    var max_str = toStandartNumbers(max);
 
     self.payment_slider.slider("option", "min", min);
     $("#ResultPayment .min").text(min_str);
@@ -1020,14 +1025,14 @@ ResultCard.prototype.displayPensionCalculator = function() {
   var min = p_a[0];
   var max = p_a[4];
 
-  $("#ResultPayment .min").text(min.toString().replace(".", ","));
+  $("#ResultPayment .min").text( toStandartNumbers(min) );
   this.payment_slider.slider("option", "min", min);
 
-  $("#ResultPayment .max").text(max.toString().replace(".", ","));
-  this.payment_slider.slider("option", "max", max + 0.01);
+  $("#ResultPayment .max").text( toStandartNumbers(max) );
+  this.payment_slider.slider("option", "max", max);
 
   this.payment_slider.slider("value", savings);
-  $("#ResultPayment .value").text( savings.toString().replace(".", ","));
+  $("#ResultPayment .value").text(  toStandartNumbers(savings) );
 
   $("#ResultPension").val( p + " Euro");
 };

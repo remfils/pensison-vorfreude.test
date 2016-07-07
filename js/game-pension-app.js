@@ -973,7 +973,7 @@ ResultCard.prototype.displayPensionCalculator = function() {
 
   var p = this.app.calculateImaginaryPension();
 
-  var savings = Math.round(this.app.calculateSavings(p));
+  var savings = Math.round(this.app.calculateSavings(this.app.user_age, p));
 
   var p_a = PENSION_ARRAY[this.app.user_age];
   var min = p_a[0];

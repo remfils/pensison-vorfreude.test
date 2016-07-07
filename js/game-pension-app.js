@@ -517,6 +517,11 @@ QuestionCard.prototype.createSlider = function() {
 
       self.swapImages(prev_value, ui.value);
       prev_value = ui.value;
+    },
+    change: function( event, ui) {
+      self.app.answers[ self.num - 1 ] = ui.value;
+      self.swapImages(prev_value, ui.value);
+      prev_value = ui.value;
     }
   });
 
@@ -560,7 +565,7 @@ QuestionCard.prototype.addClickListeners = function() {
     }
 
     self.swapImages(value-1, value);
-    $s.slider( "option", "value", value )
+    $s.slider( "option", "value", value );
   });
 
   disableSelection($span[0]);
@@ -682,7 +687,9 @@ ResultCard.prototype.createSliders = function() {
   });
 
   var paymentResultSlideListener = function (e, ui) {
-    self.$("#ResultPayment .value").text( Math.round(ui.value * 100) / 100 );
+    var payment = Math.round(ui.value * 100) / 100;
+    payment = payment.toString().replace(".", ",");
+    self.$("#ResultPayment .value").text( payment );
     self.updateCalculatorResult();
   }
 
@@ -708,11 +715,14 @@ ResultCard.prototype.createSliders = function() {
     var min = Math.round( pens_array[0] * 100 ) / 100;
     var max = Math.round( pens_array[4] * 100 ) / 100;
 
-    self.payment_slider.slider("option", "min", min);
-    $("#ResultPayment .min").text(min);
+    var min_str = min.toString().replace(".", ",");
+    var max_str = max.toString().replace(".", ",");
 
-    self.payment_slider.slider("option", "max", max);
-    $("#ResultPayment .max").text(max);
+    self.payment_slider.slider("option", "min", min);
+    $("#ResultPayment .min").text(min_str);
+
+    self.payment_slider.slider("option", "max", max + 0.01);
+    $("#ResultPayment .max").text(max_str);
 
     var savings = self.app.calculateSavings(ui.value, user_pension);
     self.payment_slider.slider("option", "value", savings);
@@ -797,7 +807,7 @@ ResultCard.prototype.updateCalculatorResult = function() {
   var payment = this.payment_slider.slider("value");
   var year = this.app.user_age;
 
-  var result = self.app.real_pension = this.app.calculateRealPension(year, payment);
+  var result = self.app.imaginary_pension = this.app.calculateRealPension(year, payment);
 
   $("#ResultPension").val( Math.round(result / 10 ) * 10 + " Euro");
 };
@@ -973,20 +983,20 @@ ResultCard.prototype.displayPensionCalculator = function() {
 
   var p = this.app.calculateImaginaryPension();
 
-  var savings = Math.round(this.app.calculateSavings(this.app.user_age, p));
+  var savings = Math.round(this.app.calculateSavings(this.app.user_age, p) * 100) / 100;
 
   var p_a = PENSION_ARRAY[this.app.user_age];
   var min = p_a[0];
   var max = p_a[4];
 
-  $("#ResultPayment .min").text(min);
+  $("#ResultPayment .min").text(min.toString().replace(".", ","));
   this.payment_slider.slider("option", "min", min);
 
-  $("#ResultPayment .max").text(max);
-  this.payment_slider.slider("option", "max", max);
+  $("#ResultPayment .max").text(max.toString().replace(".", ","));
+  this.payment_slider.slider("option", "max", max + 0.01);
 
   this.payment_slider.slider("value", savings);
-  $("#ResultPayment .value").text( savings);
+  $("#ResultPayment .value").text( savings.toString().replace(".", ","));
 
   $("#ResultPension").val( p + " Euro");
 };

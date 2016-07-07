@@ -567,15 +567,20 @@ QuestionCard.prototype.swapImages = function(img_from_index, img_to_index) {
 
   this.setSliderHandleText(img_to_index);
 
+  this.$(".pension-image").css("z-index", 0);
+
   $from.removeClass("current-question-image");
   $to.addClass("current-question-image");
 
   $from
-    .stop()
+    .finish()
     .clearQueue()
-    .fadeOut();
+    .css("z-index", 1);
     
-  $to.fadeIn();
+  $to
+    .show()
+    .css({"opacity" : 0, "z-index": 100})
+    .animate({opacity: 1});
 };
 
 var percents = [0, 25, 50, 75, 100];

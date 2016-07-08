@@ -716,26 +716,33 @@ ResultCard.prototype.createSliders = function() {
   this.answers.map(function(num, index) {
     var i = index + 1;
     self.sliders.push(
-        $("#FinalPageSlider_" + i).slider({
-          min: 1,
-          max: 5,
-          animate: false,
-          range: "min",
-          value: num,
-          slide: function( event, ui ) {
-            self.answers[index] = ui.value;
+        $("#FinalPageSlider_" + i)
+          .slider({
+            min: 1,
+            max: 5,
+            animate: false,
+            range: "min",
+            value: num,
+            slide: function( event, ui ) {
+              self.answers[index] = ui.value;
 
-            self.updatePension();
+              self.updatePension();
 
-            self.changeAnswerImageInQuestion(i, ui.value);
+              self.changeAnswerImageInQuestion(i, ui.value);
 
-            if ( self.is_calculator_displayed ) {
-              self.updateSavings();
+              self.sliders[index].find(".ui-handle-text").text(percents[ui.value-1] + " %");
+
+              if ( self.is_calculator_displayed ) {
+                self.updateSavings();
+              }
             }
-          }
-        })
+          })
       );
   });
+
+  self.sliders.map(function ($slider) {
+    $slider.find(".ui-slider-handle").append("<span class='ui-handle-text'>" + 0 + " %</span>")
+  })
 
   var paymentResultSlideListener = function (e, ui) {
     var payment = ui.value;
@@ -887,6 +894,8 @@ ResultCard.prototype.init = function() {
 
   this.sliders.map(function(item, index) {
     item.slider("value", self.answers[index]);
+
+    item.find(".ui-handle-text").text(percents[self.answers[index] - 1] + " %");;
 
     self.changeAnswerImageInQuestion(index + 1, self.answers[index]);
   });

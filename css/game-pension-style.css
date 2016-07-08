@@ -953,6 +953,12 @@ td.slider-controll-column {
   #Result .pension-question-slider:after {
     width: 15px;
   }
+
+  #Result .ui-handle-text {
+    top: -21px;
+    font-size: 14px;
+    left: 3px;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -992,6 +998,12 @@ td.slider-controll-column {
 
   .text-cell p {
     margin-right: -7px;
+  }
+
+  #Result .ui-handle-text {
+    top: -46px;
+    font-size: 12px;
+    left: 3px;
   }
 }
 

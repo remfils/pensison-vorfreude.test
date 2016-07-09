@@ -185,8 +185,10 @@ Application.prototype.swapTwoCardsWithAnimation = function(a, b, callback) {
   this.scrollTo(b.$this, 1000);
 };
 
-Application.prototype.scrollTo = function($item, duration, is_strict = false) {
-  console.log("Scroll to");
+Application.prototype.scrollTo = function($item, duration, is_strict) {
+  if ( !is_strict ) {
+    is_strict = false;
+  }
 
   if ( !is_strict && this.$app.outerHeight() < window.innerHeight ) {
     this.scrollToPosition($item.offset().top + $item.outerHeight(true) - window.innerHeight, duration);
@@ -1119,8 +1121,7 @@ ResultCard.prototype.alertPensionIsWrongSatement = function() {
 };
 
 ResultCard.prototype.displayMessage = function(msg, message_class) {
-  $("#CalculatorMsg")
-    .show()
+  $("#CalculatorMsg").show()
     .html("<p class='"+message_class+"'>"+msg+"</p>");
 
   this.app.onResizeEndListener();

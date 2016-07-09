@@ -1262,7 +1262,10 @@ td.final-slider {
 }
 
 #ResultPayment .min:after,
-#ResultPayment .max:after,
+#ResultPayment .max:after {
+  content: " Euro";
+}
+
 #ResultPayment .value:after {
   content: " Euro*";
 }

@@ -736,6 +736,7 @@ ResultCard.prototype.createSliders = function() {
 
               if ( self.is_calculator_displayed ) {
                 self.updateSavings();
+                self.hideMessage();
               }
             }
           })
@@ -1046,24 +1047,24 @@ ResultCard.prototype.displayPensionCalculator = function() {
     height: this.$this.outerHeight(true)
   }, 1000, function() {
     self.$calculator_screen.animate({opacity: 1}, 400);
+
+    self.year_slider.slider("value", self.app.user_age);
+    self.year_slider.find(".value").text(self.app.user_age);
+
+    var p = self.app.calculateImaginaryPension();
+
+    var savings = Math.round(self.app.calculateSavings(self.app.user_age, p) * 100) / 100;
+
+    var p_a = PENSION_ARRAY[self.app.user_age];
+    var min = p_a[0];
+    var max = p_a[4];
+
+    self.setResultPaymentSlider(min, max, savings);
+
+    $("#ResultPension").val( p + " Euro");
   });
 
   this.app.scrollTo($('#PensionCalculatorFirstMessage'), 1000);
-
-  this.year_slider.slider("value", this.app.user_age);
-  this.year_slider.find(".value").text(this.app.user_age);
-
-  var p = this.app.calculateImaginaryPension();
-
-  var savings = Math.round(this.app.calculateSavings(this.app.user_age, p) * 100) / 100;
-
-  var p_a = PENSION_ARRAY[this.app.user_age];
-  var min = p_a[0];
-  var max = p_a[4];
-
-  this.setResultPaymentSlider(min, max, savings);
-
-  $("#ResultPension").val( p + " Euro");
 };
 
 ResultCard.prototype.setResultPaymentSlider = function(min, max, value) {
@@ -1102,12 +1103,18 @@ ResultCard.prototype.alertPensionIsWrongSatement = function() {
 };
 
 ResultCard.prototype.displayMessage = function(msg, message_class) {
-  $("#CalculatorMsg").html("<p class='"+message_class+"'>"+msg+"</p>");
+  $("#CalculatorMsg")
+    .show()
+    .html("<p class='"+message_class+"'>"+msg+"</p>");
+
+  this.app.onResizeEndListener();
 
 };
 
 ResultCard.prototype.hideMessage = function() {
-  $("#CalculatorMsg").html("");
+  $("#CalculatorMsg").hide();
+
+  this.app.onResizeEndListener();
 }
 
 

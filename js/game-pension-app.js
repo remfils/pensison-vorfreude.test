@@ -185,9 +185,20 @@ Application.prototype.swapTwoCardsWithAnimation = function(a, b, callback) {
   this.scrollTo(b.$this, 1000);
 };
 
-Application.prototype.scrollTo = function($item, duration) {
-  $("html, body").animate({ scrollTop: $item.offset().top - $(".if6_iconbar").outerHeight() }, duration, function() {
-  });
+Application.prototype.scrollTo = function($item, duration, is_strict = false) {
+  console.log("Scroll to");
+
+  if ( !is_strict && this.$app.outerHeight() < window.innerHeight ) {
+    this.scrollToPosition($item.offset().top + $item.outerHeight(true) - window.innerHeight, duration);
+  }
+  else {
+    this.scrollToPosition($item.offset().top - $(".if6_iconbar").outerHeight(), duration);
+  }
+};
+
+
+Application.prototype.scrollToPosition = function(num, duration) {
+  $("html, body").animate({ scrollTop: num }, duration);
 };
 
 Application.prototype.animatedChangeApplicationHeight = function(height, time) {
@@ -1064,7 +1075,12 @@ ResultCard.prototype.displayPensionCalculator = function() {
     $("#ResultPension").val( p + " Euro");
   });
 
-  this.app.scrollTo($('#PensionCalculatorFirstMessage'), 1000);
+  if ( this.app.user_age >= 28 && this.app.user_age <= 30 ) {
+    console.log("show happended");
+    $("#CalculatorMsg").show();
+  }
+
+  this.app.scrollToPosition(this.$this.offset().top + this.$this.outerHeight(true) - window.innerHeight);
 };
 
 ResultCard.prototype.setResultPaymentSlider = function(min, max, value) {

@@ -190,8 +190,8 @@ Application.prototype.scrollTo = function($item, duration, is_strict) {
     is_strict = false;
   }
 
-  if ( !is_strict && this.$app.outerHeight() < window.innerHeight ) {
-    this.scrollToPosition($item.offset().top + $item.outerHeight(true) - window.innerHeight, duration);
+  if ( (!is_strict) && ($item.outerHeight(true) < window.innerHeight) ) {
+    this.scrollToPosition(this.$app.offset().top + $item.outerHeight(true) - window.innerHeight, duration);
   }
   else {
     this.scrollToPosition($item.offset().top - $(".if6_iconbar").outerHeight(), duration);

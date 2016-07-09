@@ -693,9 +693,9 @@ function ResultCard(app) {
   ];
 
   this.question_normal_labels = [
-    "Rinotera allundum est erando entalia bueno kanitustra enorum klibum espana",
-    "Rinotera allundum est erando entalia bueno kanitustra enorum klibum espana",
-    "Rinotera allundum est erando entalia bueno kanitustra enorum klibum espana"
+    "So hoch soll Ihr Lebensstandard im Alltag und beim Wohnen sein.",
+    "So viel Reisefreiheit möchten Sie sich im Alter gönnen.",
+    "Solche Aktivitäten und Hobbys wollen Sie sich leisten können."
   ];
 
   if ( this.app.DEBUG ) {

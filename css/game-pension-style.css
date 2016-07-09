@@ -879,14 +879,14 @@ td.slider-controll-column {
 .slider-cell,
 .image-cell,
 .text-cell {
-  height: 183px;
+  height: 144px;
 }
 
 .slider-cell {
   padding-left: 60px;
   padding-right: 60px;
   width: 460px;
-  padding-top: 65px;
+  padding-top: 52px;
 }
 
 .slider-cell .pension-question-slider {
@@ -900,7 +900,7 @@ td.slider-controll-column {
   display: inline-block;
   height: 100%;
   position: absolute;
-  width: 35px;
+  width: 29px;
 }
 
 #Result .pension-question-slider:before {
@@ -913,15 +913,17 @@ td.slider-controll-column {
 
 .image-cell {
   overflow: hidden;
-  width: 280px;
+  width: 260px;
 }
 
 .text-cell {
-  width: 240px;
+  width: 260px;
   padding-top: 14px;
 }
 
 .text-cell h2 {
+  font-size: 18px;
+  font-weight: bold;
   margin-bottom: 14px;
 }
 
@@ -931,25 +933,28 @@ td.slider-controll-column {
 }
 
 @media screen and (max-width: 999px) {
+  .slider-cell,
+  .image-cell,
+  .text-cell {
+    height: 95px;
+  }
+
   .slider-cell {
     width: 50%;
     padding-left: 40px;
     padding-right: 40px;
     padding-top: 0;
-    height: 116px;
     padding-top: 40px;
     padding-bottom: 0;
   }
 
   .image-cell {
     width: 175px;
-    height: 116px;
   }
 
   .text-cell {
     padding-top: 14px;
-    width: 176px;
-    height: 116px;
+    width: 190px;
   }
 
   .text-cell h2 {
@@ -966,6 +971,14 @@ td.slider-controll-column {
     top: -21px;
     font-size: 14px;
     left: 3px;
+  }
+
+  .text-cell h2 {
+    font-size: 14px;
+  }
+
+  .text-cell p {
+    font-size: 14px;
   }
 }
 
@@ -1097,9 +1110,9 @@ td.final-slider {
 }
 
 #PensionCalculatorInput label {
-  color: #666666;
+  color: black;
   display: block;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: normal;
   margin-bottom: 14px;
 }
@@ -1229,6 +1242,11 @@ td.final-slider {
   margin-right: 10px;
 }
 
+#ResultPayment .value {
+  font-weight: bold;
+  font-size: 23px;
+}
+
 @media screen and (max-width: 600px) {
   #ResultWorkYears,
   #ResultPayment {
@@ -1245,7 +1263,7 @@ td.final-slider {
 #ResultPayment .min:after,
 #ResultPayment .max:after,
 #ResultPayment .value:after {
-  content: " Euro";
+  content: " Euro*";
 }
 
 

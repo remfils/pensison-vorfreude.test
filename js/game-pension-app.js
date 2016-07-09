@@ -769,7 +769,8 @@ ResultCard.prototype.createSliders = function() {
     range: "min",
     value: 0,
     slide: paymentResultSlideListener,
-    change: paymentResultSlideListener
+    change: paymentResultSlideListener,
+    stop: this.alertPensionIsWrongSatement.bind(this)
   });
 
   var yearSlideFunction = function(e, ui) {
@@ -786,6 +787,13 @@ ResultCard.prototype.createSliders = function() {
     var savings = self.app.calculateSavings(ui.value, user_pension);
 
     self.setResultPaymentSlider(min, max, savings);
+
+    if ( ui.value >= 28 && ui.value <= 30 ) {
+      self.alertYearStatement();
+    }
+    else {
+      self.hideMessage();
+    }
   }
 
   this.year_slider = $("#ResultWorkYears").slider({
@@ -1084,6 +1092,23 @@ ResultCard.prototype.hideCalculator = function() {
     self.app.animatedChangeApplicationHeight(self.$this.outerHeight(true), 1000);
   }, 400);
 };
+
+ResultCard.prototype.alertYearStatement = function() {
+  this.displayMessage("<b>Hinweis:</b> Mindestbeitrag beachten!<br>Ab einem versicherungstechnischen Eintrittsalter der versicherten Person ab 28 Jahren: bei mtl. Zahlweise 50,00 Euro", "msg");
+};
+
+ResultCard.prototype.alertPensionIsWrongSatement = function() {
+  this.displayMessage("<span class='exlamation-point'>!</span><span>Achtung: Vorfreude und Rentenziel stimmen nicht mehr überein. Bitte passen Sie Ihre Wünsche oder den monatlichen Beitrag an.</span>", "alert");
+};
+
+ResultCard.prototype.displayMessage = function(msg, message_class) {
+  $("#CalculatorMsg").html("<p class='"+message_class+"'>"+msg+"</p>");
+
+};
+
+ResultCard.prototype.hideMessage = function() {
+  $("#CalculatorMsg").html("");
+}
 
 
 

@@ -367,7 +367,7 @@
               <span class="red current-question">1</span>
               <span>2</span>
               <span>3</span>
-              <span>✓</span>
+              <span><img src="img/tick.png" alt="tick"></span>
             </div>
           </div>
 
@@ -570,40 +570,48 @@
         </p>
 
         <div id="PensionCalculatorInput" class="section cbox cbox-large">
-          <div class="div-column pension-calculator-result-cell">
-            <div class="pension-calculator-result">
-              <label for="ResultPension">Lebenslange monatliche Rente</label>
-              <div class="icon-text-field">
-                <input id="ResultPension" class="ixl followed-by-icon" type="text" value="1.500 Euro" readonly />
-                <!-- <span class="helper-button">?</span> -->
-                <img src="img/qestion.png" alt=""/>
+          <div class="pension-row">
+            <div class="div-column pension-calculator-result-cell">
+              <div class="pension-calculator-result">
+                <label for="ResultPension">Lebenslange monatliche Rente</label>
+                <div class="icon-text-field">
+                  <input id="ResultPension" class="ixl followed-by-icon" type="text" value="1.500 Euro" readonly />
+                  <!-- <span class="helper-button">?</span> -->
+                  <img src="img/qestion.png" alt=""/>
+                </div>
+              </div>
+              <div class="calculator-memo">
+                <p>
+                  Je früher Sie starten, desto günstiger erreichen Sie Ihre Vorfreude.
+                </p>
               </div>
             </div>
-            <div class="calculator-memo">
-              <p>
-                Je früher Sie starten, desto günstiger erreichen Sie Ihre Vorfreude.
-              </p>
+
+            <div class="div-column pension-calculator-input-cell">
+              <div class="pension-row">
+                <label for="ResultWorkYears">Mein Alter:</label>
+                <div id="ResultWorkYears" class="pension-simple-slider">
+                  <span class="min">18</span>
+                  <span class="max">55</span>
+                  <span class="value">0</span>
+                </div>
+              </div>
+
+              <div class="pension-row">
+                <label for="ResultPayment">Mein monatlicher Beitrag:</label>
+                <div id="ResultPayment" class="pension-simple-slider">
+                  <span class="min">20</span>
+                  <span class="max">500</span>
+                  <span class="value">20</span>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="div-column pension-calculator-input-cell">
-            <div class="pension-row">
-              <label for="ResultWorkYears">Mein Alter:</label>
-              <div id="ResultWorkYears" class="pension-simple-slider">
-                <span class="min">18</span>
-                <span class="max">55</span>
-                <span class="value">0</span>
-              </div>
-            </div>
-
-            <div class="pension-row">
-              <label for="ResultPayment">Mein monatlicher Beitrag:</label>
-              <div id="ResultPayment" class="pension-simple-slider">
-                <span class="min">20</span>
-                <span class="max">500</span>
-                <span class="value">20</span>
-              </div>
-            </div>
+          <div id="CalculatorMsg" class="calculator-msg">
+            <p>
+              
+            </p>
           </div>
         </div>
 

@@ -432,7 +432,8 @@ h1.card-title {
 
 #QuestionNumbers {
   text-align: center;
-  height: 46px;
+  height: 30px;
+  margin-bottom: 10px;
 }
 
 #QuestionNumbers span {
@@ -925,7 +926,7 @@ td.slider-controll-column {
 .text-cell h2 {
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .text-cell p {
@@ -1099,6 +1100,10 @@ td.final-slider {
   width: 60%;
 }
 
+.pension-calculator-input-cell:after {
+  clear: both;
+}
+
 #ResultPension {
   color: red;
   width: 137px;
@@ -1155,6 +1160,36 @@ td.final-slider {
   .icon-text-field img {
     margin-bottom: -2px;
   }
+}
+
+#CalculatorMsg {
+  clear: both;
+}
+
+#CalculatorMsg span {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#CalculatorMsg .alert {
+  background-color: red;
+  font-size: 15px;
+  color: #FFF;
+  margin: -20px;
+  padding: 5px 20px;
+  line-height: 50px;
+  vertical-align: middle;
+}
+
+#CalculatorMsg .msg {
+  color: red;
+  font-size: 15px;
+}
+
+.exlamation-point {
+  font-size: 50px;
+  padding-right: 15px;
+  font-weight: bold;
 }
 
 .icon-text-field input {

@@ -726,6 +726,8 @@ ResultCard.prototype.createSliders = function() {
             slide: function( event, ui ) {
               self.answers[index] = ui.value;
 
+              console.log(self.answers);
+
               self.updatePension();
 
               self.changeAnswerImageInQuestion(i, ui.value);
@@ -807,6 +809,7 @@ ResultCard.prototype.changeAnswerImageInQuestion = function(question_id, ui_valu
 };
 
 ResultCard.prototype.createMobileFunctions = function() {
+  var self = this;
   var $all_cells = this.$(".slider-cell, .image-cell, .text-cell");
   var $slider_cell = this.$(".slider-cell");
   var $image_cell = this.$(".image-cell");
@@ -826,7 +829,7 @@ ResultCard.prototype.createMobileFunctions = function() {
   var fixImageContainerPosition = function(index, container) {
     var $container = $(container);
 
-    $container.css("left", - $container[0].getBoundingClientRect().width * (answers[index] - 1) );
+    $container.css("left", - $container[0].getBoundingClientRect().width * (self.answers[index] - 1) );
   };
 
   this.updatePositionsOfAnswerImages = function() {

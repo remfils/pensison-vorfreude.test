@@ -89,7 +89,7 @@ Application.prototype.onResizeListener = function(e) {
 };
 
 Application.prototype.onResizeEndListener = function() {
-  this.$app.css({height: this.current_card.$this.outerHeight(true)});
+  this.$app.css({height: this.current_card.getHeight() });
 
   if ( !this.tryToFixFooterHeight() ) {
     $(".if6_footer").css("height", "");
@@ -358,13 +358,18 @@ Application.prototype.restartGameButtonClickListener = function(e) {
 /* TITLE CARD */
 
 function TitleCard ( app ) {
-  this.$this = $("#TitleCard");
+  var $this = $("#TitleCard");
+  this.$this = $this;
 
   this.app = app;
 
   $("#TitleCardStartButton").click(app.titleCardStartButtonListener.bind(app));
 
-  this.$this.hide();
+  $this.hide();
+
+  this.getHeight = function () {
+    return $this.outerHeight(true);
+  }
 };
 
 
@@ -373,7 +378,8 @@ function TitleCard ( app ) {
 QuestionAgeCard = function(app) {
     this.app = app;
 
-    this.$this = $("#QuestionAge");
+    var $this = $("#QuestionAge");
+    this.$this = $this;
     
     this.age_slider = $("#SliderUserAge").slider({
         min: 18,
@@ -388,9 +394,13 @@ QuestionAgeCard = function(app) {
         });
     $("#SliderUserAge .ui-slider-handle").append("<span class='ui-handle-text'>" + app.user_age + " Jahre</span>");
 
-    this.$this.find("#QuestionAgeWeiter").click(this.app.questionAgeWeiterListener.bind(app));
+    $this.find("#QuestionAgeWeiter").click(this.app.questionAgeWeiterListener.bind(app));
 
-    this.$this.hide();
+    $this.hide();
+
+    this.getHeight = function () {
+      return $this.outerHeight(true);
+    }
 };
 
 
@@ -418,6 +428,11 @@ function QuestionFormCard ( app ) {
   $("#QuestionFormBack").click(this.questionFormBackClickListener.bind(this));
 
   this.$this.hide();
+
+  var self = this;
+  this.getHeight = function () {
+    return self.$this.outerHeight(true);
+  }
 };
 
 QuestionFormCard.prototype.questionFormWeiterClickListerner = function(e) {
@@ -528,7 +543,8 @@ function QuestionCard ( app, question_number, question_text ) {
 
   this.is_transition = false;
 
-  this.$this = $("#Question_" + this.num);
+  var $this = $("#Question_" + this.num);
+  this.$this = $this;
 
   this.$ = function(query) {
     return this.$this.find(query);
@@ -545,6 +561,10 @@ function QuestionCard ( app, question_number, question_text ) {
   });
 
   this.updateSize();
+
+  this.getHeight = function () {
+    return $this.outerHeight(true);
+  }
 
   if ( this.app.DEBUG ) {
     return;
@@ -711,6 +731,13 @@ function ResultCard(app) {
     "Solche Aktivitäten und Hobbys wollen Sie sich leisten können."
   ];
 
+
+  var $c = $("#CalculatorMsg");
+  var $this = this.$this;
+  this.getHeight = function () {
+    return $this.outerHeight(true) + $c.outerHeight(true);
+  }
+
   if ( this.app.DEBUG ) {
     return;
   }
@@ -765,14 +792,13 @@ ResultCard.prototype.createSliders = function() {
     self.updateCalculatorResult();
 
     var app = self.app;
+
     if ( app.user_age == 28 && app.imaginary_pension == 1000 ) {
       self.$("#ResultPayment .value").text( toStandartNumbers(214.32) );
     }
     else {
       self.$("#ResultPayment .value").text( toStandartNumbers(payment) );
     }
-
-    console.log(self.imag_pension);
   }
 
   this.payment_slider = this.$("#ResultPayment").slider({
@@ -782,9 +808,11 @@ ResultCard.prototype.createSliders = function() {
     animate: false,
     range: "min",
     value: 0,
-    slide: paymentResultSlideListener,
-    change: paymentResultSlideListener,
-    stop: this.alertPensionIsWrongSatement.bind(this)
+    slide: function (e, ui) {
+      self.alertPensionIsWrongSatement();
+      paymentResultSlideListener(e, ui);
+    },
+    change: paymentResultSlideListener
   });
 
   var yearSlideFunction = function(e, ui) {
@@ -1061,8 +1089,8 @@ ResultCard.prototype.displayPensionCalculator = function() {
   }, 1000, function() {
     self.$calculator_screen.animate({opacity: 1}, 400);
 
-    self.year_slider.slider("value", self.app.user_age);
     self.year_slider.find(".value").text(self.app.user_age);
+    self.year_slider.slider("value", self.app.user_age);
 
     var p = self.app.calculateImaginaryPension();
 
@@ -1077,12 +1105,11 @@ ResultCard.prototype.displayPensionCalculator = function() {
     $("#ResultPension").val( p + " Euro");
   });
 
-  if ( this.app.user_age >= 28 && this.app.user_age <= 30 ) {
-    console.log("show happended");
-    $("#CalculatorMsg").show();
-  }
-
   this.app.scrollToPosition(this.$this.offset().top + this.$this.outerHeight(true) - window.innerHeight);
+
+  if ( !(this.app.user_age >= 28 && this.app.user_age <= 30) ) {
+    $("#CalculatorMsg").hide();
+  }
 };
 
 ResultCard.prototype.setResultPaymentSlider = function(min, max, value) {
@@ -1124,7 +1151,7 @@ ResultCard.prototype.displayMessage = function(msg, message_class) {
   $("#CalculatorMsg").show()
     .html("<p class='"+message_class+"'>"+msg+"</p>");
 
-  this.app.onResizeEndListener();
+  /*this.app.onResizeEndListener();*/
 
 };
 

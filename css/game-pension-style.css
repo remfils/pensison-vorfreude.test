@@ -320,10 +320,10 @@ h1.card-title {
 
 @media screen and (max-width: 999px) {
   .pension-question-slider .ui-slider-handle {
-    width: 60px;
-    height: 60px;
-    margin-left: -30px;
-    margin-top: -26px;
+    width: 50px;
+    height: 50px;
+    margin-left: -25px;
+    margin-top: -21px;
   }
 }
 

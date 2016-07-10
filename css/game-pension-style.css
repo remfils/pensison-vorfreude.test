@@ -21,12 +21,29 @@
   .if6_opener .ty1 div.overlay {
     display: block;
   }
+  .if6_opener {
+    height: auto;
+  }
+
+  .if6_opener .opener_image {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .if6_opener .opener_inner {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    padding-left: 0;
+  }
 }
 
 
 #App {
   margin-top: -15px;
 }
+
+
 
 #Game {
   position: absolute;
@@ -48,6 +65,12 @@
 
 .text h1 {
   margin-top: -7px;
+}
+
+@media screen and (max-width: 999px) {
+  .text h1 {
+    margin-top: -6px;
+  }
 }
 
 h1.card-title {

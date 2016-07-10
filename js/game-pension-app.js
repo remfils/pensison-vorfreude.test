@@ -451,6 +451,10 @@ QuestionFormCard.prototype.displayQuestion = function(question_index) {
   var prev_q = this.questions[this.current_question_index];
   var q = this.questions[question_index];
 
+  if ( this.is_question_transition ) {
+    return;
+  }
+
   this.current_question_index = question_index;
 
   this.updateQuestionNumbers();
@@ -471,10 +475,16 @@ QuestionFormCard.prototype.updateQuestionNumbers = function() {
 };
 
 QuestionFormCard.prototype.swapTwoQuestions = function(q1, q2) {
+  var self = this;
   var $q1 = q1.$this;
   var $q2 = q2.$this;
+  var $c = $("#QuestionContainer");
+
+  this.is_question_transition = true;
 
   this.changeQuestionText(q2.text);
+
+  $c.height($c.height());
 
   $q1.removeClass("current-question");
   $q2.addClass("current-question");
@@ -482,9 +492,14 @@ QuestionFormCard.prototype.swapTwoQuestions = function(q1, q2) {
 
   q2.updateSize();
 
+  var delta = $q2.outerHeight(true) - $q1.outerHeight(true);
+
+  
   $q1.fadeOut({
     duration: 1000,
     complete: function() {
+      $c.animate({height: $c.outerHeight(true) + delta});
+      self.is_question_transition = false;
       $q2.animate({opacity: 1}, 1000);
     }
   });

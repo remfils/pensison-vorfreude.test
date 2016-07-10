@@ -700,9 +700,9 @@ function ResultCard(app) {
   this.is_short_calculator_label_displayed = false;
 
   this.question_short_labels = [
-    "Rinotera allundum Rinotera allundum est erando entalia.",
-    "Rinotera allundum Rinotera allundum est erando entalia.",
-    "Rinotera allundum Rinotera allundum est erando entalia."
+    "So hoch soll Ihr Lebensstandard im Alltag.",
+    "So viel Reisefreiheit möchten Sie sich im Alter gönnen.",
+    "Solche Aktivitäten wollen Sie sich leisten können."
   ];
 
   this.question_normal_labels = [

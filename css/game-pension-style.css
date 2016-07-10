@@ -433,7 +433,7 @@ h1.card-title {
 #QuestionNumbers {
   text-align: center;
   height: 30px;
-  margin-bottom: 10px;
+  margin-bottom: 7px;
 }
 
 #QuestionNumbers span {
@@ -613,12 +613,13 @@ img.current-question-image {
 .question h2 {
   text-align: left;
   margin: 0 20px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .question > p {
   margin: 0 20px;
   margin-bottom: 15px;
+  line-height: 100%;
 }
 
 @media screen and (max-width: 999px) {
@@ -645,12 +646,12 @@ img.current-question-image {
 
 .question td.minus-btn-cell {
   text-align: left;
-  padding-left: 0;
+  padding-left: 15px;
 }
 
 .question td.plus-btn-cell {
   text-align: right;
-  padding-right: 0;
+  padding-right: 15px;
 }
 
 .question-button {
@@ -1031,9 +1032,9 @@ td.slider-controll-column {
   }
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 450px) {
   .text-cell h2 {
-    margin-bottom: 5px;
+    margin-bottom: 0;
   }
 
   .text-cell p {

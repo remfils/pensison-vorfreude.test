@@ -195,7 +195,7 @@ Application.prototype.scrollTo = function($item, duration, is_strict) {
     this.scrollToPosition(this.$app.offset().top + $item.outerHeight(true) - window.innerHeight, duration);
   }
   else {
-    this.scrollToPosition($item.offset().top - $(".if6_iconbar").outerHeight(), duration);
+    this.scrollToPosition($item.offset().top - $(".if6_iconbar").outerHeight() + 20, duration);
   }
 };
 
@@ -648,7 +648,7 @@ QuestionCard.prototype.setSliderHandleText = function(ui_value) {
 
 QuestionCard.prototype.addClickListeners = function() {
   var self = this;
-  var $span = this.$(".plus-btn-cell span");
+  var $span = this.$(".plus-btn-cell");
 
   $span.click(function() {
     var $s = self.$(".pension-question-slider");
@@ -666,7 +666,7 @@ QuestionCard.prototype.addClickListeners = function() {
 
   disableSelection($span[0]);
 
-  $span = this.$(".minus-btn-cell span");
+  $span = this.$(".minus-btn-cell");
 
   $span.click(function() {
     var $s = self.$(".pension-question-slider");

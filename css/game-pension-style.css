@@ -757,6 +757,16 @@ td.slider-controll-column {
   .plus-btn-cell .question-button {
     top: 0;
   }
+
+  .question td.minus-btn-cell {
+    text-align: left;
+    padding-left: 0;
+  }
+
+  .question td.plus-btn-cell {
+    text-align: right;
+    padding-right: 0;
+  }
 }
 
 
@@ -953,8 +963,8 @@ td.slider-controll-column {
   display: inline-block;
 }
 
-#Result .pension-question-slider:before,
-#Result .pension-question-slider:after {
+.pension-question-slider:before,
+.pension-question-slider:after {
   content: " ";
   background-color: red;
   display: inline-block;
@@ -963,11 +973,11 @@ td.slider-controll-column {
   width: 29px;
 }
 
-#Result .pension-question-slider:before {
+.pension-question-slider:before {
   right: 100%;
 }
 
-#Result .pension-question-slider:after {
+.pension-question-slider:after {
   left: 100%;
 }
 
@@ -1021,8 +1031,8 @@ td.slider-controll-column {
     margin-bottom: 4px;
   }
 
-  #Result .pension-question-slider:before,
-  #Result .pension-question-slider:after {
+  .pension-question-slider:before,
+  .pension-question-slider:after {
     width: 15px;
   }
 

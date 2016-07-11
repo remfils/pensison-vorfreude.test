@@ -1,7 +1,8 @@
 var SCREEN_GAME_OVER_MIN_WIDTH = 480;
 
 function toStandartNumbers(number) {
-  return number.toFixed(2).replace(".", ",");
+  var n = Math.ceil(number * 100) / 100;
+  return n.toFixed(2).replace(".", ",");
 }
 
 
@@ -234,8 +235,6 @@ Application.prototype.calculateImaginaryPension = function() {
   });
 
   imag_pension = imag_pension / QUESTIONS_COUNT * MAX_PENSION;
-
-  this.imaginary_pension = imag_pension;
 
   return Math.round(imag_pension / 10) * 10;
 };
@@ -705,6 +704,11 @@ QuestionCard.prototype.updateSize = function() {
 
 
 function ResultCard(app) {
+
+  ResultCard.MESSAGE_HIDDEN = 1;
+  ResultCard.MESSAGE_ALERT = 2;
+  ResultCard.MESSAGE_NORMAL = 3;
+
   this.app = app;
   this.answers = [1,1,1];
 
@@ -753,6 +757,8 @@ function ResultCard(app) {
     return $this.outerHeight(true) + $c.outerHeight(true);
   }
 
+  this.message_state = ResultCard.MESSAGE_HIDDEN;
+
   if ( this.app.DEBUG ) {
     return;
   }
@@ -781,6 +787,8 @@ ResultCard.prototype.createSliders = function() {
             slide: function( event, ui ) {
               self.answers[index] = ui.value;
 
+              self.app.imaginary_pension = self.app.calculateImaginaryPension();
+
               console.log(self.answers);
 
               self.updatePension();
@@ -791,7 +799,15 @@ ResultCard.prototype.createSliders = function() {
 
               if ( self.is_calculator_displayed ) {
                 self.updateSavings();
-                self.hideMessage();
+
+                var app = self.app;
+                
+                if ( app.user_age >= 28 && app.user_age <= 30 ) {
+                  self.alertYearStatement();
+                }
+                else {
+                  self.hideMessage();
+                }
               }
             }
           })
@@ -808,8 +824,9 @@ ResultCard.prototype.createSliders = function() {
 
     var app = self.app;
 
-    if ( app.user_age == 28 && app.imaginary_pension == 1000 ) {
-      self.$("#ResultPayment .value").text( toStandartNumbers(214.32) );
+    if ( app.imaginary_pension == 1000 ) {
+      var a = PENSION_ARRAY[app.user_age];
+      self.$("#ResultPayment .value").text( toStandartNumbers(a[4]) );
     }
     else {
       self.$("#ResultPayment .value").text( toStandartNumbers(payment) );
@@ -824,8 +841,24 @@ ResultCard.prototype.createSliders = function() {
     range: "min",
     value: 0,
     slide: function (e, ui) {
-      self.alertPensionIsWrongSatement();
       paymentResultSlideListener(e, ui);
+
+      var p = self.app.calculateImaginaryPension();
+
+      console.log(p, self.app.imaginary_pension);
+
+      if ( p == Math.round(self.app.imaginary_pension) ) {
+        var a = self.app.user_age;
+        if ( a >= 28 && a <= 30 ) {
+          self.alertYearStatement();
+        }
+        else {
+          self.hideMessage();
+        }
+      }
+      else {
+        self.alertPensionIsWrongSatement();
+      }
     },
     change: paymentResultSlideListener
   });
@@ -849,7 +882,17 @@ ResultCard.prototype.createSliders = function() {
       self.alertYearStatement();
     }
     else {
-      self.hideMessage();
+      var p = self.app.calculateImaginaryPension();
+
+      console.log("Year slidres:", p, self.app.imaginary_pension);
+
+      if ( p == self.app.imaginary_pension ) {
+        self.hideMessage();
+      }
+      else {
+        self.alertPensionIsWrongSatement();
+      }
+      
     }
   }
 
@@ -932,11 +975,13 @@ ResultCard.prototype.updateCalculatorResult = function() {
   var payment = this.payment_slider.slider("value");
   var year = this.app.user_age;
 
-  var result = this.app.calculateRealPension(year, payment);
+  this.app.imaginary_pension = this.app.calculateRealPension(year, payment);
 
-  result = self.app.imaginary_pension = Math.round(result / 10 ) * 10;
+  this.app.imaginary_pension = Math.round(this.app.imaginary_pension / 10 ) * 10;
 
-  $("#ResultPension").val( result + " Euro");
+  console.log("Imag:", this.app.imaginary_pension);
+
+  $("#ResultPension").val( this.app.imaginary_pension + " Euro");
 };
 
 ResultCard.prototype.resultCardDisplayCalculatorBtnClickListener = function(e) {
@@ -1155,22 +1200,34 @@ ResultCard.prototype.hideCalculator = function() {
 };
 
 ResultCard.prototype.alertYearStatement = function() {
+  if ( this.message_state == ResultCard.MESSAGE_NORMAL ) {
+    return;
+  }
+  this.message_state = ResultCard.MESSAGE_NORMAL;
+
   this.displayMessage("<b>Hinweis:</b> Mindestbeitrag beachten!<br>Ab einem versicherungstechnischen Eintrittsalter der versicherten Person ab 28 Jahren: bei mtl. Zahlweise 50,00 Euro", "msg");
 };
 
 ResultCard.prototype.alertPensionIsWrongSatement = function() {
+  if ( this.message_state == ResultCard.MESSAGE_ALERT ) {
+    return;
+  }
+  this.message_state = ResultCard.MESSAGE_ALERT;
+
   this.displayMessage("<span class='exlamation-point'>!</span><span>Achtung: Vorfreude und Rentenziel stimmen nicht mehr überein. Bitte passen Sie Ihre Wünsche oder den monatlichen Beitrag an.</span>", "alert");
 };
 
 ResultCard.prototype.displayMessage = function(msg, message_class) {
   $("#CalculatorMsg").show()
     .html("<p class='"+message_class+"'>"+msg+"</p>");
-
-  /*this.app.onResizeEndListener();*/
-
 };
 
 ResultCard.prototype.hideMessage = function() {
+  if ( this.message_state == ResultCard.MESSAGE_HIDDEN ) {
+    return;
+  }
+  this.message_state = ResultCard.MESSAGE_HIDDEN;
+
   $("#CalculatorMsg").hide();
 
   this.app.onResizeEndListener();

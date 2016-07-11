@@ -43,7 +43,11 @@
   margin-top: -15px;
 }
 
-
+@media screen and (max-width: 999px) {
+  #App {
+    margin-top: -12px;
+  }
+}
 
 #Game {
   position: absolute;

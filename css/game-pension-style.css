@@ -300,7 +300,7 @@ h1.card-title {
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 649px) {
 .pension-simple-slider .ui-slider-handle {
     width: 40px;
     height: 40px;
@@ -451,6 +451,28 @@ h1.card-title {
 #SliderUserAge {
   position: relative;
 }
+
+@media screen and (max-width: 649px) {
+  #SliderUserAge:before,
+  #SliderUserAge:after {
+    content: " ";
+    background-color: red;
+    display: inline-block;
+    height: 100%;
+    position: absolute;
+    width: 20px;
+  }
+
+  #SliderUserAge:before {
+    left: -20px;
+  }
+
+  #SliderUserAge:after {
+    right: -20px;
+    background-color: #F0F0F0;
+  }
+}
+
 
 #SliderUserAge .min:after,
 #SliderUserAge .max:after,

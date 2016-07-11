@@ -789,25 +789,20 @@ ResultCard.prototype.createSliders = function() {
 
               self.app.imaginary_pension = self.app.calculateImaginaryPension();
 
-              console.log(self.answers);
-
               self.updatePension();
 
               self.changeAnswerImageInQuestion(i, ui.value);
 
               self.sliders[index].find(".ui-handle-text").text(percents[ui.value-1] + " %");
 
+              self.updateMessage();
+
               if ( self.is_calculator_displayed ) {
                 self.updateSavings();
 
                 var app = self.app;
                 
-                if ( app.user_age >= 28 && app.user_age <= 30 ) {
-                  self.alertYearStatement();
-                }
-                else {
-                  self.hideMessage();
-                }
+                self.updateMessage(self.app.imaginary_pension);
               }
             }
           })
@@ -823,6 +818,10 @@ ResultCard.prototype.createSliders = function() {
     self.updateCalculatorResult();
 
     var app = self.app;
+
+    var p = self.app.calculateImaginaryPension();
+
+    self.updateMessage(p);
 
     if ( app.imaginary_pension == 1000 ) {
       var a = PENSION_ARRAY[app.user_age];
@@ -840,26 +839,7 @@ ResultCard.prototype.createSliders = function() {
     animate: false,
     range: "min",
     value: 0,
-    slide: function (e, ui) {
-      paymentResultSlideListener(e, ui);
-
-      var p = self.app.calculateImaginaryPension();
-
-      console.log(p, self.app.imaginary_pension);
-
-      if ( p == Math.round(self.app.imaginary_pension) ) {
-        var a = self.app.user_age;
-        if ( a >= 28 && a <= 30 ) {
-          self.alertYearStatement();
-        }
-        else {
-          self.hideMessage();
-        }
-      }
-      else {
-        self.alertPensionIsWrongSatement();
-      }
-    },
+    slide: paymentResultSlideListener,
     change: paymentResultSlideListener
   });
 
@@ -878,22 +858,8 @@ ResultCard.prototype.createSliders = function() {
 
     self.setResultPaymentSlider(min, max, savings);
 
-    if ( ui.value >= 28 && ui.value <= 30 ) {
-      self.alertYearStatement();
-    }
-    else {
-      var p = self.app.calculateImaginaryPension();
-
-      console.log("Year slidres:", p, self.app.imaginary_pension);
-
-      if ( p == self.app.imaginary_pension ) {
-        self.hideMessage();
-      }
-      else {
-        self.alertPensionIsWrongSatement();
-      }
-      
-    }
+    var p = self.app.calculateImaginaryPension();
+    self.updateMessage(p);
   }
 
   this.year_slider = $("#ResultWorkYears").slider({
@@ -905,6 +871,21 @@ ResultCard.prototype.createSliders = function() {
     slide: yearSlideFunction,
     change: yearSlideFunction
   });
+};
+
+ResultCard.prototype.updateMessage = function(p) {
+  if ( p == Math.round(this.app.imaginary_pension) ) {
+    var a = this.app.user_age;
+    if ( a >= 28 && a <= 30 ) {
+      this.alertYearStatement();
+    }
+    else {
+      this.hideMessage();
+    }
+  }
+  else {
+    this.alertPensionIsWrongSatement();
+  }
 };
 
 ResultCard.prototype.changeAnswerImageInQuestion = function(question_id, ui_value) {

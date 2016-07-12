@@ -817,7 +817,7 @@ ResultCard.prototype.createSliders = function() {
   })
 
   var paymentResultSlideListener = function (e, ui) {
-    var payment = ui.value;
+    /*var payment = ui.value;
     self.updateCalculatorResult();
 
     var app = self.app;
@@ -832,13 +832,13 @@ ResultCard.prototype.createSliders = function() {
     }
     else {
       self.$("#ResultPayment .value").text( toStandartNumbers(payment) );
-    }
+    }*/
   }
 
   this.payment_slider = this.$("#ResultPayment").slider({
-    min: 20,
-    max: 500,
-    step: 0.01,
+    min: 0,
+    max: 100,
+    step: 1,
     animate: false,
     range: "min",
     value: 0,
@@ -1158,9 +1158,7 @@ ResultCard.prototype.displayPensionCalculator = function() {
 
 ResultCard.prototype.setResultPaymentSlider = function(min, max, value) {
   this.payment_slider
-    .slider("option", "min", min)
-    .slider("option", "max", max)
-    .slider("value", value);
+    .slider("value", 1);
 
   $("#ResultPayment .min").text( toStandartNumbers(min) );
   $("#ResultPayment .max").text( toStandartNumbers(max) );

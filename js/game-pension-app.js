@@ -297,6 +297,9 @@ Application.prototype.calculateSavings = function(age, pension) {
     savings = p_a[3] + ( p_a[4] - p_a[3] ) * ( p - 800 ) / 200;
   }
 
+  console.log("M:", savings, p_a[0], p_a[4]);
+  console.log("M:", (savings - p_a[0]) / (p_a[4] - p_a[0]));
+
   return savings;
 };
 
@@ -1186,7 +1189,7 @@ ResultCard.prototype.alertYearStatement = function() {
   }
   this.message_state = ResultCard.MESSAGE_NORMAL;
 
-  this.displayMessage("<b>Hinweis:</b> Mindestbeitrag beachten!<br>Ab einem versicherungstechnischen Eintrittsalter der versicherten Person ab 28 Jahren: bei mtl. Zahlweise 50,00 Euro", "msg");
+  this.displayMessage("<b>*Hinweis:</b> Mindestbeitrag beachten!<br>Ab einem versicherungstechnischen Eintrittsalter der versicherten Person ab 28 Jahren: bei mtl. Zahlweise 50,00 Euro.", "msg");
 };
 
 ResultCard.prototype.alertPensionIsWrongSatement = function() {
@@ -1236,7 +1239,7 @@ PENSION_ARRAY[27] = [42.47, 82.65, 122.83, 163.01, 203.19];
 PENSION_ARRAY[28] = [42.47, 87.1, 129.52, 171.92, 214.32];
 PENSION_ARRAY[29] = [42.47, 91.81, 136.59, 181.35, 226.11];
 PENSION_ARRAY[30] = [42.47, 96.88, 144.16, 191.46, 238.74];
-PENSION_ARRAY[31] = [52.260, 102.24, 152.22, 202.19, 252.16];
+PENSION_ARRAY[31] = [52.26, 102.24, 152.22, 202.19, 252.16];
 PENSION_ARRAY[32] = [55.12, 107.97, 160.8, 213.64, 266.48];
 PENSION_ARRAY[33] = [58.19, 114.08, 169.99, 225.91, 281.8];
 PENSION_ARRAY[34] = [61.46, 120.65, 179.83, 239.03, 298.21];

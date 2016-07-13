@@ -870,8 +870,8 @@ ResultCard.prototype.createSliders = function() {
 };
 
 ResultCard.prototype.updateMessage = function(p) {
-  console.log("updateMessage: ", p);
-  if ( p == Math.round(this.app.calculateImaginaryPension()) ) {
+  var delta = Math.abs(p - Math.round(this.app.calculateImaginaryPension()));
+  if ( delta < 20 ) {
     var a = this.app.user_age;
     if ( a >= 28 && a <= 30 ) {
       this.alertYearStatement();
@@ -1184,7 +1184,7 @@ ResultCard.prototype.displayPensionCalculator = function() {
 
     self.updateResultAndPayment(p);
 
-    self.hideMessage();
+    self.updateMessage(p);
 
     $("#ResultPension").val( p + " Euro");
   });

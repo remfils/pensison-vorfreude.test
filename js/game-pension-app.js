@@ -1242,10 +1242,6 @@ ResultCard.prototype.displayPensionCalculator = function() {
   });
 
   this.app.scrollToPosition(this.$this.offset().top + this.$this.outerHeight(true) - window.innerHeight);
-
-  if ( !(this.app.user_age >= 28 && this.app.user_age <= 30) ) {
-    $("#CalculatorMsg").hide();
-  }
 };
 
 ResultCard.prototype.setResultPaymentSliderLabels = function(value, min, max) {
@@ -1280,23 +1276,43 @@ ResultCard.prototype.alertYearStatement = function() {
   if ( this.message_state == ResultCard.MESSAGE_NORMAL ) {
     return;
   }
+
+  var state_before = this.message_state;
   this.message_state = ResultCard.MESSAGE_NORMAL;
 
-  this.displayMessage("<b>*Hinweis:</b> Mindestbeitrag beachten!<br>Ab einem versicherungstechnischen Eintrittsalter der versicherten Person ab 28 Jahren: bei mtl. Zahlweise 50,00 Euro.", "msg");
+  this.displayMessage("<b>*Hinweis:</b> Mindestbeitrag beachten!<br>Ab einem versicherungstechnischen Eintrittsalter der versicherten Person ab 28 Jahren: bei mtl. Zahlweise 50,00 Euro.", "msg", state_before, this.message_state);
 };
 
 ResultCard.prototype.alertPensionIsWrongSatement = function() {
   if ( this.message_state == ResultCard.MESSAGE_ALERT ) {
     return;
   }
+
+  var state_before = this.message_state;
   this.message_state = ResultCard.MESSAGE_ALERT;
 
-  this.displayMessage("<span class='exlamation-point'>!</span><span>Achtung: Vorfreude und Rentenziel stimmen nicht mehr überein. Bitte passen Sie Ihre Wünsche oder den monatlichen Beitrag an.</span>", "alert");
+  this.displayMessage("<span class='exlamation-point'>!</span><span>Achtung: Vorfreude und Rentenziel stimmen nicht mehr überein. Bitte passen Sie Ihre Wünsche oder den monatlichen Beitrag an.</span>", "alert", state_before, this.message_state);
 };
 
-ResultCard.prototype.displayMessage = function(msg, message_class) {
-  $("#CalculatorMsg").show()
-    .html("<p class='"+message_class+"'>"+msg+"</p>");
+ResultCard.prototype.displayMessage = function(msg, message_class, state_before, state_after) {
+  var $cc = $("#CalculatorMsgContainer");
+  var $cm = $("#CalculatorMsg");
+
+  $cm.stop()
+    .clearQueue();
+
+  if ( state_before == ResultCard.MESSAGE_HIDDEN ) {
+    $cm.html("<p class='"+message_class+"'>"+msg+"</p>");
+
+    var h = $cm.outerHeight(true);
+
+    console.log("displayMessage: ", h);
+
+    $cc.height(0);
+    $cc.css("opacity", 1);
+
+    $cc.animate({height: h});
+  }
 };
 
 ResultCard.prototype.hideMessage = function() {
@@ -1305,7 +1321,7 @@ ResultCard.prototype.hideMessage = function() {
   }
   this.message_state = ResultCard.MESSAGE_HIDDEN;
 
-  $("#CalculatorMsg").hide();
+  $("#CalculatorMsgContainer").height(0);
 
   this.app.onResizeEndListener();
 };

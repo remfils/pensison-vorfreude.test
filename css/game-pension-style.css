@@ -1320,6 +1320,8 @@ td.final-slider {
 @media screen and (max-width: 600px) {
   .pension-calculator-result-cell {
     display: table;
+    width: 100%;
+    margin-bottom: 30px;
   }
 
   .pension-calculator-result {
@@ -1331,10 +1333,6 @@ td.final-slider {
     width: 100%;
     margin-top: 10px;
     margin-bottom: 40px;
-  }
-
-  .pension-calculator-result-cell {
-    width: 100%;
   }
 
   #PensionCalculatorInput label {
@@ -1375,6 +1373,10 @@ td.final-slider {
   #ResultWorkYears,
   #ResultPayment {
     margin: 50px 15px;
+  }
+
+  #PensionCalculatorInput .result-payment-label {
+    margin-bottom: 60px;
   }
 }
 
@@ -1459,4 +1461,9 @@ td.final-slider {
   #PensionCalculatorButtonLine .section {
     width: 197px;
   }
+}
+
+#ResultPayment .min,
+#ResultPayment .max {
+  display: none !important;
 }

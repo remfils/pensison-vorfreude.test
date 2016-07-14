@@ -1467,3 +1467,176 @@ width: 197px;
 #ResultPayment .max {
 display: none !important;
 }
+
+/* TOOLTIPS */
+
+.result-pension-helper-tooltip,
+.result-payment-helper-tooltip {
+  padding: 20px;
+}
+
+.result-pension-helper-tooltip:after, .result-pension-helper-tooltip:before {
+  right: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.result-pension-helper-tooltip:after {
+  border-color: rgba(255, 255, 255, 0);
+  border-right-color: #fff;
+  border-width: 15px;
+  margin-top: -15px;
+}
+.result-pension-helper-tooltip:before {
+  border-color: rgba(170, 170, 170, 0);
+  border-right-color: #AAAAAA;
+  border-width: 18px;
+  margin-top: -18px;
+}
+
+.result-payment-helper-tooltip:after, .result-payment-helper-tooltip:before {
+  right: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.result-payment-helper-tooltip:after {
+  border-color: rgba(255, 255, 255, 0);
+  border-right-color: #fff;
+  border-width: 15px;
+  margin-top: -15px;
+}
+.result-payment-helper-tooltip:before {
+  border-color: rgba(170, 170, 170, 0);
+  border-right-color: #AAAAAA;
+  border-width: 18px;
+  margin-top: -18px;
+}
+
+@media screen and (max-width: 999px) {
+  .result-payment-helper-tooltip:after, .result-payment-helper-tooltip:before {
+    left: 100%;
+    top: 50%;
+    right: auto;
+    bottom: auto;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .result-payment-helper-tooltip:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-left-color: #fff;
+    border-width: 15px;
+    margin-top: -15px;
+  }
+  .result-payment-helper-tooltip:before {
+    border-color: rgba(170, 170, 170, 0);
+    border-left-color: #AAAAAA;
+    border-width: 18px;
+    margin-top: -18px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .result-pension-helper-tooltip:after, .result-pension-helper-tooltip:before {
+    left: 100%;
+    top: 50%;
+    right: auto;
+    bottom: auto;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .result-pension-helper-tooltip:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-left-color: #fff;
+    border-width: 15px;
+    margin-top: -15px;
+  }
+  .result-pension-helper-tooltip:before {
+    border-color: rgba(170, 170, 170, 0);
+    border-left-color: #AAAAAA;
+    border-width: 18px;
+    margin-top: -18px;
+  }
+
+  .result-payment-helper-tooltip:after, .result-payment-helper-tooltip:before {
+    bottom: 100%;
+    left: 50%;
+    right: auto;
+    top: auto;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .result-payment-helper-tooltip:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: #fff;
+    border-width: 15px;
+    margin-left: -15px;
+  }
+  .result-payment-helper-tooltip:before {
+    border-color: rgba(170, 170, 170, 0);
+    border-bottom-color: #AAAAAA;
+    border-width: 18px;
+    margin-left: -18px;
+  }
+}
+
+@media screen and (max-width: 395px) {
+  /* .result-payment-helper-tooltip:after,
+  .result-payment-helper-tooltip:before,
+  .result-pension-helper-tooltip:before,
+  .result-pension-helper-tooltip:after {
+    display: none;
+  } */
+
+  .result-pension-helper-tooltip:after, .result-pension-helper-tooltip:before {
+    bottom: 100%;
+    right: 0px;
+    left: auto;
+    top: auto;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .result-pension-helper-tooltip:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: #fff;
+    border-width: 15px;
+    margin-left: -15px;
+  }
+  .result-pension-helper-tooltip:before {
+    border-color: rgba(170, 170, 170, 0);
+    border-bottom-color: #AAAAAA;
+    border-width: 18px;
+    margin-left: -18px;
+    right: -3px;
+  }
+}

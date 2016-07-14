@@ -771,6 +771,21 @@ function ResultCard(app) {
 
   this.$calculator_screen.hide();
   this.$this.hide();
+
+  this.$("#ResultPensionHelper").tooltip({
+    "content":
+      "<p>Zur Überschussbeteiligung und zur Wertsteigerung des Fondsguthabens ist zu berücksichtigen: Die dargestellten möglichen Leistungsentwicklungen in der Zukunft basieren auf den für das Jahr 2016 festgelegten und dieser Berechnung zugrunde gelegten Überschussanteilsätzen und der Annahme gleichbleibender Wertsteigerungen des Fondsguthabens (nach Berücksichtigung der spezifischen Fondskosten). Sie dienen ausschließlich Illustrationszwecken und können nicht garantiert werden. Bisherige oder künftige Wertsteigerungen können daraus nicht abgeleitet werden. Die tatsächlichen Ergebnisse können höher oder niedriger sein.</p>"
+      + "<p>Zum derzeit festgelegten Rentenfaktor ist zu berücksichtigen: Dieser Rentenfaktor ist nicht garantiert. Er basiert auf den derzeit gültigen Rechnungsgrundlagen.</p>",
+    "position": {my: "left center", at: "right+20px center"},
+    "tooltipClass": "result-pension-helper-tooltip"
+  });
+
+  this.$("#ResultPaymentHelper").tooltip({
+    "content":
+      "Tarif HRV2, Fondsanteil 50 %, angenommene jährliche Wertsteigerung des Fondsguthabens von 6 %, Alter bei Beginn der Rentenzahlung 67 Jahre, verzinsliche Ansammlung, teildynamische Überschussrente im Rentenbezug und Kapitalrückgewähr bei Tod nach Rentenbeginn.",
+    "position": {my: "left center", at: "right+20px center"},
+    "tooltipClass": "result-payment-helper-tooltip"
+  });
 }
 
 ResultCard.prototype.createSliders = function() {
@@ -1123,6 +1138,15 @@ ResultCard.prototype.updateSize = function() {
   }
 
   if ( window_width <= 600 ) {
+    if ( window_width <= 395 ) {
+      this.$("#ResultPensionHelper").tooltip("option", "position", {my: "right top+20px", at: "right bottom"});
+      this.$("#ResultPaymentHelper").tooltip("option", "position", {my: "center top+20px", at: "center bottom"});
+    }
+    else {
+      this.$("#ResultPensionHelper").tooltip("option", "position", {my: "right-20px center", at: "left center"});
+      this.$("#ResultPaymentHelper").tooltip("option", "position", {my: "center top+20px", at: "center bottom"});
+    }
+
     if ( this.display_width_state != ResultCard.MOBILE_STATE ) {
       this.clearSizeOfResultCells();
     }
@@ -1136,6 +1160,9 @@ ResultCard.prototype.updateSize = function() {
       this.clearSizeOfResultCells();
     }
 
+    this.$("#ResultPensionHelper").tooltip("option", "position", {my: "left center", at: "right+20px center"});
+    this.$("#ResultPaymentHelper").tooltip("option", "position", {my: "right-20px center", at: "left center"});
+
     this.updateTabletSize();
 
     this.display_width_state = ResultCard.TABLET_STATE;
@@ -1145,6 +1172,9 @@ ResultCard.prototype.updateSize = function() {
       this.clearSizeOfResultCells();
       this.updatePositionsOfAnswerImages();
     }
+
+    this.$("#ResultPensionHelper").tooltip("option", "position", {my: "left center", at: "right+20px center"});
+    this.$("#ResultPaymentHelper").tooltip("option", "position", {my: "left center", at: "right+20px center"});
 
     this.display_width_state = ResultCard.WEB_STATE;
   }

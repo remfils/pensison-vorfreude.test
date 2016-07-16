@@ -273,8 +273,6 @@ Application.prototype.calculateSavings = function(age, pension) {
   var p = pension || this.imaginary_pension;
   var p_a = PENSION_ARRAY[age];
 
-  console.log(p_a, age, pension);
-
   var savings = 0;
 
   if ( p == 200 ) {
@@ -760,7 +758,7 @@ function ResultCard(app) {
   var $c = $("#CalculatorMsg");
   var $this = this.$this;
   this.getHeight = function () {
-    return $this.outerHeight(true) + $c.outerHeight(true);
+    return $this.outerHeight(true) + $("#CalculatorMsgContainer").outerHeight(true);
   };
 
   this.message_state = ResultCard.MESSAGE_HIDDEN;
@@ -768,6 +766,8 @@ function ResultCard(app) {
   if ( this.app.DEBUG ) {
     return;
   }
+
+  $("#CalculatorMsgContainer").slideUp();
 
   this.$calculator_screen.hide();
   this.$this.hide();
@@ -819,7 +819,10 @@ ResultCard.prototype.createSliders = function() {
               if ( self.is_calculator_displayed ) {
                 self.updateResultAndPayment(self.app.imaginary_pension);
                 
-                self.updateMessageForRedSliders(self.app.imaginary_pension);
+                // self.updateMessageForRedSliders(self.app.imaginary_pension);
+                
+                self.updateYearMessage(self.app.user_age);
+                self.updatePensionMessage(self.app.imaginary_pension);
               }
             }
           })
@@ -841,7 +844,7 @@ ResultCard.prototype.createSliders = function() {
     var app = self.app;
     var p = self.app.imaginary_pension;
 
-    self.updateMessage(self.app.imaginary_pension);
+    self.updatePensionMessage(p);
 
     if ( p === 1000 ) {
       payment = PENSION_ARRAY[app.user_age][4];
@@ -879,8 +882,6 @@ ResultCard.prototype.createSliders = function() {
 
     var user_pension = self.app.imaginary_pension;
 
-    console.log("yearSlideFunction: ", user_pension);
-
     var pens_array = PENSION_ARRAY[ui.value];
     var min = Math.round( pens_array[0] * 100 ) / 100;
     var max = Math.round( pens_array[4] * 100 ) / 100;
@@ -888,7 +889,9 @@ ResultCard.prototype.createSliders = function() {
 
     self.setResultPaymentSliderLabels(savings, min, max);
 
-    self.updateMessageForRedSliders(user_pension);
+    //self.updateMessageForRedSliders(user_pension);
+    self.updateYearMessage(self.app.user_age);
+    self.updatePensionMessage(user_pension);
 
     self.updateResultAndPayment(user_pension, true);
   };
@@ -922,7 +925,6 @@ ResultCard.prototype.updateMessage = function(p) {
 
 ResultCard.prototype.updateMessageForRedSliders = function(p) {
   var delta = Math.abs(p - Math.round(this.app.calculateImaginaryPension()));
-  console.log("updateMessageForRedSliders: ", delta);
   if ( delta < 28 ) {
     var a = this.app.user_age;
     if ( a >= 28 && a <= 30 ) {
@@ -1000,8 +1002,6 @@ ResultCard.prototype.updateCalculatorResult = function(payment) {
   var year = this.app.user_age;
 
   this.app.imaginary_pension = this.app.calculateRealPension(year, payment);
-
-  console.log("calculateRealPension result:", this.app.imaginary_pension);
 
   this.app.imaginary_pension = Math.round(this.app.imaginary_pension / 10 ) * 10;
 
@@ -1222,7 +1222,6 @@ ResultCard.prototype.displayPensionCalculator = function() {
     self.year_slider.slider("value", self.app.user_age);
 
     var p = self.app.calculateImaginaryPension();
-    console.log("PENSION: ", p);
 
     self.app.imaginary_pension = p;
 
@@ -1236,7 +1235,9 @@ ResultCard.prototype.displayPensionCalculator = function() {
 
     self.updateResultAndPayment(p);
 
-    self.updateMessageForRedSliders(p);
+    // self.updateMessageForRedSliders(p);
+    self.updateYearMessage(self.app.user_age);
+    self.updatePensionMessage(p);
 
     $("#ResultPension").val( p + " Euro");
   });
@@ -1272,6 +1273,31 @@ ResultCard.prototype.hideCalculator = function() {
   }, 400);
 };
 
+ResultCard.prototype.updateYearMessage = function(age) {
+  var $c = $("#YearLimitationMessage");
+
+  $c.stop().clearQueue();
+
+  if ( age >= 27 && age <= 30 ) {
+    $c.animate({opacity: 1});
+  }
+  else {
+    $c.animate({opacity: 0});
+  }
+};
+
+ResultCard.prototype.updatePensionMessage = function(pension) {
+  var $c = $("#CalculatorMsgContainer");
+  var delta = Math.abs(pension - Math.round(this.app.calculateImaginaryPension()));
+
+  if ( delta > 28 ) {
+    $c.slideDown();
+  }
+  else {
+    $c.slideUp();
+  }
+};
+
 ResultCard.prototype.alertYearStatement = function() {
   if ( this.message_state == ResultCard.MESSAGE_NORMAL ) {
     return;
@@ -1295,6 +1321,7 @@ ResultCard.prototype.alertPensionIsWrongSatement = function() {
 };
 
 ResultCard.prototype.displayMessage = function(msg, message_class, state_before, state_after) {
+  return;
   var $cc = $("#CalculatorMsgContainer");
   var $cm = $("#CalculatorMsg");
 
@@ -1306,8 +1333,6 @@ ResultCard.prototype.displayMessage = function(msg, message_class, state_before,
 
     var h = $cm.outerHeight(true);
 
-    console.log("displayMessage: ", h);
-
     $cc.height(0);
     $cc.css("opacity", 1);
 
@@ -1316,6 +1341,7 @@ ResultCard.prototype.displayMessage = function(msg, message_class, state_before,
 };
 
 ResultCard.prototype.hideMessage = function() {
+  return;
   if ( this.message_state == ResultCard.MESSAGE_HIDDEN ) {
     return;
   }

@@ -1158,7 +1158,6 @@ width: 100%;
 }
 
 .pension-row {
-margin-bottom: 60px;
 }
 
 .pension-calculator-result-cell {
@@ -1237,11 +1236,20 @@ margin-bottom: -2px;
 }
 }
 
+#CalculatorMsgContainer {
+  margin-top: -20px;
+  margin-bottom: 20px;
+  padding-right: 0;
+}
+
 .calculator-msg-container {
   overflow: hidden;
-  height: 0;
   width: 100%;
-  margin-bottom: -10px;
+  border-right: 20px solid #f0f0f0;
+  float: left;
+  box-sizing: border-box;
+  font-size: 15px;
+  line-height: 50px;
 }
 
 .calculator-msg {
@@ -1250,6 +1258,11 @@ margin-bottom: -2px;
 
 #CalculatorMsg {
 clear: both;
+background-color: red;
+color: white;
+line-height: 60px;
+font-size: 15px;
+padding: 0 20px;
 }
 
 #CalculatorMsg span {
@@ -1282,10 +1295,10 @@ position: relative;
   top: 0;
 }
 
-
-#CalculatorMsg .msg {
+.msg {
 color: red;
 font-size: 15px;
+margin-top: -40px !important;
 }
 
 .exlamation-point {
@@ -1295,10 +1308,18 @@ font-weight: bold;
 }
 
 @media screen and (max-width: 999px) {
-#CalculatorMsg .alert {
-line-height: 100%;
+#CalculatorMsg {
+  margin-top: -10px;
+  line-height: 100%;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.calculator-msg-container {
+line-height: normal;
 padding-top: 10px;
 padding-bottom: 10px;
+border-right-width: 10px;
 }
 
 .exlamation-point {

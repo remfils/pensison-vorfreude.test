@@ -1139,12 +1139,12 @@ ResultCard.prototype.updateSize = function() {
 
   if ( window_width <= 600 ) {
     if ( window_width <= 395 ) {
-      this.$("#ResultPensionHelper").tooltip("option", "position", {my: "right top+20px", at: "right bottom"});
-      this.$("#ResultPaymentHelper").tooltip("option", "position", {my: "center top+20px", at: "center bottom"});
+      this.$("#ResultPensionHelper").tooltip("option", "position", {my: "right top+20px", at: "right bottom", collision: "none none"});
+      this.$("#ResultPaymentHelper").tooltip("option", "position", {my: "center top+20px", at: "center bottom", collision: "none none"});
     }
     else {
-      this.$("#ResultPensionHelper").tooltip("option", "position", {my: "right-20px center", at: "left center"});
-      this.$("#ResultPaymentHelper").tooltip("option", "position", {my: "center top+20px", at: "center bottom"});
+      this.$("#ResultPensionHelper").tooltip("option", "position", {my: "right-20px center", at: "left center", collision: "none none"});
+      this.$("#ResultPaymentHelper").tooltip("option", "position", {my: "center top+20px", at: "center bottom", collision: "none none"});
     }
 
     if ( this.display_width_state != ResultCard.MOBILE_STATE ) {
@@ -1160,8 +1160,8 @@ ResultCard.prototype.updateSize = function() {
       this.clearSizeOfResultCells();
     }
 
-    this.$("#ResultPensionHelper").tooltip("option", "position", {my: "left center", at: "right+20px center"});
-    this.$("#ResultPaymentHelper").tooltip("option", "position", {my: "right-20px center", at: "left center"});
+    this.$("#ResultPensionHelper").tooltip("option", "position", {my: "left center", at: "right+20px center", collision: "none none"});
+    this.$("#ResultPaymentHelper").tooltip("option", "position", {my: "right-20px center", at: "left center", collision: "none none"});
 
     this.updateTabletSize();
 
@@ -1173,8 +1173,8 @@ ResultCard.prototype.updateSize = function() {
       this.updatePositionsOfAnswerImages();
     }
 
-    this.$("#ResultPensionHelper").tooltip("option", "position", {my: "left center", at: "right+20px center"});
-    this.$("#ResultPaymentHelper").tooltip("option", "position", {my: "left center", at: "right+20px center"});
+    this.$("#ResultPensionHelper").tooltip("option", "position", {my: "left center", at: "right+20px center", collision: "none none"});
+    this.$("#ResultPaymentHelper").tooltip("option", "position", {my: "left center", at: "right+20px center", collision: "none none"});
 
     this.display_width_state = ResultCard.WEB_STATE;
   }

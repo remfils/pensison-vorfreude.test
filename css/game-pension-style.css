@@ -38,17 +38,6 @@ padding-left: 0;
 }
 }
 
-
-#App {
-margin-top: -15px;
-}
-
-@media screen and (max-width: 999px) {
-#App {
-margin-top: -12px;
-}
-}
-
 #Game {
 position: absolute;
 top: 120px;  
@@ -67,10 +56,6 @@ user-select: none;
 padding-top: 0;
 }
 
-.text h1 {
-margin-top: -7px;
-}
-
 @media screen and (max-width: 999px) {
 .text h1 {
 margin-top: -6px;
@@ -87,10 +72,6 @@ h1.card-title {
 white-space: normal;
 font-size: 20px;
 }
-}
-
-.if6_breadcrumb {
-margin-bottom: 10px;
 }
 
 @media screen and (max-width: 999px) {
@@ -874,7 +855,7 @@ font-family: Sparkasse;
 }
 
 #PensionPrice:after {
-content: " Euro*";
+content: " Euro";
 }
 
 .pension-price-row h2 {
@@ -1517,6 +1498,20 @@ display: none !important;
 
 /* TOOLTIPS */
 
+.question-inline {
+    vertical-align: middle;
+    bottom: 2px;
+    position: relative;
+}
+
+.result-pension-helper-tooltip {
+  max-width: 540px;
+}
+
+.result-payment-helper-tooltip {
+  max-width: 260px;
+}
+
 .result-pension-helper-tooltip,
 .result-payment-helper-tooltip {
   padding: 20px;
@@ -1599,6 +1594,14 @@ display: none !important;
 }
 
 @media screen and (max-width: 600px) {
+  .result-pension-helper-tooltip {
+    max-width: 70%;
+  }
+
+  .result-payment-helper-tooltip {
+    max-width: 150px;
+  }
+
   .result-pension-helper-tooltip:after, .result-pension-helper-tooltip:before {
     left: 100%;
     top: 50%;

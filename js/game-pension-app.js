@@ -822,7 +822,7 @@ ResultCard.prototype.createSliders = function() {
                 // self.updateMessageForRedSliders(self.app.imaginary_pension);
                 
                 self.updateYearMessage(self.app.user_age);
-                self.updatePensionMessage(self.app.imaginary_pension);
+                self.updatePensionMessageBroad(self.app.imaginary_pension);
               }
             }
           })
@@ -1237,7 +1237,7 @@ ResultCard.prototype.displayPensionCalculator = function() {
 
     // self.updateMessageForRedSliders(p);
     self.updateYearMessage(self.app.user_age);
-    self.updatePensionMessage(p);
+    self.updatePensionMessageBroad(p);
 
     $("#ResultPension").val( p + " Euro");
   });
@@ -1287,6 +1287,19 @@ ResultCard.prototype.updateYearMessage = function(age) {
 };
 
 ResultCard.prototype.updatePensionMessage = function(pension) {
+  var $c = $("#CalculatorMsgContainer");
+  var delta = Math.abs(pension - Math.round(this.app.calculateImaginaryPension()));
+
+  /*if ( delta > 28 ) {*/
+  if ( delta > 5 ) {
+    $c.slideDown();
+  }
+  else {
+    $c.slideUp();
+  }
+};
+
+ResultCard.prototype.updatePensionMessageBroad = function(pension) {
   var $c = $("#CalculatorMsgContainer");
   var delta = Math.abs(pension - Math.round(this.app.calculateImaginaryPension()));
 
